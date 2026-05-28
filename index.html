@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Portfolio of Harikaran Chettiyar, featuring full-stack web, Linux automation, and Android system projects."
+    />
+    <title>Harikaran Chettiyar | Project Portfolio</title>
+    <meta name="view-transition" content="same-origin" />
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;700;900&display=swap" rel="stylesheet" />
+    
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Background dynamic elements -->
+    <div class="bg-blobs">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="blob blob-3"></div>
+    </div>
+
+    <div class="site-wrapper">
+      <header class="site-header reveal">
+        <a class="brand" href="#top" aria-label="Portfolio home">
+          <span class="brand-mark">HC</span>
+          <span class="brand-name">Harikaran Chettiyar</span>
+        </a>
+        <nav class="nav-links" aria-label="Primary navigation">
+          <a href="#workspaces">Workspaces</a>
+          <a href="#projects">Projects</a>
+          <a href="#stack">Stack</a>
+        </nav>
+      </header>
+
+      <main id="top">
+        <section class="hero-section reveal" aria-labelledby="hero-title">
+          <div class="hero-copy">
+            <p class="eyebrow">Full-stack Web • Linux Automation • Android Systems</p>
+            <h1 id="hero-title">Engineering practical tools across the web and device platforms.</h1>
+            <p class="hero-text">
+              A curated showcase of projects built by <strong>Harikaran Chettiyar</strong>, 
+              spanning across modern web experiences, configuration scripts, and low-level system mods.
+            </p>
+            <div class="hero-actions" aria-label="Quick links">
+              <a class="button primary" href="#workspaces">View Workspaces</a>
+              <a class="button secondary" href="#projects">Browse Projects</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="summary-band reveal" aria-label="Portfolio highlights">
+          <div class="glass-panel">
+            <span class="metric">56</span>
+            <span>Public repositories across accounts</span>
+          </div>
+          <div class="glass-panel">
+            <span class="metric">33</span>
+            <span>Repository stars</span>
+          </div>
+          <div class="glass-panel">
+            <span class="metric">12+</span>
+            <span>Languages & platforms</span>
+          </div>
+        </section>
+
+        <section class="workspaces-section reveal" id="workspaces" aria-labelledby="workspaces-title">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Source Accounts</p>
+              <h2 id="workspaces-title">GitHub Workspaces</h2>
+            </div>
+          </div>
+          
+          <div class="workspaces-grid">
+            <article class="workspace-card glass-panel accent-primary">
+              <div class="workspace-header">
+                <img src="https://github.com/animegamer4422.png" alt="animegamer4422 GitHub avatar" class="avatar" />
+                <div class="workspace-title">
+                  <h3>Web & Automation</h3>
+                  <a href="https://github.com/animegamer4422" target="_blank" rel="noopener">@animegamer4422 ↗</a>
+                </div>
+              </div>
+              <p class="workspace-desc">Primary workspace for web apps, tools, scripts, and pinned projects.</p>
+              <dl class="workspace-stats">
+                <div><dt>Repos</dt><dd>29</dd></div>
+                <div><dt>Followers</dt><dd>19</dd></div>
+                <div><dt>Stars</dt><dd>18</dd></div>
+              </dl>
+            </article>
+
+            <article class="workspace-card glass-panel accent-secondary">
+              <div class="workspace-header">
+                <img src="https://github.com/DeadPool-4422.png" alt="DeadPool-4422 GitHub avatar" class="avatar" />
+                <div class="workspace-title">
+                  <h3>Systems & Archive</h3>
+                  <a href="https://github.com/DeadPool-4422?tab=repositories" target="_blank" rel="noopener">@DeadPool-4422 ↗</a>
+                </div>
+              </div>
+              <p class="workspace-desc">Secondary workspace focused on Android systems, security guides, recovery tooling, and archives.</p>
+              <dl class="workspace-stats">
+                <div><dt>Repos</dt><dd>27</dd></div>
+                <div><dt>Followers</dt><dd>5</dd></div>
+                <div><dt>Stars</dt><dd>15</dd></div>
+              </dl>
+            </article>
+          </div>
+        </section>
+
+        <section class="projects-section reveal" id="projects" aria-labelledby="projects-title">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Selected Work</p>
+              <h2 id="projects-title">Prominent Projects</h2>
+            </div>
+          </div>
+
+          <div class="filter-bar glass-panel" aria-label="Project filters">
+            <button class="filter-button active" type="button" data-filter="all" aria-pressed="true">All</button>
+            <button class="filter-button" type="button" data-filter="web" aria-pressed="false">Web apps</button>
+            <button class="filter-button" type="button" data-filter="automation" aria-pressed="false">Automation</button>
+            <button class="filter-button" type="button" data-filter="systems" aria-pressed="false">Systems</button>
+          </div>
+
+          <div class="project-grid">
+
+            <article class="project-card glass-panel featured reveal" data-category="web">
+              <div class="project-visual security">
+                <span>SECURE</span>
+              </div>
+              <div class="project-body">
+                <div class="project-meta">
+                  <span class="tag">TypeScript</span>
+                  <span class="tag">NextJS</span>
+                </div>
+                <h3>Secure-Cipher</h3>
+                <p>A simple web app to encrypt and decrypt text, built with Next.js and DaisyUI.</p>
+                <div style="display: flex; gap: 16px; margin-top: auto;">
+                  <a class="project-link" href="projects/secure-cipher.html">View Details →</a>
+                  <a class="project-link" href="https://secure-cipher-orcin.vercel.app" target="_blank" rel="noopener">Live Demo ↗</a>
+                </div>
+              </div>
+            </article>
+            <article class="project-card glass-panel featured reveal" data-category="web">
+              <div class="project-visual civic">
+                <span>CASE</span>
+              </div>
+              <div class="project-body">
+                <div class="project-meta">
+                  <span class="tag">TypeScript</span>
+                  <span class="tag highlight">Realtime</span>
+                </div>
+                <h3>CaseAtlas</h3>
+                <p>A modern case tracking platform with persistent official updates and real-time discussion support.</p>
+                <div style="display: flex; gap: 16px; margin-top: auto;">
+                  <a class="project-link" href="projects/caseatlas.html">View Details →</a>
+                  <a class="project-link" href="https://case-atlas-five.vercel.app" target="_blank" rel="noopener">Live Demo ↗</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card glass-panel featured reveal" data-category="web">
+              <div class="project-visual media">
+                <span>SYNC2</span>
+              </div>
+              <div class="project-body">
+                <div class="project-meta">
+                  <span class="tag">TypeScript</span>
+                  <span class="tag">Media</span>
+                </div>
+                <h3>SyncPlayer</h3>
+                <p>A synchronized playback solution built with TypeScript, complementing the Next-Sync-Player ecosystem.</p>
+                <div style="display: flex; gap: 16px; margin-top: auto;">
+                  <a class="project-link" href="projects/syncplayer.html">View Details →</a>
+                  <a class="project-link" href="https://sync-player-web.vercel.app" target="_blank" rel="noopener">Live Demo ↗</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card glass-panel reveal" data-category="automation">
+              <div class="project-visual terminal">
+                <span>SYS</span>
+              </div>
+              <div class="project-body">
+                <div class="project-meta">
+                  <span class="tag">Shell</span>
+                  <span class="tag">Linux</span>
+                </div>
+                <h3>Sys-Config</h3>
+                <p>A config-driven Linux distro setup tool designed to bootstrap popular environments without extra setup tools.</p>
+                <a class="project-link" href="projects/sys-config.html">View Details →</a>
+              </div>
+            </article>
+
+            <article class="project-card glass-panel reveal" data-category="automation">
+              <div class="project-visual music">
+                <span>MEDIA</span>
+              </div>
+              <div class="project-body">
+                <div class="project-meta">
+                  <span class="tag">Shell</span>
+                  <span class="tag highlight">9 stars</span>
+                </div>
+                <h3>MY-MUSIC</h3>
+                <p>A Termux-friendly set of scripts for downloading video and audio from YouTube and social platforms without ad-heavy apps.</p>
+                <a class="project-link" href="projects/my-music.html">View Details →</a>
+              </div>
+            </article>
+
+            <article class="project-card glass-panel reveal" data-category="web">
+              <div class="project-visual commerce">
+                <span>SHOP</span>
+              </div>
+              <div class="project-body">
+                <div class="project-meta">
+                  <span class="tag">PHP</span>
+                  <span class="tag">Clone build</span>
+                </div>
+                <h3>BlinkHub</h3>
+                <p>A Blinkit-style commerce clone that shows product flow, catalog thinking, and practical storefront structure.</p>
+                <a class="project-link" href="projects/blinkhub.html">View Details →</a>
+              </div>
+            </article>
+
+            <article class="project-card glass-panel reveal" data-category="web">
+              <div class="project-visual commerce">
+                <span>CARGO</span>
+              </div>
+              <div class="project-body">
+                <div class="project-meta">
+                  <span class="tag">ASP.NET</span>
+                  <span class="tag">Web Forms</span>
+                </div>
+                <h3>Cargo-Management-System</h3>
+                <p>A cargo management system built with ASP.NET Web Forms to handle logistics and shipment tracking.</p>
+                <a class="project-link" href="projects/cargo.html">View Details →</a>
+              </div>
+            </article>
+
+            <article class="project-card glass-panel reveal" data-category="web">
+              <div class="project-visual security">
+                <span>SAFE</span>
+              </div>
+              <div class="project-body">
+                <div class="project-meta">
+                  <span class="tag">HTML</span>
+                  <span class="tag">Guide</span>
+                </div>
+                <h3>Ransomware-Recovery-Guide</h3>
+                <p>A web-based recovery guide that packages security response information into a direct, readable format.</p>
+                <a class="project-link" href="projects/ransomware-recovery-guide.html">View Details →</a>
+              </div>
+            </article>
+
+            <article class="project-card glass-panel reveal" data-category="systems">
+              <div class="project-visual android">
+                <span>A7</span>
+              </div>
+              <div class="project-body">
+                <div class="project-meta">
+                  <span class="tag">Android</span>
+                  <span class="tag highlight">12 stars</span>
+                </div>
+                <h3>a7y18lte-Resources</h3>
+                <p>Device resources for Galaxy A7 2018 customization, covering kernels, ROM choices, recoveries, and GSI guidance.</p>
+                <a class="project-link" href="projects/a7y18lte-resources.html">View Details →</a>
+              </div>
+            </article>
+
+            <article class="project-card glass-panel reveal" data-category="systems">
+              <div class="project-visual kernel">
+                <span>KRN</span>
+              </div>
+              <div class="project-body">
+                <div class="project-meta">
+                  <span class="tag">C</span>
+                  <span class="tag">Device kernel</span>
+                </div>
+                <h3>kernel_realme_RMX2001</h3>
+                <p>A modified Realme 6 kernel aimed at Droidian compatibility and low-cost server-style device experiments.</p>
+                <a class="project-link" href="projects/kernel-realme-rmx2001.html">View Details →</a>
+              </div>
+            </article>
+
+
+          </div>
+        </section>
+
+        <section class="stack-section reveal" id="stack" aria-labelledby="stack-title">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Working Range</p>
+              <h2 id="stack-title">Stack & Strengths</h2>
+            </div>
+          </div>
+          <div class="stack-grid">
+            <article class="glass-panel">
+              <div class="stack-icon web-icon"></div>
+              <h3>Frontend Product Work</h3>
+              <p>TypeScript, Next.js, Tailwind-style interfaces, media players, dashboards, and clone builds.</p>
+            </article>
+            <article class="glass-panel">
+              <div class="stack-icon script-icon"></div>
+              <h3>Automation & Scripting</h3>
+              <p>Shell, Python, setup scripts, one-off utilities, and repeatable config-first workflows.</p>
+            </article>
+            <article class="glass-panel">
+              <div class="stack-icon sys-icon"></div>
+              <h3>Android & Linux Systems</h3>
+              <p>Custom kernels, recovery tooling, device trees, GSIs, fastboot patching, and Linux customization.</p>
+            </article>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer reveal">
+        <div class="glass-panel footer-content">
+          <span>&copy; Harikaran Chettiyar. Built with static web tech.</span>
+          <div class="footer-links">
+            <a href="https://github.com/animegamer4422" target="_blank" rel="noopener">@animegamer4422</a>
+            <a href="https://github.com/DeadPool-4422?tab=repositories" target="_blank" rel="noopener">@DeadPool-4422</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
