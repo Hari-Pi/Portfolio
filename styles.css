@@ -524,6 +524,8 @@ main {
 .android { background: linear-gradient(135deg, #065f46, #3f6212); }
 .kernel { background: linear-gradient(135deg, #78350f, #451a03); }
 .recovery { background: linear-gradient(135deg, #1e3a8a, #115e59); }
+.mobile { background: linear-gradient(135deg, #be123c, #831843); }
+.finance { background: linear-gradient(135deg, #047857, #064e3b); }
 
 .project-body {
   padding: 24px;
@@ -771,8 +773,11 @@ main {
   color: var(--muted);
   font-size: 1.1rem;
   line-height: 1.8;
+  margin-bottom: 60px;
+}
+
+.project-content > * {
   max-width: 800px;
-  margin: 0 auto 60px;
 }
 
 .project-content h2 {
