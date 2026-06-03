@@ -54,4 +54,19 @@ document.addEventListener("DOMContentLoaded", () => {
   );
 
   revealElements.forEach((el) => revealObserver.observe(el));
+
+  // --- Card Clickability ---
+  projectCards.forEach((card) => {
+    card.style.cursor = "pointer";
+    card.addEventListener("click", (e) => {
+      // Do not navigate if a specific link was clicked
+      if (e.target.closest("a")) return;
+      
+      // Find the main project details link
+      const detailsLink = card.querySelector('a.project-link[href^="projects/"]');
+      if (detailsLink) {
+        window.location.href = detailsLink.href;
+      }
+    });
+  });
 });

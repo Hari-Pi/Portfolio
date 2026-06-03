@@ -37,8 +37,8 @@
             A synchronized playback solution built with TypeScript, complementing the Next-Sync-Player ecosystem.
           </p>
           <div class="hero-actions">
-            <a class="button primary" href="https://github.com/animegamer4422/SyncPlayer" target="_blank" rel="noopener">View on GitHub ↗</a>
-            <a class="button secondary" href="https://sync-player-web.vercel.app" target="_blank" rel="noopener">Live Demo ↗</a>
+            <a class="button primary" href="https://sync-player-web.vercel.app" target="_blank" rel="noopener">Live Demo ↗</a>
+            <a class="button secondary" href="https://github.com/animegamer4422/SyncPlayer" target="_blank" rel="noopener">View on GitHub ↗</a>
           </div>
         </section>
 
@@ -49,8 +49,23 @@
         <section class="project-content glass-panel" style="padding: 40px; border-radius: 16px;">
           <h2>About the Project</h2>
           <p>
-            Detailed information about SyncPlayer will go here. You can easily modify this static HTML file later to add your own screenshots, architecture diagrams, or text descriptions.
+            Peer-to-peer synchronized playback for local files and direct online media URLs.
           </p>
+          <h3>Core Architecture</h3>
+          <ul>
+            <li><strong>Web app cockpit:</strong> Immersive playback UI, room controls, peer status, logs, and settings.</li>
+            <li><strong>WebRTC peer layer:</strong> Discovery, manual invites, data channels, latency checks, and sync messages.</li>
+            <li><strong>WASM sync core:</strong> High-performance file fingerprinting, time math, drift decisions, and media helpers.</li>
+            <li><strong>Shared contracts:</strong> Message schemas, media identity types, and cross-package utilities.</li>
+          </ul>
+          <h3>Key Features</h3>
+          <ul>
+            <li>Local video/audio file mounting.</li>
+            <li>Direct media URL mounting for common progressive files such as MP4, WebM, OGG, MP3, WAV, M4A, AAC, FLAC, and Opus.</li>
+            <li>HLS <code>.m3u8</code> and MPEG-DASH <code>.mpd</code> online stream playback.</li>
+            <li>Manual WebRTC offer/answer pairing with shareable invite links that hide raw WebRTC offer/answer text.</li>
+            <li>WebRTC DataChannel playback-state messages and peer latency pings.</li>
+          </ul>
         </section>
       </main>
 
