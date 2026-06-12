@@ -1,0 +1,14 @@
+# Ignore everything
+*
+
+# Don't ignore directories
+!*/
+
+# Don't ignore web files
+!*.html
+!*.css
+!*.js
+
+# Don't ignore essential git/repo files
+!.gitignore
+!README.md
