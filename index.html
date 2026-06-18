@@ -9,7 +9,6 @@
       content="Portfolio of Harikaran Chettiyar, featuring full-stack web, Linux automation, and Android system projects."
     />
     <title>Harikaran Chettiyar | Project Portfolio</title>
-    <meta name="view-transition" content="same-origin" />
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -20,9 +19,6 @@
     <link rel="stylesheet" href="styles.css?v=2.0" />
   </head>
   <body>
-    <!-- Scroll Progress Indicator -->
-    <div id="scroll-progress" aria-hidden="true"></div>
-
     <!-- Background dynamic elements -->
     <div class="bg-blobs">
       <div class="blob blob-1"></div>
@@ -31,7 +27,7 @@
     </div>
 
     <div class="site-wrapper">
-      <header class="site-header reveal">
+      <header class="site-header">
         <a class="brand" href="#top" aria-label="Portfolio home">
           <span class="brand-mark">HC</span>
           <span class="brand-name">Harikaran Chettiyar</span>
@@ -355,17 +351,5 @@
     </div>
 
     <script src="script.js"></script>
-    <script type="speculationrules">
-      {
-        "prerender": [
-          {
-            "where": {
-              "href_matches": "/*"
-            },
-            "eagerness": "moderate"
-          }
-        ]
-      }
-    </script>
   </body>
 </html>
