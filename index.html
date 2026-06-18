@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0d0d12" media="(prefers-color-scheme: dark)" />
     <meta
       name="description"
       content="Portfolio of Harikaran Chettiyar, featuring full-stack web, Linux automation, and Android system projects."
@@ -13,11 +14,15 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;700;900&display=swap" as="style" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;700;900&display=swap" rel="stylesheet" />
     
     <link rel="stylesheet" href="styles.css?v=2.0" />
   </head>
   <body>
+    <!-- Scroll Progress Indicator -->
+    <div id="scroll-progress" aria-hidden="true"></div>
+
     <!-- Background dynamic elements -->
     <div class="bg-blobs">
       <div class="blob blob-1"></div>
@@ -32,7 +37,7 @@
           <span class="brand-name">Harikaran Chettiyar</span>
         </a>
         <nav class="nav-links" aria-label="Primary navigation">
-          <a href="#workspaces">Workspaces</a>
+          <a href="#profile">Profile</a>
           <a href="#projects">Projects</a>
           <a href="#stack">Stack</a>
         </nav>
@@ -44,11 +49,11 @@
             <p class="eyebrow">Full-stack Web • Linux Automation • Android Systems</p>
             <h1 id="hero-title">Engineering practical tools across the web and device platforms.</h1>
             <p class="hero-text">
-              A curated showcase of projects built by <strong>Harikaran Chettiyar</strong>, 
+              A curated showcase of projects I've built, 
               spanning across modern web experiences, configuration scripts, and low-level system mods.
             </p>
             <div class="hero-actions" aria-label="Quick links">
-              <a class="button primary" href="#workspaces">View Workspaces</a>
+              <a class="button primary" href="#profile">View Profile</a>
               <a class="button secondary" href="#projects">Browse Projects</a>
             </div>
           </div>
@@ -57,7 +62,7 @@
         <section class="summary-band reveal" aria-label="Portfolio highlights">
           <div class="glass-panel">
             <span class="metric">56</span>
-            <span>Public repositories across accounts</span>
+            <span>Public repositories</span>
           </div>
           <div class="glass-panel">
             <span class="metric">33</span>
@@ -69,24 +74,24 @@
           </div>
         </section>
 
-        <section class="workspaces-section reveal" id="workspaces" aria-labelledby="workspaces-title">
+        <section class="workspaces-section reveal" id="profile" aria-labelledby="profile-title">
           <div class="section-heading">
             <div>
-              <p class="eyebrow">Unified Hub</p>
-              <h2 id="workspaces-title">GitHub Profile</h2>
+              <p class="eyebrow">Developer Profile</p>
+              <h2 id="profile-title">GitHub Profile</h2>
             </div>
           </div>
           
           <div class="workspaces-grid unified-workspace">
             <article class="workspace-card glass-panel accent-primary">
               <div class="workspace-header">
-                <img src="https://github.com/Hari-Pi.png" alt="Hari-Pi GitHub avatar" class="avatar unified-avatar" />
+                <img src="https://github.com/Hari-Pi.png" alt="Hari-Pi GitHub avatar" class="avatar unified-avatar" fetchpriority="high" />
                 <div class="workspace-title">
-                  <h3>Hari-Pi</h3>
+                  <h3>Harikaran Chettiyar</h3>
                   <a href="https://github.com/Hari-Pi" target="_blank" rel="noopener">@Hari-Pi ↗</a>
                 </div>
               </div>
-              <p class="workspace-desc unified-desc">A unified repository spanning modern full-stack web applications, Flutter mobile apps, Linux automation tools, and deep-level Android system engineering.</p>
+              <p class="workspace-desc unified-desc">A comprehensive showcase of my software engineering capabilities. Explore my work across full-stack web development, responsive Flutter mobile applications, Linux system automation, and low-level Android OS engineering.</p>
               <dl class="workspace-stats unified-stats">
                 <div><dt>Repos</dt><dd>50+</dd></div>
                 <div><dt>Followers</dt><dd>24+</dd></div>
@@ -350,5 +355,17 @@
     </div>
 
     <script src="script.js"></script>
+    <script type="speculationrules">
+      {
+        "prerender": [
+          {
+            "where": {
+              "href_matches": "/*"
+            },
+            "eagerness": "moderate"
+          }
+        ]
+      }
+    </script>
   </body>
 </html>
