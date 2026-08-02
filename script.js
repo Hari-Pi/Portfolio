@@ -1,4 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
   // --- Filtering Logic ---
   const filterButtons = document.querySelectorAll(".filter-button");
   const projectCards = document.querySelectorAll(".project-card");
@@ -14,21 +18,27 @@ document.addEventListener("DOMContentLoaded", () => {
         item.setAttribute("aria-pressed", String(isActive));
       });
 
-      // Filter cards
+      // Filter cards. Toggling .hidden off and .active on in the same frame
+      // would skip the transition, so unhide first and let the next frame
+      // start the reveal.
       projectCards.forEach((card) => {
-        const matchesFilter = filter === "all" || card.dataset.category === filter;
-        
-        // Remove reveal active class briefly to re-trigger animation if visible
+        const matchesFilter =
+          filter === "all" || card.dataset.category === filter;
+
         if (matchesFilter) {
           card.classList.remove("hidden");
-          // slight delay to allow layout calculation before adding active
-          setTimeout(() => {
-            card.classList.add("active");
-          }, 50);
         } else {
           card.classList.add("hidden");
           card.classList.remove("active");
         }
+      });
+
+      requestAnimationFrame(() => {
+        projectCards.forEach((card) => {
+          if (!card.classList.contains("hidden")) {
+            card.classList.add("active");
+          }
+        });
       });
     });
   });
@@ -36,35 +46,41 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- Scroll Reveal Animation ---
   const revealElements = document.querySelectorAll(".reveal");
 
-  const revealObserver = new IntersectionObserver(
-    (entries, observer) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("active");
-        }
-      });
-    },
-    {
-      root: null,
-      rootMargin: "0px 0px -50px 0px",
-      threshold: 0,
-    }
-  );
+  if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+    // No observer needed: show everything up front.
+    revealElements.forEach((el) => el.classList.add("active"));
+  } else {
+    const revealObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("active");
+            // Reveal is one-way, so stop tracking once it has fired.
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        root: null,
+        rootMargin: "0px 0px -50px 0px",
+        threshold: 0,
+      }
+    );
 
-  revealElements.forEach((el) => revealObserver.observe(el));
+    revealElements.forEach((el) => revealObserver.observe(el));
+  }
 
   // --- Card Clickability ---
   projectCards.forEach((card) => {
+    const detailsLink = card.querySelector('a.project-link[href^="projects/"]');
+    if (!detailsLink) return;
+
     card.style.cursor = "pointer";
+
     card.addEventListener("click", (e) => {
       // Do not navigate if a specific link was clicked
       if (e.target.closest("a")) return;
-      
-      // Find the main project details link
-      const detailsLink = card.querySelector('a.project-link[href^="projects/"]');
-      if (detailsLink) {
-        window.location.href = detailsLink.href;
-      }
+      window.location.href = detailsLink.href;
     });
   });
 });

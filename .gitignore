@@ -9,6 +9,15 @@
 !*.css
 !*.js
 
+# Don't ignore site images
+!*.webp
+!*.svg
+
+# Don't ignore SEO / hosting files
+!sitemap.xml
+!robots.txt
+!CNAME
+
 # Don't ignore essential git/repo files
 !.gitignore
 !README.md

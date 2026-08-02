@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0d0d12" />
+    <script>
+      document.documentElement.classList.add("js");
+    </script>
+    <meta
+      name="description"
+      content="CloudStudio108 — a fast, image-heavy marketing and booking site for a professional recording studio, hand-built and tuned for edge delivery."
+    />
+    <title>CloudStudio108 | Harikaran Chettiyar</title>
+    <link rel="canonical" href="https://hari-pi.com/projects/cloudstudio108.html" />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="CloudStudio108 | Harikaran Chettiyar" />
+    <meta property="og:description" content="A fast, image-heavy marketing and booking site for a professional recording studio." />
+
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%236366f1'/%3E%3Cstop offset='1' stop-color='%23ec4899'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='url(%23g)'/%3E%3Ctext x='32' y='43' font-family='Verdana,sans-serif' font-size='26' font-weight='bold' fill='%23fff' text-anchor='middle'%3EHC%3C/text%3E%3C/svg%3E"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400..800&family=Outfit:wght@500..900&display=swap"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400..800&family=Outfit:wght@500..900&display=swap"
+      />
+    </noscript>
+
+    <link rel="stylesheet" href="../styles.css?v=3.7" />
+  </head>
+  <body>
+    <div class="bg-blobs" aria-hidden="true">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="blob blob-3"></div>
+    </div>
+
+    <div class="site-wrapper">
+      <main id="top" class="detail-main">
+        <div class="project-detail-header">
+          <a href="../index.html#projects" class="back-link">
+            ← Back to Portfolio
+          </a>
+        </div>
+
+        <section class="project-hero glass-panel">
+          <div class="project-meta project-hero-meta">
+            <span class="tag">JavaScript</span>
+            <span class="tag">Performance</span>
+            <span class="tag highlight">Client project</span>
+          </div>
+          <h1>CloudStudio108</h1>
+          <p class="description">
+            A marketing and booking site for a professional music production studio — heavy on
+            photography and video, built to stay fast anyway.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="https://cloudstudio108.com" target="_blank" rel="noopener">Visit Live Site ↗</a>
+          </div>
+          <p class="private-note">
+            Built under a private engagement. The source is not public, so this page covers the
+            build and the decisions behind it rather than the code.
+          </p>
+        </section>
+
+        <section class="media-gallery" aria-label="Screenshots of the live site">
+          <div class="shot-grid">
+            <figure class="shot">
+              <img
+                src="../images/cloudstudio108-home.webp"
+                alt="CloudStudio108 homepage: neon logo on a dark purple backdrop, headline Elevate Your Sound, and Record, Mix, Master, Release icons"
+                width="1440"
+                height="900"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>Homepage — hero and service overview</figcaption>
+            </figure>
+            <figure class="shot shot-mobile">
+              <img
+                src="../images/cloudstudio108-mobile.webp"
+                alt="CloudStudio108 homepage on a phone-sized screen"
+                width="600"
+                height="1299"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>Responsive layout</figcaption>
+            </figure>
+          </div>
+
+          <figure class="shot">
+            <img
+              src="../images/cloudstudio108-packages.webp"
+              alt="Artist Packages section with three neon-bordered pricing tiers: Starter, Professional, and Premium Release"
+              width="1440"
+              height="900"
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption>Artist packages — tiers laid out for direct comparison</figcaption>
+          </figure>
+        </section>
+
+        <section class="project-content glass-panel project-content-pad">
+          <h2>About the Project</h2>
+          <p>
+            CloudStudio108 is a recording studio offering sound recording, music production, mixing,
+            and mastering, plus a music academy. The pitch is entirely visual and sonic — the rooms,
+            the gear, the sound — so the site had to lead with media while still loading quickly for
+            people finding it on mobile data.
+          </p>
+          <p>
+            I built it as a hand-written static site rather than reaching for a framework or a site
+            builder. For a content set this size, a framework would have added a build step and a
+            JavaScript payload without buying anything the studio needed.
+          </p>
+
+          <h3>What I Built</h3>
+          <ul>
+            <li><strong>Full marketing site:</strong> Vision and about sections, facilities, equipment, the creative space, and the music academy.</li>
+            <li><strong>Service and package pages:</strong> Artist packages and monthly creator tiers laid out for direct comparison, since pricing was the most common enquiry.</li>
+            <li><strong>Booking flow:</strong> A dedicated booking page so enquiries arrive structured instead of as open-ended messages.</li>
+            <li><strong>Media gallery:</strong> A large studio photography set plus embedded video and audio, so prospective clients can see and hear the room before they commit.</li>
+            <li><strong>Search groundwork:</strong> Sitemap, robots directives, and descriptive metadata for local discovery.</li>
+          </ul>
+
+          <h3>Notable Decisions</h3>
+          <p>
+            <strong>An all-WebP image pipeline.</strong> The gallery is the heaviest part of the site by
+            far, so every photograph was converted to WebP and served directly — around fifty images,
+            at a fraction of the original JPEG and PNG weight.
+          </p>
+          <p>
+            <strong>Lazy loading and reserved space.</strong> Below-the-fold media is lazy-loaded, and
+            every image carries explicit width and height attributes so the browser reserves its space
+            before the file arrives. On a page this image-dense, that is the difference between a stable
+            layout and content jumping under the reader's thumb.
+          </p>
+          <p>
+            <strong>Static over a site builder.</strong> The studio was previously on a hosted page builder.
+            Moving to plain HTML, CSS, and JavaScript removed the platform's script overhead and gave
+            full control over layout and load order.
+          </p>
+          <p>
+            <strong>Edge hosting on Cloudflare Pages.</strong> With a custom domain behind Cloudflare, the
+            media is served from the edge and cached close to visitors — the difference is most
+            noticeable on the image-heavy pages.
+          </p>
+
+          <h3>Tech Stack</h3>
+          <ul>
+            <li><strong>Frontend:</strong> Hand-written HTML, CSS, and JavaScript — no framework, no build step</li>
+            <li><strong>Media:</strong> All-WebP image set, lazy loading, explicit dimensions, preloaded logo</li>
+            <li><strong>Hosting:</strong> Cloudflare Pages with a custom domain and Cloudflare DNS</li>
+          </ul>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <div class="glass-panel footer-content">
+          <span>&copy; Harikaran Chettiyar. Built with static web tech.</span>
+          <div class="footer-links">
+            <a href="https://github.com/Hari-Pi" target="_blank" rel="noopener">@Hari-Pi</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
