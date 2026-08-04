@@ -3,12 +3,10 @@ document.addEventListener("DOMContentLoaded", () => {
     "(prefers-reduced-motion: reduce)"
   ).matches;
 
-  const projectCards = document.querySelectorAll(
-    ".project-grid .project-card:not(.archived-card)"
-  );
+  const projectCards = document.querySelectorAll(".project-grid .project-card");
 
   // --- Scroll Reveal Animation ---
-  const revealElements = document.querySelectorAll(".reveal:not(.archived-card)");
+  const revealElements = document.querySelectorAll(".reveal");
 
   if (prefersReducedMotion || !("IntersectionObserver" in window)) {
     // No observer needed: show everything up front.

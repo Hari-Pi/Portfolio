@@ -12,6 +12,7 @@
 # Don't ignore site images
 !*.webp
 !*.svg
+!images/og-portfolio.png
 
 # Don't ignore SEO / hosting files
 !sitemap.xml
