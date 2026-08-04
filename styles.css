@@ -1522,6 +1522,13 @@ section[id] {
   display: block;
 }
 
+.shot video {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #000;
+}
+
 .shot-open {
   position: relative;
   display: block;

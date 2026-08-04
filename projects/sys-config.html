@@ -30,7 +30,7 @@
       rel="icon"
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%236366f1'/%3E%3Cstop offset='1' stop-color='%23ec4899'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='url(%23g)'/%3E%3Ctext x='32' y='43' font-family='Verdana,sans-serif' font-size='26' font-weight='bold' fill='%23fff' text-anchor='middle'%3EHC%3C/text%3E%3C/svg%3E"
     />
-    <link rel="stylesheet" href="../styles.css?v=3.8" />
+    <link rel="stylesheet" href="../styles.css?v=4.6" />
   </head>
   <body>
     <div class="bg-blobs" aria-hidden="true">
@@ -61,29 +61,75 @@
           </div>
         </section>
 
-        <section class="media-gallery">
-          <!-- Add images or videos here later -->
+        <dl class="case-summary glass-panel" aria-label="Project overview">
+          <div><dt>Role</dt><dd>Automation Developer</dd></div>
+          <div><dt>Context</dt><dd>Linux utility</dd></div>
+          <div><dt>Scope</dt><dd>Cross-distro setup</dd></div>
+          <div><dt>Delivery</dt><dd>Source + terminal demo</dd></div>
+        </dl>
+
+        <section class="media-gallery" aria-label="Sys-Config demonstration">
+          <figure class="shot video-shot">
+            <video
+              controls
+              playsinline
+              preload="metadata"
+              poster="../images/sys-config-demo.webp"
+              aria-label="Terminal demonstration of Sys-Config validating a JSON configuration and installing a server setup"
+            >
+              <source src="../media/sys-config-demo.mp4?v=2" type="video/mp4" />
+              Your browser does not support embedded video. You can
+              <a href="../media/sys-config-demo.mp4?v=2">open the Sys-Config demo directly</a>.
+            </video>
+            <figcaption>Live terminal demo — configuration validation, environment detection, and package setup</figcaption>
+          </figure>
         </section>
 
         <section class="project-content glass-panel project-content-pad">
-          <h2>About the project</h2>
-          <p>Sys-Config is a powerful automation tool designed to streamline package installation across popular Linux distributions. By utilizing a simple JSON configuration file, it seamlessly adapts to your system's package manager, ensuring consistent setups across Debian, Fedora, and Arch-based environments.</p>
-          
-          <h2 style="margin-top: 32px;">Key Features</h2>
+          <h2>The Challenge</h2>
+          <p>
+            Rebuilding a Linux environment usually means repeating package installation, privilege
+            checks, and distribution-specific commands by hand. Sys-Config turns that setup into a
+            repeatable JSON configuration that can be used across Debian, Fedora, and Arch-based
+            systems.
+          </p>
+
+          <h3>My Role</h3>
+          <p>
+            I designed and implemented the shell workflow, including package-manager detection,
+            configuration validation, dependency bootstrapping, privilege handling, and interactive
+            selection between different machine profiles.
+          </p>
+
+          <h3>What I Delivered</h3>
           <ul>
-            <li>Automated Package Detection (`apt`, `dnf`, `pacman`)</li>
-            <li>JSON-based configuration for consistency</li>
-            <li>Smart root/sudo privilege handling</li>
-            <li>Interactive and headless execution modes</li>
-            <li>Automatic installation of core dependencies like `jq`</li>
+            <li><strong>Distribution awareness:</strong> Detects and works with apt, dnf, and pacman environments.</li>
+            <li><strong>Configuration-driven setup:</strong> Reads JSON profiles so laptop, server, or other setups stay reproducible.</li>
+            <li><strong>Dependency bootstrapping:</strong> Installs required helpers such as jq before validating and processing the configuration.</li>
+            <li><strong>Privilege handling:</strong> Adapts commands for root and sudo-based execution.</li>
+            <li><strong>Flexible operation:</strong> Supports interactive profile selection and unattended workflows.</li>
           </ul>
 
-          <h2 style="margin-top: 32px;">Tech Stack</h2>
-          <div class="tags-container" style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px;">
-            <span class="tag">Bash</span>
-            <span class="tag">JSON</span>
-            <span class="tag">Linux Shell</span>
-          </div>
+          <h3>Key Decisions</h3>
+          <ul>
+            <li><strong>JSON as the interface:</strong> Machine profiles remain readable, portable, and easy to version without modifying the shell program.</li>
+            <li><strong>Native package managers:</strong> The tool works with each distribution's existing package system instead of adding another setup framework.</li>
+            <li><strong>Validate before changing the system:</strong> Configuration checks happen before the installation workflow proceeds, reducing avoidable partial setups.</li>
+          </ul>
+
+          <h3>Outcome</h3>
+          <p>
+            The result is a lightweight setup utility that can reproduce useful Linux environments
+            from a small configuration file. The terminal demo shows the full path from dependency
+            detection and validation through profile selection and package installation.
+          </p>
+
+          <h3>Tech Stack</h3>
+          <ul>
+            <li><strong>Automation:</strong> Bash and Linux shell tooling</li>
+            <li><strong>Configuration:</strong> JSON and jq</li>
+            <li><strong>Package systems:</strong> apt, dnf, and pacman</li>
+          </ul>
         </section>
       </main>
 
