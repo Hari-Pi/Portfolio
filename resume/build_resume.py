@@ -201,7 +201,7 @@ def build_resume():
     story.extend(section_heading("Professional Summary", styles))
     story.append(
         Paragraph(
-            "Full-stack software engineer who builds and deploys production web products from customer-facing interfaces through backend systems and infrastructure. Hands-on experience with Django, Python, TypeScript, React, Flutter, Linux automation, and client delivery, including domains, deployment, performance, and technical handover.",
+            "Full-stack software engineer who turns product requirements into reliable, deployed software. Delivered two live client platforms and works across web products, mobile applications, automation, and Linux systems, with end-to-end ownership spanning interfaces, backends, domains, deployment, performance, and handover.",
             styles["body"],
         )
     )
@@ -221,12 +221,13 @@ def build_resume():
             ]
             for label, value in skill_rows
         ],
-        colWidths=[31 * mm, 152 * mm],
+        colWidths=[34 * mm, 149 * mm],
         style=TableStyle(
             [
                 ("VALIGN", (0, 0), (-1, -1), "TOP"),
                 ("LEFTPADDING", (0, 0), (-1, -1), 0),
                 ("RIGHTPADDING", (0, 0), (-1, -1), 0),
+                ("RIGHTPADDING", (0, 0), (0, -1), 6),
                 ("TOPPADDING", (0, 0), (-1, -1), 1),
                 ("BOTTOMPADDING", (0, 0), (-1, -1), 1),
             ]
@@ -234,7 +235,7 @@ def build_resume():
     )
     story.append(skills_table)
 
-    story.extend(section_heading("Client Experience", styles))
+    story.extend(section_heading("Client Delivery", styles))
     story.append(
         item_header(
             "Full-stack Developer | Averra Data Academy",
@@ -247,7 +248,7 @@ def build_resume():
     story.extend(
         [
             bullet(
-                "Designed, built, and deployed a production learning platform combining public course discovery with an authenticated student area.",
+                "Designed, built, and deployed a production learning platform spanning five academy tracks, public course discovery, and an authenticated student area.",
                 styles,
             ),
             bullet(
@@ -261,26 +262,31 @@ def build_resume():
         ]
     )
 
+    story.append(Spacer(1, 4))
+    story.append(
+        item_header(
+            "Web Developer | CloudStudio108",
+            "Marketing site | Booking flow | Media performance | Cloudflare Pages",
+            "",
+            styles,
+            "https://hari-pi.com/projects/cloudstudio108.html",
+        )
+    )
+    story.extend(
+        [
+            bullet(
+                "Built and deployed a production marketing and booking site that presents the studio, services, pricing, and structured enquiry flow.",
+                styles,
+            ),
+            bullet(
+                "Prepared and delivered 50+ WebP media assets with lazy loading and reserved dimensions for a fast, stable image-heavy experience.",
+                styles,
+            ),
+        ]
+    )
+
     story.extend(section_heading("Selected Projects", styles))
     projects = [
-        (
-            "CloudStudio108 - Client Marketing and Booking Site",
-            "HTML | CSS | JavaScript | Cloudflare Pages | Performance",
-            "https://hari-pi.com/projects/cloudstudio108.html",
-            [
-                "Built and deployed an image-heavy production site with service packages, structured booking enquiries, and local-search metadata.",
-                "Created a WebP media pipeline with lazy loading and reserved image dimensions to reduce page weight and layout movement.",
-            ],
-        ),
-        (
-            "CaseAtlas - Real-time Case Tracking Platform",
-            "Next.js | Node.js | Express | Socket.io | MongoDB",
-            "https://hari-pi.com/projects/caseatlas.html",
-            [
-                "Built a full-stack platform for persistent case updates, real-time discussion, authentication, and media handling.",
-                "Designed a REST API backend and Socket.io event flow for responsive updates and interactions.",
-            ],
-        ),
         (
             "SyncPlayer - Peer-to-peer Media Synchronization",
             "React | TypeScript | WebRTC | WASM | HLS.js",
@@ -291,11 +297,20 @@ def build_resume():
             ],
         ),
         (
-            "Android-to-Linux Private Cloud",
+            "Sys-Config - Cross-distribution Linux Setup",
+            "Bash | JSON | jq | apt | dnf | pacman",
+            "https://hari-pi.com/projects/sys-config.html",
+            [
+                "Built a configuration-driven setup utility that validates JSON profiles and detects native package managers across major Linux distribution families.",
+                "Implemented dependency bootstrapping, privilege handling, and both interactive and unattended setup workflows.",
+            ],
+        ),
+        (
+            "Linux on a Smartphone: Realme 6",
             "Linux kernel | Droidian | Docker | CasaOS | Tailscale",
             "https://hari-pi.com/projects/kernel-realme-rmx2001.html",
             [
-                "Adapted an unsupported Android device for a Linux-based private-cloud experiment and debugged boot, partition, and deployment issues.",
+                "Modified a Realme 6 device kernel for a Droidian-based Linux experiment and debugged boot, partition, and deployment issues.",
                 "Ran containerized services and configured secure remote access for low-cost self-hosted infrastructure.",
             ],
         ),
