@@ -9,7 +9,7 @@
     </script>
     <meta name="view-transition" content="same-origin" />
     <meta name="description" content="A specially modified Linux kernel for the Realme 6 (RMX2001) to run Droidian OS as a cost-effective server." />
-    <title>kernel_realme_RMX2001 | Harikaran Chettiyar</title>
+    <title>Mainline Linux For Smartphone | Harikaran Chettiyar</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -30,7 +30,7 @@
       rel="icon"
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%236366f1'/%3E%3Cstop offset='1' stop-color='%23ec4899'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='url(%23g)'/%3E%3Ctext x='32' y='43' font-family='Verdana,sans-serif' font-size='26' font-weight='bold' fill='%23fff' text-anchor='middle'%3EHC%3C/text%3E%3C/svg%3E"
     />
-    <link rel="stylesheet" href="../styles.css?v=3.8" />
+    <link rel="stylesheet" href="../styles.css?v=4.3" />
   </head>
   <body>
     <div class="bg-blobs" aria-hidden="true">
@@ -52,7 +52,7 @@
             <span class="tag">C</span>
             <span class="tag">Device kernel</span>
           </div>
-          <h1>kernel_realme_RMX2001</h1>
+          <h1>Mainline Linux For Smartphone</h1>
           <p class="description">
             A specially modified Linux kernel for the Realme 6 (RMX2001) to run Droidian OS as a cost-effective server.
           </p>
@@ -61,30 +61,64 @@
           </div>
         </section>
 
+        <dl class="case-summary glass-panel" aria-label="Project overview">
+          <div><dt>Role</dt><dd>Systems Developer</dd></div>
+          <div><dt>Context</dt><dd>Device experiment</dd></div>
+          <div><dt>Scope</dt><dd>Kernel + Linux deployment</dd></div>
+          <div><dt>Delivery</dt><dd>Open-source repository</dd></div>
+        </dl>
+
         <section class="media-gallery">
           <!-- Add images or videos here later -->
         </section>
 
         <section class="project-content glass-panel project-content-pad">
-          <h2>About the project</h2>
-          <p>This project features a specially modified Linux kernel for the Realme 6 (RMX2001). The primary goal is to establish compatibility with Droidian, effectively repurposing the smartphone into a powerful, cost-effective Linux server and a viable alternative to the Raspberry Pi.</p>
-          
-          <h2 style="margin-top: 32px;">Key Features</h2>
+          <h2>The Challenge</h2>
+          <p>
+            The Realme 6 is unsupported hardware for running a conventional mobile Linux environment.
+            This project investigates what it takes to adapt the device kernel, debug the boot path,
+            and repurpose existing phone hardware as a low-cost Linux experimentation platform.
+          </p>
+
+          <h3>My Role</h3>
+          <p>
+            I worked across kernel configuration and builds, device boot and recovery workflows,
+            partition-level troubleshooting, and Linux service deployment. Debugging relied on ADB
+            and device logs rather than a standard desktop installation path.
+          </p>
+
+          <h3>What I Delivered</h3>
           <ul>
-            <li>Droidian OS compatibility layer</li>
-            <li>Optimized for server workloads on mobile hardware</li>
-            <li>Cost-effective Raspberry Pi alternative</li>
-            <li>Custom driver implementations for RMX2001</li>
-            <li>Enhanced battery and thermal management for uptime</li>
+            <li><strong>Device kernel work:</strong> A modified Realme 6 kernel repository aimed at Droidian compatibility.</li>
+            <li><strong>Boot debugging:</strong> Investigation across recovery, partitions, kernel logs, and deployment failures.</li>
+            <li><strong>Linux environment:</strong> A device-side environment for experimenting with services on reused hardware.</li>
+            <li><strong>Remote access:</strong> Containerized services and secure connectivity through Docker, CasaOS, and Tailscale.</li>
           </ul>
 
-          <h2 style="margin-top: 32px;">Tech Stack</h2>
-          <div class="tags-container" style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px;">
-            <span class="tag">C</span>
-            <span class="tag">Linux Kernel</span>
-            <span class="tag">Makefile</span>
-            <span class="tag">Droidian</span>
-          </div>
+          <h3>Key Decisions</h3>
+          <p>
+            <strong>Reuse hardware before buying more.</strong> The project treats an existing phone as
+            a systems-learning platform, accepting device-specific constraints in exchange for a
+            low-cost environment that exposes real kernel and deployment problems.
+          </p>
+          <p>
+            <strong>Debug from evidence.</strong> Boot logs, recovery behavior, partition state, and
+            repeatable build output drive each iteration instead of relying on opaque trial and error.
+          </p>
+
+          <h3>Outcome</h3>
+          <p>
+            The repository documents an open, device-specific path toward running Droidian and Linux
+            services on the Realme 6. More importantly, it demonstrates hands-on work below the
+            application layer: kernels, boot flows, hardware constraints, and remote administration.
+          </p>
+
+          <h3>Tech Stack</h3>
+          <ul>
+            <li><strong>Kernel:</strong> C, Linux kernel, Makefile</li>
+            <li><strong>Mobile Linux:</strong> Droidian, ADB, recovery tooling</li>
+            <li><strong>Services:</strong> Docker, CasaOS, Tailscale</li>
+          </ul>
         </section>
       </main>
 

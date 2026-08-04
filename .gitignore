@@ -21,3 +21,7 @@
 # Don't ignore essential git/repo files
 !.gitignore
 !README.md
+
+# Public résumé and its reproducible source
+!resume/build_resume.py
+!resume/Harikaran-Chettiyar-Resume.pdf

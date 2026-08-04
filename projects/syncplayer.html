@@ -30,7 +30,7 @@
       rel="icon"
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%236366f1'/%3E%3Cstop offset='1' stop-color='%23ec4899'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='url(%23g)'/%3E%3Ctext x='32' y='43' font-family='Verdana,sans-serif' font-size='26' font-weight='bold' fill='%23fff' text-anchor='middle'%3EHC%3C/text%3E%3C/svg%3E"
     />
-    <link rel="stylesheet" href="../styles.css?v=3.8" />
+    <link rel="stylesheet" href="../styles.css?v=4.5" />
   </head>
   <body>
     <div class="bg-blobs" aria-hidden="true">
@@ -62,29 +62,84 @@
           </div>
         </section>
 
-        <section class="media-gallery">
-          <!-- Add images or videos here later -->
+        <dl class="case-summary glass-panel" aria-label="Project overview">
+          <div><dt>Role</dt><dd>Web App Developer</dd></div>
+          <div><dt>Context</dt><dd>Technical product</dd></div>
+          <div><dt>Scope</dt><dd>Peer-to-peer media sync</dd></div>
+          <div><dt>Delivery</dt><dd>Live demo + source</dd></div>
+        </dl>
+
+        <section class="media-gallery" aria-label="Screenshots of SyncPlayer">
+          <div class="shot-grid">
+            <figure class="shot">
+              <img
+                src="../images/syncplayer-home.webp"
+                alt="SyncPlayer desktop command deck with session status, playback surface, synchronization controls, and room sharing"
+                width="1280"
+                height="720"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>Desktop command deck — playback, synchronization, and room controls</figcaption>
+            </figure>
+            <figure class="shot shot-mobile">
+              <img
+                src="../images/syncplayer-mobile.webp"
+                alt="SyncPlayer command deck arranged for a mobile screen"
+                width="390"
+                height="844"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>Responsive command deck on mobile</figcaption>
+            </figure>
+          </div>
         </section>
 
         <section class="project-content glass-panel project-content-pad">
-          <h2>About the Project</h2>
+          <h2>The Challenge</h2>
           <p>
-            Peer-to-peer synchronized playback for local files and direct online media URLs.
+            Keeping media synchronized across separate browsers is harder than sharing a play or
+            pause command. Each peer has different latency, playback drift, and potentially a
+            different local copy of the file. SyncPlayer explores a peer-to-peer approach that keeps
+            those concerns visible and manageable.
           </p>
-          <h3>Core Architecture</h3>
+
+          <h3>My Role</h3>
+          <p>
+            I designed and implemented the playback interface, WebRTC connection flow, shared message
+            contracts, latency checks, media handling, and synchronization helpers across the project.
+          </p>
+
+          <h3>What I Delivered</h3>
           <ul>
             <li><strong>Web app cockpit:</strong> Immersive playback UI, room controls, peer status, logs, and settings.</li>
             <li><strong>WebRTC peer layer:</strong> Discovery, manual invites, data channels, latency checks, and sync messages.</li>
             <li><strong>WASM sync core:</strong> High-performance file fingerprinting, time math, drift decisions, and media helpers.</li>
             <li><strong>Shared contracts:</strong> Message schemas, media identity types, and cross-package utilities.</li>
           </ul>
-          <h3>Key Features</h3>
+
+          <h3>Key Decisions</h3>
           <ul>
-            <li>Local video/audio file mounting.</li>
-            <li>Direct media URL mounting for common progressive files such as MP4, WebM, OGG, MP3, WAV, M4A, AAC, FLAC, and Opus.</li>
-            <li>HLS <code>.m3u8</code> and MPEG-DASH <code>.mpd</code> online stream playback.</li>
-            <li>Manual WebRTC offer/answer pairing with shareable invite links that hide raw WebRTC offer/answer text.</li>
-            <li>WebRTC DataChannel playback-state messages and peer latency pings.</li>
+            <li><strong>Peer-to-peer transport:</strong> WebRTC DataChannels carry playback state and latency pings without routing every sync event through a central media server.</li>
+            <li><strong>Shared media identity:</strong> File fingerprints and common contracts help peers confirm that they are coordinating the same content.</li>
+            <li><strong>Broad media input:</strong> Local files, direct media URLs, HLS, and MPEG-DASH are handled through one playback experience.</li>
+            <li><strong>Explicit connection state:</strong> Pairing, peer health, logs, and settings remain visible so connection problems can be understood instead of hidden.</li>
+          </ul>
+
+          <h3>Outcome</h3>
+          <p>
+            The project delivers a working live demo and public codebase for synchronized playback
+            across local files and online media sources, with the connection and timing architecture
+            exposed clearly enough to extend and debug.
+          </p>
+
+          <h3>Tech Stack</h3>
+          <ul>
+            <li><strong>Application:</strong> React, TypeScript</li>
+            <li><strong>Connectivity:</strong> WebRTC, DataChannels</li>
+            <li><strong>Media:</strong> HLS.js, MPEG-DASH support, local file mounting</li>
+            <li><strong>Synchronization:</strong> WebAssembly helpers and shared message contracts</li>
           </ul>
         </section>
       </main>
@@ -98,5 +153,6 @@
         </div>
       </footer>
     </div>
+    <script src="../project-gallery.js?v=1.1"></script>
   </body>
 </html>

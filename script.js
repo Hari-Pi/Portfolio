@@ -3,48 +3,12 @@ document.addEventListener("DOMContentLoaded", () => {
     "(prefers-reduced-motion: reduce)"
   ).matches;
 
-  // --- Filtering Logic ---
-  const filterButtons = document.querySelectorAll(".filter-button");
-  const projectCards = document.querySelectorAll(".project-card");
-
-  filterButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const filter = button.dataset.filter;
-
-      // Update button states
-      filterButtons.forEach((item) => {
-        const isActive = item === button;
-        item.classList.toggle("active", isActive);
-        item.setAttribute("aria-pressed", String(isActive));
-      });
-
-      // Filter cards. Toggling .hidden off and .active on in the same frame
-      // would skip the transition, so unhide first and let the next frame
-      // start the reveal.
-      projectCards.forEach((card) => {
-        const matchesFilter =
-          filter === "all" || card.dataset.category === filter;
-
-        if (matchesFilter) {
-          card.classList.remove("hidden");
-        } else {
-          card.classList.add("hidden");
-          card.classList.remove("active");
-        }
-      });
-
-      requestAnimationFrame(() => {
-        projectCards.forEach((card) => {
-          if (!card.classList.contains("hidden")) {
-            card.classList.add("active");
-          }
-        });
-      });
-    });
-  });
+  const projectCards = document.querySelectorAll(
+    ".project-grid .project-card:not(.archived-card)"
+  );
 
   // --- Scroll Reveal Animation ---
-  const revealElements = document.querySelectorAll(".reveal");
+  const revealElements = document.querySelectorAll(".reveal:not(.archived-card)");
 
   if (prefersReducedMotion || !("IntersectionObserver" in window)) {
     // No observer needed: show everything up front.

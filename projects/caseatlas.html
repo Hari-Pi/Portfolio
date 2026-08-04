@@ -30,7 +30,7 @@
       rel="icon"
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%236366f1'/%3E%3Cstop offset='1' stop-color='%23ec4899'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='url(%23g)'/%3E%3Ctext x='32' y='43' font-family='Verdana,sans-serif' font-size='26' font-weight='bold' fill='%23fff' text-anchor='middle'%3EHC%3C/text%3E%3C/svg%3E"
     />
-    <link rel="stylesheet" href="../styles.css?v=3.8" />
+    <link rel="stylesheet" href="../styles.css?v=4.3" />
   </head>
   <body>
     <div class="bg-blobs" aria-hidden="true">
@@ -62,16 +62,33 @@
           </div>
         </section>
 
+        <dl class="case-summary glass-panel" aria-label="Project overview">
+          <div><dt>Role</dt><dd>Full-stack Developer</dd></div>
+          <div><dt>Context</dt><dd>Product project</dd></div>
+          <div><dt>Scope</dt><dd>Case tracking + realtime</dd></div>
+          <div><dt>Delivery</dt><dd>Live demo + source</dd></div>
+        </dl>
+
         <section class="media-gallery">
           <!-- Add images or videos here later -->
         </section>
 
         <section class="project-content glass-panel project-content-pad">
-          <h2>About the Project</h2>
+          <h2>The Challenge</h2>
           <p>
-            CaseAtlas is a modern web platform designed for tracking cases, providing persistent official updates, and fostering discussions. Built with a robust Next.js frontend and a Node.js/Express backend, it offers real-time notifications and a seamless user experience.
+            Case information can become difficult to follow when official updates, media, and public
+            discussion are scattered across separate channels. CaseAtlas explores a single platform
+            where authoritative updates remain persistent while conversations and notifications can
+            happen in real time.
           </p>
-          <h3>Key Features</h3>
+
+          <h3>My Role</h3>
+          <p>
+            I designed and built the full application flow across the web interface, API,
+            authentication, media handling, data persistence, and real-time event layer.
+          </p>
+
+          <h3>What I Delivered</h3>
           <ul>
             <li><strong>Case Tracking & Subscriptions:</strong> Subscribe to cases and stay informed.</li>
             <li><strong>Official Updates:</strong> Persistent, moderator-driven official updates for each case.</li>
@@ -80,6 +97,25 @@
             <li><strong>Modern UI:</strong> Fully responsive, accessible, and dynamic user interface.</li>
             <li><strong>Secure Authentication:</strong> Robust user authentication system.</li>
           </ul>
+
+          <h3>Key Decisions</h3>
+          <p>
+            <strong>Separate official updates from discussion.</strong> Authoritative case information
+            remains persistent and moderator-driven, while the conversation layer can stay fast and
+            interactive without becoming the source of truth.
+          </p>
+          <p>
+            <strong>Use real time selectively.</strong> The API and database hold durable application
+            state; Socket.io is used for notifications and live interactions where immediacy improves
+            the experience.
+          </p>
+
+          <h3>Outcome</h3>
+          <p>
+            The live demo shows an end-to-end case-tracking workflow with authentication, persistent
+            updates, subscriptions, media, and real-time interactions. The source is public for review.
+          </p>
+
           <h3>Tech Stack</h3>
           <ul>
             <li><strong>Frontend:</strong> Next.js (App Router), React, Next-Auth, Socket.io-client, Lucide React</li>

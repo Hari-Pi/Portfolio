@@ -38,7 +38,7 @@
       />
     </noscript>
 
-    <link rel="stylesheet" href="../styles.css?v=3.8" />
+    <link rel="stylesheet" href="../styles.css?v=4.5" />
   </head>
   <body>
     <div class="bg-blobs" aria-hidden="true">
@@ -74,6 +74,13 @@
             build and the decisions behind it rather than the code.
           </p>
         </section>
+
+        <dl class="case-summary glass-panel" aria-label="Project overview">
+          <div><dt>Role</dt><dd>Full-stack Developer</dd></div>
+          <div><dt>Context</dt><dd>Client engagement</dd></div>
+          <div><dt>Scope</dt><dd>Web platform + learning system</dd></div>
+          <div><dt>Delivery</dt><dd>Live production site</dd></div>
+        </dl>
 
         <section class="media-gallery" aria-label="Screenshots of the live site">
           <div class="shot-grid">
@@ -119,7 +126,7 @@
         </p>
 
         <section class="project-content glass-panel project-content-pad">
-          <h2>About the Project</h2>
+          <h2>The Challenge</h2>
           <p>
             Averra Data is a data analytics academy that needed to move from a brochure presence to a
             platform its students could actually learn on. I built the site and the learning system
@@ -132,7 +139,14 @@
             variation without needing a developer every time a course changed.
           </p>
 
-          <h3>What I Built</h3>
+          <h3>My Role</h3>
+          <p>
+            I owned the full build: translating the academy's requirements into the data model,
+            authenticated learning flows, public course experience, deployment, domain setup,
+            and search groundwork.
+          </p>
+
+          <h3>What I Delivered</h3>
           <ul>
             <li><strong>Course structure:</strong> A nested courses → modules → lessons model, so staff can restructure a syllabus from the admin without touching templates.</li>
             <li><strong>Student accounts:</strong> Email-based authentication with a custom user model, registration, and a full password reset flow.</li>
@@ -142,7 +156,7 @@
             <li><strong>Discovery:</strong> Structured data, sitemap, and location-aware metadata so the academy ranks for the regional course searches its students actually run.</li>
           </ul>
 
-          <h3>Notable Decisions</h3>
+          <h3>Key Decisions</h3>
           <p>
             <strong>A custom user model from day one.</strong> The academy identifies students by email,
             not username. Swapping Django's user model after launch is painful, so it went in before
@@ -156,6 +170,13 @@
           <p>
             <strong>Serverless deployment.</strong> The site runs on Vercel, which keeps hosting cost
             near zero at the academy's traffic level while still handling enrolment-season spikes.
+          </p>
+
+          <h3>Outcome</h3>
+          <p>
+            The academy now has one live platform for course discovery, enrolment enquiries,
+            authenticated lessons, and practice testing. Staff can restructure courses and import
+            question banks without needing a developer for routine content changes.
           </p>
 
           <h3>Tech Stack</h3>
@@ -178,5 +199,6 @@
         </div>
       </footer>
     </div>
+    <script src="../project-gallery.js?v=1.1"></script>
   </body>
 </html>

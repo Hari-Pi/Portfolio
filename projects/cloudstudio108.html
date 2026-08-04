@@ -38,7 +38,7 @@
       />
     </noscript>
 
-    <link rel="stylesheet" href="../styles.css?v=3.8" />
+    <link rel="stylesheet" href="../styles.css?v=4.5" />
   </head>
   <body>
     <div class="bg-blobs" aria-hidden="true">
@@ -75,14 +75,21 @@
           </p>
         </section>
 
+        <dl class="case-summary glass-panel" aria-label="Project overview">
+          <div><dt>Role</dt><dd>Web Developer</dd></div>
+          <div><dt>Context</dt><dd>Client engagement</dd></div>
+          <div><dt>Scope</dt><dd>Marketing + booking</dd></div>
+          <div><dt>Delivery</dt><dd>Live production site</dd></div>
+        </dl>
+
         <section class="media-gallery" aria-label="Screenshots of the live site">
           <div class="shot-grid">
             <figure class="shot">
               <img
-                src="../images/cloudstudio108-home.webp"
+                src="../images/cloudstudio108-home.webp?v=2"
                 alt="CloudStudio108 homepage: neon logo on a dark purple backdrop, headline Elevate Your Sound, and Record, Mix, Master, Release icons"
                 width="1440"
-                height="900"
+                height="1000"
                 loading="lazy"
                 decoding="async"
               />
@@ -115,7 +122,7 @@
         </section>
 
         <section class="project-content glass-panel project-content-pad">
-          <h2>About the Project</h2>
+          <h2>The Challenge</h2>
           <p>
             CloudStudio108 is a recording studio offering sound recording, music production, mixing,
             and mastering, plus a music academy. The pitch is entirely visual and sonic — the rooms,
@@ -128,7 +135,14 @@
             JavaScript payload without buying anything the studio needed.
           </p>
 
-          <h3>What I Built</h3>
+          <h3>My Role</h3>
+          <p>
+            I handled the project end to end: information architecture, responsive implementation,
+            media preparation, booking flow, performance work, search foundations, domain setup,
+            and deployment.
+          </p>
+
+          <h3>What I Delivered</h3>
           <ul>
             <li><strong>Full marketing site:</strong> Vision and about sections, facilities, equipment, the creative space, and the music academy.</li>
             <li><strong>Service and package pages:</strong> Artist packages and monthly creator tiers laid out for direct comparison, since pricing was the most common enquiry.</li>
@@ -137,7 +151,7 @@
             <li><strong>Search groundwork:</strong> Sitemap, robots directives, and descriptive metadata for local discovery.</li>
           </ul>
 
-          <h3>Notable Decisions</h3>
+          <h3>Key Decisions</h3>
           <p>
             <strong>An all-WebP image pipeline.</strong> The gallery is the heaviest part of the site by
             far, so every photograph was converted to WebP and served directly — around fifty images,
@@ -160,6 +174,13 @@
             noticeable on the image-heavy pages.
           </p>
 
+          <h3>Outcome</h3>
+          <p>
+            The studio now has an independently hosted production site that presents its rooms,
+            services, media, and pricing in one place. Prospective clients can compare packages and
+            send structured booking enquiries without relying on a page-builder platform.
+          </p>
+
           <h3>Tech Stack</h3>
           <ul>
             <li><strong>Frontend:</strong> Hand-written HTML, CSS, and JavaScript — no framework, no build step</li>
@@ -178,5 +199,6 @@
         </div>
       </footer>
     </div>
+    <script src="../project-gallery.js?v=1.1"></script>
   </body>
 </html>
