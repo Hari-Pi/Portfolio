@@ -1,3 +1,19 @@
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url('fonts/inter-latin-variable.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 500 900;
+  font-display: swap;
+  src: url('fonts/outfit-latin-variable.woff2') format('woff2');
+}
+
 :root {
   color-scheme: dark;
   --bg: #0d0d12;
@@ -497,6 +513,8 @@ section[id] {
   flex: 0 0 auto;
   border: 2px solid rgba(255, 255, 255, 0.12);
   border-radius: 18px;
+  object-fit: cover;
+  box-shadow: 0 10px 28px rgba(99, 102, 241, 0.24);
 }
 
 .about-identity h3 {
@@ -1339,6 +1357,17 @@ section[id] {
     padding-bottom: 80px;
   }
 
+  .hero-section {
+    min-height: auto;
+    padding: 52px 0 32px;
+  }
+
+  .hero-section .eyebrow {
+    margin-bottom: 14px;
+    font-size: 0.72rem;
+    line-height: 1.4;
+  }
+
   .site-header {
     justify-content: center;
     padding: 12px;
@@ -1366,7 +1395,13 @@ section[id] {
   }
 
   .hero-copy h1 {
-    font-size: clamp(2.5rem, 12vw, 3.5rem);
+    margin-bottom: 20px;
+    font-size: clamp(2.35rem, 10.8vw, 3.15rem);
+  }
+
+  .hero-text {
+    margin-bottom: 28px;
+    font-size: 1rem;
   }
   
   .hero-actions {
@@ -1377,6 +1412,20 @@ section[id] {
   .hero-actions .button {
     width: 100%;
     text-align: center;
+  }
+
+  .hero-section .hero-actions {
+    gap: 10px;
+  }
+
+  .hero-section .hero-actions .button {
+    padding: 12px 18px;
+  }
+
+  /* Contact is already fixed in the mobile navigation, so repeating it here
+     only pushes the résumé action below the first screen. */
+  .hero-section .hero-actions .button:last-child {
+    display: none;
   }
 
   .workspaces-grid,
@@ -1415,12 +1464,16 @@ section[id] {
     grid-template-columns: 1fr;
   }
 
-  /* Keep the stat band as a compact 2x2 block rather than four
-     full-height panels the reader has to scroll past. */
+  /* Lead with the strongest outcome, then place the two supporting results
+     side by side so the shorter proof strip stays balanced. */
   .summary-band {
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
     margin-bottom: 60px;
+  }
+
+  .summary-band .glass-panel:first-child {
+    grid-column: 1 / -1;
   }
 
   .summary-band .glass-panel {

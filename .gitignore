@@ -8,6 +8,7 @@
 !*.html
 !*.css
 !*.js
+!*.woff2
 
 # Don't ignore site images
 !*.webp
