@@ -97,4 +97,13 @@ document.addEventListener("DOMContentLoaded", () => {
       previewVideos.forEach((video) => videoObserver.observe(video));
     }
   }
+
+  // --- Park the hero system map's animations once it scrolls away ---
+  if (heroSystem && "IntersectionObserver" in window) {
+    const idleObserver = new IntersectionObserver(
+      ([entry]) => heroSystem.classList.toggle("is-idle", !entry.isIntersecting),
+      { rootMargin: "120px" }
+    );
+    idleObserver.observe(heroSystem);
+  }
 });

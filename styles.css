@@ -450,6 +450,15 @@ section[id] {
   border-color: rgba(32, 205, 189, 0.4);
 }
 
+/* The system map runs three infinite animations. On a ~7000px page the hero is
+   off-screen for most of the visit, so JS parks them once it scrolls away —
+   they are compositor work and battery drain for something nobody can see. */
+.hero-system.is-idle .system-stage::before,
+.hero-system.is-idle .system-connections path,
+.hero-system.is-idle .system-core::after {
+  animation-play-state: paused;
+}
+
 .system-stage::before,
 .system-stage::after {
   content: "";
@@ -805,11 +814,6 @@ section[id] {
   letter-spacing: -0.5px;
 }
 
-/* Workspaces */
-.workspaces-section {
-  padding: 60px 0 100px;
-}
-
 /* About */
 .about-section {
   padding: 60px 0 100px;
@@ -830,6 +834,10 @@ section[id] {
 /* Recruiter-facing chronology: compact enough to scan before the projects. */
 .experience-section {
   padding: 60px 0 100px;
+  /* Skips layout and paint while off-screen; the intrinsic size keeps
+     the scrollbar and anchor offsets stable. */
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
 }
 
 .experience-grid {
@@ -1007,76 +1015,6 @@ section[id] {
   transform: translateY(-2px);
 }
 
-.workspaces-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
-}
-
-.workspaces-grid.unified-workspace {
-  grid-template-columns: 1fr;
-  max-width: 700px;
-  margin: 0 auto;
-}
-
-.unified-avatar {
-  width: 72px;
-  height: 72px;
-}
-
-.unified-desc {
-  font-size: 1.05rem;
-  line-height: 1.6;
-}
-
-.unified-stats {
-  margin-top: 24px;
-  padding-top: 24px;
-  border-top: 1px solid rgba(255,255,255,0.1);
-}
-
-.workspace-card {
-  padding: 32px;
-  position: relative;
-  overflow: hidden;
-}
-
-.workspace-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at top right, rgba(255,255,255,0.05), transparent 70%);
-  z-index: 0;
-}
-
-.workspace-card > * {
-  position: relative;
-  z-index: 1;
-}
-
-.workspace-card:hover {
-  transform: translateY(-4px);
-  border-color: var(--border-hover);
-  background: var(--surface-hover);
-}
-
-.workspace-card.accent-primary:hover {
-  border-color: rgba(52, 120, 212,0.3);
-  box-shadow: 0 10px 40px rgba(52, 120, 212,0.15);
-}
-
-.workspace-card.accent-secondary:hover {
-  border-color: rgba(32, 205, 189, 0.3);
-  box-shadow: 0 10px 40px rgba(32, 205, 189, 0.15);
-}
-
-.workspace-header {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  margin-bottom: 20px;
-}
-
 .workspace-header .avatar {
   width: 72px;
   height: 72px;
@@ -1084,55 +1022,13 @@ section[id] {
   border: 2px solid rgba(255,255,255,0.1);
 }
 
-.workspace-title h3 {
-  font-size: 1.5rem;
-  margin-bottom: 4px;
-}
-
-.workspace-title a {
-  color: var(--accent-1);
-  font-weight: 600;
-}
-
-.workspace-card.accent-secondary .workspace-title a {
-  color: var(--accent-2);
-}
-
-.workspace-desc {
-  color: var(--muted);
-  margin-bottom: 24px;
-}
-
-.workspace-stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-}
-
-.workspace-stats div {
-  background: rgba(0,0,0,0.2);
-  padding: 12px 16px;
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.05);
-}
-
-.workspace-stats dt {
-  color: var(--muted);
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  font-weight: 700;
-  margin-bottom: 4px;
-}
-
-.workspace-stats dd {
-  font-size: 1.5rem;
-  font-weight: 800;
-  font-family: 'Outfit', sans-serif;
-}
-
 /* Projects */
 .projects-section {
   padding: 60px 0 100px;
+  /* Skips layout and paint while off-screen; the intrinsic size keeps
+     the scrollbar and anchor offsets stable. */
+  content-visibility: auto;
+  contain-intrinsic-size: auto 2600px;
 }
 
 .project-group + .project-group {
@@ -1182,29 +1078,6 @@ section[id] {
   font-size: 0.68rem;
   font-weight: 800;
   letter-spacing: 0.06em;
-}
-
-.filter-bar {
-  display: inline-flex;
-  padding: 8px;
-  gap: 8px;
-  margin-bottom: 32px;
-  border-radius: 16px;
-}
-
-.filter-button {
-  background: transparent;
-  color: var(--muted);
-  padding: 10px 20px;
-  min-height: 48px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.filter-button:hover {
-  color: var(--ink);
-  background: rgba(255,255,255,0.05);
 }
 
 .filter-button.active {
@@ -1436,16 +1309,11 @@ section[id] {
 /* Distinct Project Visuals */
 .anime { background: linear-gradient(135deg, #1e3a8a, #9d174d); }
 .terminal { background: linear-gradient(135deg, #164e63, #172033); }
-.commerce { background: linear-gradient(135deg, #854d0e, #451a03); }
-.civic { background: linear-gradient(135deg, #831843, #1e3a8a); }
 .media { background: linear-gradient(135deg, #312e81, #0f172a); }
 .music { background: linear-gradient(135deg, #4c1d95, #1d4ed8); }
-.security { background: linear-gradient(135deg, #7f1d1d, #450a0a); }
-.android { background: linear-gradient(135deg, #155e75, #3b2948); }
 .kernel { background: linear-gradient(135deg, #78350f, #451a03); }
 .recovery { background: linear-gradient(135deg, #1e3a8a, #155e75); }
 .mobile { background: linear-gradient(135deg, #be123c, #831843); }
-.finance { background: linear-gradient(135deg, #0e7490, #1e3a5f); }
 
 /* A project-specific device visual for the Realme 6 Linux experiment. */
 .kernel-device {
@@ -1825,6 +1693,10 @@ section[id] {
 /* Stack Section */
 .stack-section {
   padding: 60px 0 100px;
+  /* Skips layout and paint while off-screen; the intrinsic size keeps
+     the scrollbar and anchor offsets stable. */
+  content-visibility: auto;
+  contain-intrinsic-size: auto 700px;
 }
 
 .stack-grid {
@@ -2301,28 +2173,6 @@ section[id] {
 
   .summary-band span:last-child {
     font-size: 0.85rem;
-  }
-
-  .filter-bar {
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scroll-snap-type: x mandatory;
-    padding-bottom: 8px;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-    width: calc(100vw - 32px);
-  }
-  
-  .filter-bar::-webkit-scrollbar {
-    display: none;
-  }
-  
-  .filter-button {
-    scroll-snap-align: start;
-    flex: 0 0 auto;
-    white-space: nowrap;
   }
   
   .footer-content {

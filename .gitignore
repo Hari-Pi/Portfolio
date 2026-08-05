@@ -13,7 +13,7 @@
 # Don't ignore site images
 !*.webp
 !*.svg
-!images/og-portfolio.png
+!images/og-portfolio.jpg
 
 # Don't ignore public project demo videos
 !media/sys-config-demo.mp4
