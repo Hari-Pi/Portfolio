@@ -211,8 +211,7 @@ img {
     scroll-behavior: auto !important;
   }
 
-  .js .reveal,
-  .js .motion-reveal {
+  .js .reveal {
     opacity: 1;
     transform: none;
   }
@@ -1386,19 +1385,54 @@ section[id] {
   transform: translateY(0);
 }
 
-/* Project pages use the same restrained entrance language without requiring
-   every section to carry presentation classes in the markup. */
-.js .motion-reveal {
-  opacity: 0;
-  transform: translateY(18px);
-  transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
-  transition-delay: var(--motion-delay, 0ms);
+/* Project-page motion stays CSS-only. The first screen receives a short load
+   transition; later sections animate on view where scroll timelines exist.
+   Browsers without that feature simply render those sections normally. */
+@keyframes detail-enter {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.js .motion-reveal.motion-visible {
-  opacity: 1;
-  transform: translateY(0);
+.detail-main > .project-detail-header,
+.detail-main > .project-hero,
+.detail-main > .case-summary {
+  animation: detail-enter 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.detail-main > .project-hero {
+  animation-delay: 45ms;
+}
+
+.detail-main > .case-summary {
+  animation-delay: 90ms;
+}
+
+@supports (animation-timeline: view()) {
+  @keyframes detail-scroll-reveal {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .detail-main > .media-gallery,
+  .detail-main > .project-content,
+  .detail-main > .project-pagination,
+  .detail-main + .site-footer {
+    animation: detail-scroll-reveal linear both;
+    animation-timeline: view();
+    animation-range: entry 4% cover 24%;
+  }
 }
 
 /* Responsive */
