@@ -211,7 +211,8 @@ img {
     scroll-behavior: auto !important;
   }
 
-  .js .reveal {
+  .js .reveal,
+  .js .motion-reveal {
     opacity: 1;
     transform: none;
   }
@@ -219,7 +220,16 @@ img {
   .project-card:hover,
   .workspace-card:hover,
   .button.primary:hover,
-  .button.secondary:hover {
+  .button.secondary:hover,
+  .stack-grid article:hover,
+  .archive-item:hover,
+  .about-links a:hover,
+  .footer-links a:hover,
+  .back-link:hover,
+  .project-pagination a:hover,
+  .media-container:hover,
+  .shot:hover,
+  .shot-open:hover img {
     transform: none;
   }
 }
@@ -515,6 +525,12 @@ section[id] {
   border-radius: 18px;
   object-fit: cover;
   box-shadow: 0 10px 28px rgba(99, 102, 241, 0.24);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.about-card:hover .about-avatar {
+  transform: translateY(-2px) scale(1.025);
+  border-color: var(--border-hover);
 }
 
 .about-identity h3 {
@@ -567,11 +583,14 @@ section[id] {
   background: rgba(255, 255, 255, 0.05);
   font-family: 'Outfit', sans-serif;
   font-weight: 700;
+  transition: transform 0.2s ease, background-color 0.2s ease,
+              border-color 0.2s ease;
 }
 
 .about-links a:hover {
   border-color: var(--border-hover);
   background: var(--surface-hover);
+  transform: translateY(-2px);
 }
 
 .workspaces-grid {
@@ -1094,23 +1113,22 @@ section[id] {
 }
 
 .project-archive summary::after {
-  content: "Open";
+  content: "+";
   display: grid;
-  width: auto;
+  width: 36px;
   height: 36px;
   flex: 0 0 auto;
   place-items: center;
-  padding: 0 14px;
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: 50%;
   color: var(--ink);
-  font-size: 0.75rem;
-  font-weight: 700;
-  transition: background-color 0.2s ease, border-color 0.2s ease;
+  font-size: 1.4rem;
+  transition: transform 0.25s ease, background-color 0.2s ease,
+              border-color 0.2s ease;
 }
 
 .project-archive[open] summary::after {
-  content: "Close";
+  transform: rotate(45deg);
   background: var(--surface-hover);
   border-color: var(--border-hover);
 }
@@ -1166,6 +1184,8 @@ section[id] {
   border: 1px solid var(--border);
   border-radius: 14px;
   background: rgba(255, 255, 255, 0.025);
+  transition: transform 0.25s ease, background-color 0.25s ease,
+              border-color 0.25s ease;
 }
 
 .archive-item:hover {
@@ -1204,6 +1224,16 @@ section[id] {
 .stack-grid article:hover {
   border-color: var(--border-hover);
   background: var(--surface-hover);
+  transform: translateY(-3px);
+}
+
+.stack-icon {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stack-grid article:hover .stack-icon {
+  transform: translateY(-2px) scale(1.035);
+  box-shadow: 0 10px 24px rgba(99, 102, 241, 0.18);
 }
 
 .stack-icon {
@@ -1298,8 +1328,22 @@ section[id] {
   gap: 24px;
 }
 
+.footer-links a {
+  display: inline-flex;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
 .footer-links a:hover {
   color: var(--ink);
+  transform: translateY(-2px);
+}
+
+.button:active,
+.project-link:active,
+.about-links a:active,
+.archive-item:active,
+.project-pagination a:active {
+  transform: translateY(0) scale(0.98);
 }
 
 /* Scroll Progress Indicator
@@ -1338,6 +1382,21 @@ section[id] {
 }
 
 .js .reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Project pages use the same restrained entrance language without requiring
+   every section to carry presentation classes in the markup. */
+.js .motion-reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--motion-delay, 0ms);
+}
+
+.js .motion-reveal.motion-visible {
   opacity: 1;
   transform: translateY(0);
 }
@@ -1566,11 +1625,12 @@ section[id] {
   color: var(--muted);
   font-weight: 600;
   margin-bottom: 24px;
-  transition: color 0.2s;
+  transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .back-link:hover {
   color: var(--ink);
+  transform: translateX(3px);
 }
 
 .project-pagination {
@@ -1589,7 +1649,8 @@ section[id] {
   gap: 7px;
   padding: 24px 28px;
   background: rgba(255, 255, 255, 0.025);
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease,
+              transform 0.2s ease;
 }
 
 .project-pagination a + a {
@@ -1617,6 +1678,7 @@ section[id] {
 .project-pagination a:hover {
   background: var(--surface-hover);
   color: #fff;
+  transform: translateY(-2px);
 }
 
 .project-hero {
@@ -1652,6 +1714,11 @@ section[id] {
   min-width: 0;
   padding: 20px;
   border-right: 1px solid var(--border);
+  transition: background-color 0.25s ease;
+}
+
+.case-summary div:hover {
+  background: rgba(255, 255, 255, 0.035);
 }
 
 .case-summary div:last-child {
@@ -1688,6 +1755,14 @@ section[id] {
   border: 1px solid var(--border);
   background: rgba(0,0,0,0.4);
   box-shadow: var(--shadow);
+  transition: transform 0.3s ease, border-color 0.3s ease,
+              box-shadow 0.3s ease;
+}
+
+.media-container:hover {
+  transform: translateY(-3px);
+  border-color: var(--border-hover);
+  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.4);
 }
 
 .media-container video,
