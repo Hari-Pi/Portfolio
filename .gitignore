@@ -22,6 +22,7 @@
 !sitemap.xml
 !robots.txt
 !CNAME
+!.nojekyll
 
 # Don't ignore essential git/repo files
 !.gitignore

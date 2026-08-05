@@ -16,20 +16,21 @@
 
 :root {
   color-scheme: dark;
-  --bg: #0d0d12;
-  --surface: rgba(255, 255, 255, 0.03);
-  --surface-hover: rgba(255, 255, 255, 0.08);
-  --border: rgba(255, 255, 255, 0.08);
-  --border-hover: rgba(255, 255, 255, 0.2);
-  --ink: #ffffff;
-  --muted: #a1a1aa;
-  
-  /* Accents */
-  --accent-1: #6366f1; /* Indigo */
-  --accent-2: #ec4899; /* Pink */
-  --accent-3: #14b8a6; /* Teal */
-  
-  --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  /* Tokyo Night — cool, legible, and restrained enough for a portfolio. */
+  --bg: #1a1b26;
+  --bg-deep: #16161e;
+  --surface: rgba(36, 40, 59, 0.72);
+  --surface-hover: rgba(65, 72, 104, 0.66);
+  --border: rgba(122, 162, 247, 0.18);
+  --border-hover: rgba(125, 207, 255, 0.48);
+  --ink: #c0caf5;
+  --muted: #a9b1d6;
+  --accent-1: #7aa2f7;
+  --accent-2: #bb9af7;
+  --accent-3: #7dcfff;
+  --accent-green: #9ece6a;
+  --on-accent: #16161e;
+  --shadow: 0 14px 38px rgba(8, 9, 17, 0.42);
   --glass-blur: blur(16px);
   --max: 1180px;
 }
@@ -101,7 +102,7 @@ a {
   padding: 12px 20px;
   border-radius: 12px;
   background: var(--accent-1);
-  color: #fff;
+  color: var(--on-accent);
   font-weight: 700;
   transition: top 0.2s ease;
 }
@@ -129,6 +130,18 @@ img {
   contain: strict;
 }
 
+.bg-blobs::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(122, 162, 247, 0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(122, 162, 247, 0.028) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.75), transparent 78%);
+  pointer-events: none;
+}
+
 @supports (animation-timeline: scroll()) {
   @keyframes parallax-bg {
     to { transform: translateY(-20%); }
@@ -153,7 +166,7 @@ img {
   left: -10%;
   width: 50vw;
   height: 50vw;
-  background: radial-gradient(circle, rgba(99,102,241,0.6) 0%, rgba(99,102,241,0) 70%);
+  background: radial-gradient(circle, rgba(122, 162, 247, 0.48) 0%, rgba(122, 162, 247, 0) 70%);
 }
 
 .blob-2 {
@@ -161,7 +174,7 @@ img {
   right: -10%;
   width: 60vw;
   height: 60vw;
-  background: radial-gradient(circle, rgba(236,72,153,0.5) 0%, rgba(236,72,153,0) 70%);
+  background: radial-gradient(circle, rgba(187, 154, 247, 0.38) 0%, rgba(187, 154, 247, 0) 70%);
   animation-delay: -5s;
 }
 
@@ -170,7 +183,7 @@ img {
   left: 30%;
   width: 40vw;
   height: 40vw;
-  background: radial-gradient(circle, rgba(20,184,166,0.4) 0%, rgba(20,184,166,0) 70%);
+  background: radial-gradient(circle, rgba(125, 207, 255, 0.3) 0%, rgba(125, 207, 255, 0) 70%);
   animation-delay: -10s;
 }
 
@@ -263,7 +276,7 @@ img {
   margin: 0 auto;
   padding: 12px 24px;
   
-  background: var(--bg);
+  background: rgba(22, 22, 30, 0.86);
   border: 1px solid var(--border);
   border-radius: 99px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
@@ -285,10 +298,10 @@ img {
   place-items: center;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
-  color: #fff;
+  color: var(--on-accent);
   font-size: 0.9rem;
   font-weight: 900;
-  box-shadow: 0 2px 10px rgba(236,72,153,0.3);
+  box-shadow: 0 2px 14px rgba(122, 162, 247, 0.28);
 }
 
 .nav-links {
@@ -342,8 +355,8 @@ section[id] {
   margin-bottom: 16px;
   padding: 6px 12px;
   border-radius: 99px;
-  background: rgba(20, 184, 166, 0.1);
-  border: 1px solid rgba(20, 184, 166, 0.2);
+  background: rgba(125, 207, 255, 0.09);
+  border: 1px solid rgba(125, 207, 255, 0.22);
   color: var(--accent-3);
   font-size: 0.8rem;
   font-weight: 700;
@@ -356,7 +369,7 @@ section[id] {
   font-size: clamp(3rem, 7vw, 5rem);
   line-height: 1.1;
   letter-spacing: -1px;
-  background: linear-gradient(to right, #fff, #a1a1aa);
+  background: linear-gradient(105deg, #f0f3ff 0%, var(--ink) 52%, var(--accent-1) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -370,7 +383,7 @@ section[id] {
 }
 
 .hero-text strong {
-  color: #fff;
+  color: var(--ink);
 }
 
 .hero-actions {
@@ -396,13 +409,13 @@ section[id] {
   /* Size the gradient to the border box so it is not extrapolated into the
      1px transparent border, which would fringe the edges. */
   background-origin: border-box;
-  color: #fff;
-  box-shadow: 0 4px 15px rgba(99,102,241,0.3);
+  color: var(--on-accent);
+  box-shadow: 0 4px 18px rgba(122, 162, 247, 0.28);
 }
 
 .button.primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(99,102,241,0.4);
+  box-shadow: 0 8px 24px rgba(122, 162, 247, 0.4);
 }
 
 .button.secondary {
@@ -434,7 +447,7 @@ section[id] {
 }
 
 .metric {
-  background: linear-gradient(135deg, var(--accent-3), #fff);
+  background: linear-gradient(135deg, var(--accent-3), #f0f3ff);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -504,7 +517,7 @@ section[id] {
   display: flex;
   flex-direction: column;
   background:
-    radial-gradient(circle at top right, rgba(99, 102, 241, 0.14), transparent 52%),
+    radial-gradient(circle at top right, rgba(122, 162, 247, 0.16), transparent 52%),
     var(--surface);
 }
 
@@ -520,10 +533,10 @@ section[id] {
   width: 72px;
   height: 72px;
   flex: 0 0 auto;
-  border: 2px solid rgba(255, 255, 255, 0.12);
+  border: 2px solid rgba(122, 162, 247, 0.2);
   border-radius: 18px;
   object-fit: cover;
-  box-shadow: 0 10px 28px rgba(99, 102, 241, 0.24);
+  box-shadow: 0 10px 30px rgba(122, 162, 247, 0.2);
   transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
@@ -579,7 +592,7 @@ section[id] {
   padding: 10px 16px;
   border: 1px solid var(--border);
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(122, 162, 247, 0.06);
   font-family: 'Outfit', sans-serif;
   font-weight: 700;
   transition: transform 0.2s ease, background-color 0.2s ease,
@@ -771,7 +784,7 @@ section[id] {
 .project-card:hover {
   transform: translateY(-5px) scale(1.02);
   border-color: var(--accent-1);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 20px rgba(99,102,241,0.2);
+  box-shadow: 0 20px 44px rgba(8, 9, 17, 0.5), 0 0 24px rgba(122, 162, 247, 0.17);
 }
 
 .project-card.featured {
@@ -791,7 +804,7 @@ section[id] {
   font-size: 2rem;
   font-weight: 900;
   letter-spacing: 2px;
-  color: rgba(255,255,255,0.9);
+  color: var(--ink);
   position: relative;
   /* Clips the hover zoom to this box. Without it the scaled image escapes into
      the card body — past the scrim, which only covers this box — and shows as a
@@ -810,7 +823,7 @@ section[id] {
 
 /* Cards that show a real screenshot instead of a letter placeholder */
 .project-visual.has-image {
-  background: #000;
+  background: var(--bg-deep);
 }
 
 .project-visual.has-image img {
@@ -1020,15 +1033,15 @@ section[id] {
   font-weight: 700;
   padding: 4px 10px;
   border-radius: 6px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(122, 162, 247, 0.06);
+  border: 1px solid rgba(122, 162, 247, 0.16);
   color: var(--muted);
 }
 
 .tag.highlight {
   color: var(--accent-3);
-  border-color: rgba(20,184,166,0.3);
-  background: rgba(20,184,166,0.1);
+  border-color: rgba(125, 207, 255, 0.32);
+  background: rgba(125, 207, 255, 0.1);
 }
 
 .project-body h3 {
@@ -1067,18 +1080,18 @@ section[id] {
      gets extrapolated into that ring and shows an inverted-colour fringe down
      the edges. Sizing the gradient to the border box removes it. */
   background-origin: border-box;
-  color: #fff;
-  box-shadow: 0 2px 10px rgba(99, 102, 241, 0.25);
+  color: var(--on-accent);
+  box-shadow: 0 2px 12px rgba(122, 162, 247, 0.26);
 }
 
 .project-link.primary:hover {
-  color: #fff;
+  color: var(--on-accent);
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(99, 102, 241, 0.45);
+  box-shadow: 0 7px 20px rgba(122, 162, 247, 0.42);
 }
 
 .project-link.secondary {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(122, 162, 247, 0.06);
   border-color: var(--border);
   color: var(--ink);
 }
@@ -1182,7 +1195,7 @@ section[id] {
   padding: 22px;
   border: 1px solid var(--border);
   border-radius: 14px;
-  background: rgba(255, 255, 255, 0.025);
+  background: rgba(36, 40, 59, 0.44);
   transition: transform 0.25s ease, background-color 0.25s ease,
               border-color 0.25s ease;
 }
@@ -1267,8 +1280,8 @@ section[id] {
   padding: clamp(32px, 6vw, 64px);
   text-align: center;
   background:
-    radial-gradient(circle at top left, rgba(99, 102, 241, 0.16), transparent 45%),
-    radial-gradient(circle at bottom right, rgba(236, 72, 153, 0.12), transparent 42%),
+    radial-gradient(circle at top left, rgba(122, 162, 247, 0.2), transparent 45%),
+    radial-gradient(circle at bottom right, rgba(187, 154, 247, 0.14), transparent 42%),
     var(--surface);
 }
 
@@ -1474,7 +1487,7 @@ section[id] {
     bottom: 0;
     left: 0;
     width: 100%;
-    background: rgba(13, 13, 18, 0.9);
+    background: rgba(22, 22, 30, 0.92);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-top: 1px solid var(--border);
@@ -1711,7 +1724,7 @@ section[id] {
 
 .project-pagination a:hover {
   background: var(--surface-hover);
-  color: #fff;
+  color: #f0f3ff;
   transform: translateY(-2px);
 }
 
@@ -1725,7 +1738,7 @@ section[id] {
 .project-hero h1 {
   font-size: clamp(2rem, 5vw, 4rem);
   margin-bottom: 16px;
-  background: linear-gradient(to right, #fff, #a1a1aa);
+  background: linear-gradient(105deg, #f0f3ff 0%, var(--ink) 60%, var(--accent-1) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
