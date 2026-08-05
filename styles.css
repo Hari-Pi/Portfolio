@@ -1094,22 +1094,25 @@ section[id] {
 }
 
 .project-archive summary::after {
-  content: "+";
+  content: "Open";
   display: grid;
-  width: 36px;
+  width: auto;
   height: 36px;
   flex: 0 0 auto;
   place-items: center;
+  padding: 0 14px;
   border: 1px solid var(--border);
-  border-radius: 50%;
+  border-radius: 10px;
   color: var(--ink);
-  font-size: 1.4rem;
-  transition: transform 0.2s ease, background-color 0.2s ease;
+  font-size: 0.75rem;
+  font-weight: 700;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .project-archive[open] summary::after {
-  transform: rotate(45deg);
+  content: "Close";
   background: var(--surface-hover);
+  border-color: var(--border-hover);
 }
 
 .project-archive summary:focus-visible {
