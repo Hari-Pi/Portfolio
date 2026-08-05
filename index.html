@@ -39,7 +39,7 @@
     <link rel="preload" as="font" href="fonts/inter-latin-variable.woff2" type="font/woff2" crossorigin />
     <link rel="preload" as="font" href="fonts/outfit-latin-variable.woff2" type="font/woff2" crossorigin />
 
-    <link rel="stylesheet" href="styles.css?v=6.0" />
+    <link rel="stylesheet" href="styles.css?v=6.1" />
 
     <script type="application/ld+json">
       {
@@ -105,6 +105,40 @@
               <a class="button primary" href="#projects">View Selected Work</a>
               <a class="button secondary" href="resume/Harikaran-Chettiyar-Resume.pdf" download>Download Resume</a>
               <a class="button secondary" href="#contact">Contact Me</a>
+            </div>
+          </div>
+
+          <div class="hero-system" aria-hidden="true">
+            <div class="system-stage">
+              <svg class="system-connections" viewBox="0 0 520 460" focusable="false">
+                <path d="M260 230 C205 190 155 130 96 92" />
+                <path d="M260 230 C318 182 370 132 430 104" />
+                <path d="M260 230 C204 278 151 330 91 357" />
+                <path d="M260 230 C318 278 371 326 432 350" />
+              </svg>
+
+              <div class="system-core">
+                <span class="core-ring"></span>
+                <strong>HC</strong>
+                <small>BUILD / SHIP</small>
+              </div>
+
+              <div class="system-node node-web">
+                <i></i><strong>WEB</strong><small>Platforms</small>
+              </div>
+              <div class="system-node node-mobile">
+                <i></i><strong>MOBILE</strong><small>Applications</small>
+              </div>
+              <div class="system-node node-automation">
+                <i></i><strong>AUTOMATION</strong><small>Workflows</small>
+              </div>
+              <div class="system-node node-linux">
+                <i></i><strong>LINUX</strong><small>Systems</small>
+              </div>
+
+              <div class="system-status"><i></i><span>system ready</span></div>
+              <span class="system-coordinate coordinate-a">01 / PRODUCT</span>
+              <span class="system-coordinate coordinate-b">04 / DELIVERY</span>
             </div>
           </div>
         </section>
@@ -188,7 +222,7 @@
 
           <div class="project-grid">
 
-            <article class="project-card glass-panel featured reveal" data-category="client">
+            <article class="project-card glass-panel flagship reveal" data-category="client">
               <div class="project-visual has-image">
                 <img
                   src="images/averra-data-card.webp"
@@ -200,6 +234,7 @@
                 />
               </div>
               <div class="project-body">
+                <span class="project-sequence">01 / Flagship case study</span>
                 <div class="project-meta">
                   <span class="tag">Django</span>
                   <span class="tag">Python</span>
@@ -214,7 +249,7 @@
               </div>
             </article>
 
-            <article class="project-card glass-panel featured reveal" data-category="client">
+            <article class="project-card glass-panel flagship reverse reveal" data-category="client">
               <div class="project-visual has-image">
                 <img
                   src="images/cloudstudio108-card.webp?v=2"
@@ -226,6 +261,7 @@
                 />
               </div>
               <div class="project-body">
+                <span class="project-sequence">02 / Flagship case study</span>
                 <div class="project-meta">
                   <span class="tag">JavaScript</span>
                   <span class="tag">Performance</span>
@@ -240,7 +276,7 @@
               </div>
             </article>
 
-            <article class="project-card glass-panel featured reveal" data-category="web">
+            <article class="project-card glass-panel compact reveal" data-category="web">
               <div class="project-visual has-image">
                 <img
                   src="images/syncplayer-card-v3.webp"
@@ -265,7 +301,7 @@
               </div>
             </article>
 
-            <article class="project-card glass-panel featured reveal" data-category="web">
+            <article class="project-card glass-panel compact reveal" data-category="web">
               <div class="project-visual has-image">
                 <img
                   src="images/currency-card.webp"
@@ -290,16 +326,18 @@
               </div>
             </article>
 
-            <article class="project-card glass-panel featured reveal" data-category="automation">
-              <div class="project-visual has-image">
-                <img
-                  src="images/sys-config-card-v3.webp"
-                  alt="Clean Sys-Config visual with a JSON profile and validated Linux package-manager setup"
-                  width="1000"
-                  height="480"
-                  loading="lazy"
-                  decoding="async"
-                />
+            <article class="project-card glass-panel compact has-preview-video reveal" data-category="automation">
+              <div class="project-visual has-image" aria-hidden="true">
+                <video
+                  data-preview-video
+                  src="media/sys-config-demo.mp4"
+                  poster="images/sys-config-card-v3.webp"
+                  muted
+                  loop
+                  playsinline
+                  preload="metadata"
+                ></video>
+                <span class="video-preview-label">Live preview</span>
               </div>
               <div class="project-body">
                 <div class="project-meta">
@@ -316,7 +354,7 @@
               </div>
             </article>
 
-            <article class="project-card glass-panel reveal" data-category="systems">
+            <article class="project-card glass-panel compact reveal" data-category="systems">
               <div class="project-visual kernel-device" aria-hidden="true">
                 <div class="phone-frame">
                   <span class="phone-speaker"></span>
@@ -452,6 +490,6 @@
       </footer>
     </div>
 
-    <script src="script.js?v=4.2"></script>
+    <script src="script.js?v=4.3"></script>
   </body>
 </html>
