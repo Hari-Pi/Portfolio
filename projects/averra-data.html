@@ -9,7 +9,7 @@
     </script>
     <meta
       name="description"
-      content="Averra Data — a Django learning platform built for a data analytics academy, covering course delivery, student accounts, and practice testing."
+      content="Averra Data — a production Next.js and TypeScript platform for course discovery, student accounts, timed assessments, counseling requests, and admin operations."
     />
     <title>Averra Data | Harikaran Chettiyar</title>
     <link rel="canonical" href="https://hari-pi.com/projects/averra-data.html" />
@@ -17,11 +17,11 @@
     <meta property="og:type" content="article" />
     <meta property="og:url" content="https://hari-pi.com/projects/averra-data.html" />
     <meta property="og:title" content="Averra Data | Harikaran Chettiyar" />
-    <meta property="og:description" content="A Django learning platform built for a data analytics academy." />
+    <meta property="og:description" content="A production Next.js and TypeScript learning and assessment platform built for a data analytics academy." />
     <meta property="og:image" content="https://hari-pi.com/images/averra-data-card.webp" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Averra Data | Harikaran Chettiyar" />
-    <meta name="twitter:description" content="A Django learning platform built for a data analytics academy." />
+    <meta name="twitter:description" content="A production Next.js and TypeScript learning and assessment platform built for a data analytics academy." />
     <meta name="twitter:image" content="https://hari-pi.com/images/averra-data-card.webp" />
 
     <link
@@ -50,14 +50,16 @@
 
         <section class="project-hero glass-panel">
           <div class="project-meta project-hero-meta">
-            <span class="tag">Django</span>
-            <span class="tag">Python</span>
+            <span class="tag">Next.js</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">Supabase</span>
             <span class="tag highlight">Client project</span>
           </div>
           <h1>Averra Data</h1>
           <p class="description">
-            A production learning platform built for a data analytics academy — course delivery,
-            student accounts, and practice testing, running live on its own domain.
+            A production learning and assessment platform built for a data analytics academy &mdash;
+            combining course discovery, student accounts, timed exams, counseling requests,
+            and admin operations on one live product.
           </p>
           <div class="hero-actions">
             <a class="button primary" href="https://averradata.com" target="_blank" rel="noopener">Visit Live Site</a>
@@ -71,7 +73,7 @@
         <dl class="case-summary glass-panel" aria-label="Project overview">
           <div><dt>Role</dt><dd>Full-stack Developer</dd></div>
           <div><dt>Ownership</dt><dd>End-to-end delivery</dd></div>
-          <div><dt>Scope</dt><dd>5 learning tracks + student portal</dd></div>
+          <div><dt>Scope</dt><dd>Course catalogue + assessment platform</dd></div>
           <div><dt>Delivery</dt><dd>Live production site</dd></div>
         </dl>
 
@@ -115,50 +117,56 @@
         </section>
 
         <p class="shot-note">
-          Screenshots of the public site. The authenticated student area is not shown.
+          Screenshots of the public site. The authenticated assessment and admin workflows are not shown.
         </p>
 
         <section class="project-content glass-panel project-content-pad">
           <h2>The Challenge</h2>
           <p>
             Averra Data is a data analytics academy that needed to move from a brochure presence to a
-            platform its students could actually learn on. I built the site and the learning system
-            behind it as a single Django application: a public marketing front end for course discovery
-            and enrolment enquiries, and an authenticated student area for the coursework itself.
+            product that could support course discovery, counseling, student access, and assessments.
+            I built the public experience and the application workflows as one Next.js App Router
+            codebase, backed by Supabase and deployed to Vercel.
           </p>
           <p>
             The academy runs tracks across data analysis, data science, data governance, data quality,
-            and AI governance, each with its own structure. The content model had to handle that
-            variation without needing a developer every time a course changed.
+            and AI governance, each with detailed curriculum and search requirements. The platform also
+            needed timed exam sessions, reusable question imports, role-aware administration, and a
+            practical way to capture counseling requests.
           </p>
 
           <h3>My Role</h3>
           <p>
-            I owned the full build: translating the academy's requirements into the data model,
-            authenticated learning flows, public course experience, deployment, domain setup,
-            and search groundwork.
+            I owned the full build: translating the academy's requirements into the product structure,
+            TypeScript interfaces, Supabase data model, authentication and assessment flows, admin
+            workspace, deployment, domain setup, and search groundwork.
           </p>
 
           <h3>What I Delivered</h3>
           <ul>
-            <li><strong>Course structure:</strong> A nested courses, modules, and lessons model, so staff can restructure a syllabus from the admin without touching templates.</li>
-            <li><strong>Student accounts:</strong> Email-based authentication with a custom user model, registration, and a full password reset flow.</li>
-            <li><strong>Lesson delivery:</strong> Video lessons alongside downloadable notes, gated behind enrolment.</li>
-            <li><strong>Practice testing:</strong> A quiz engine with attempts, per-question answer capture, and score review — plus bulk question import via CSV so instructors can author tests in a spreadsheet.</li>
-            <li><strong>Enrolment tracking:</strong> Enrolment records linking students to courses, driving what each account can see.</li>
-            <li><strong>Discovery:</strong> Structured data, sitemap, and location-aware metadata so the academy ranks for the regional course searches its students actually run.</li>
+            <li><strong>Course discovery:</strong> Five detailed learning tracks with curriculum routes, related-course navigation, FAQs, counseling calls to action, and structured metadata.</li>
+            <li><strong>Student accounts:</strong> Email and password authentication through Supabase Auth, with profile records and student/admin roles.</li>
+            <li><strong>Timed assessments:</strong> Exam sessions with countdowns, locally preserved drafts, automatic submission, attempt history, scoring, and answer-level results.</li>
+            <li><strong>Admin workspace:</strong> Session creation, result dashboards, question-bank previews, and bulk CSV or Excel imports for instructors.</li>
+            <li><strong>Counseling workflow:</strong> Guided chat and voice booking flows that collect learner goals and save requests for the admin team.</li>
+            <li><strong>Discovery and delivery:</strong> Route-level metadata, JSON-LD, sitemap and robots generation, Vercel deployment, analytics, and a custom domain.</li>
           </ul>
 
           <h3>Key Decisions</h3>
           <p>
-            <strong>A custom user model from day one.</strong> The academy identifies students by email,
-            not username. Swapping Django's user model after launch is painful, so it went in before
-            the first migration.
+            <strong>One typed application for the public and authenticated product.</strong> Next.js App
+            Router keeps marketing pages, course routes, API handlers, exam workflows, and the admin
+            workspace in one TypeScript codebase.
           </p>
           <p>
-            <strong>CSV import for question banks.</strong> Instructors are subject-matter experts, not
-            admin-panel users. Letting them upload a spreadsheet of questions removed the biggest
-            recurring support request before it existed.
+            <strong>Supabase for authentication and relational state.</strong> PostgreSQL stores profiles,
+            exam sessions, questions, attempts, and answers, while row-level security separates student
+            access from admin operations.
+          </p>
+          <p>
+            <strong>CSV and Excel imports for question banks.</strong> Instructors can prepare assessment
+            content in familiar spreadsheets, validate it in the browser, and create a timed session
+            without entering every question manually.
           </p>
           <p>
             <strong>Serverless deployment.</strong> The site runs on Vercel, which keeps hosting cost
@@ -167,17 +175,19 @@
 
           <h3>Outcome</h3>
           <p>
-            The academy now has one live platform for course discovery, enrolment enquiries,
-            authenticated lessons, and practice testing. Staff can restructure courses and import
-            question banks without needing a developer for routine content changes.
+            The academy now has one live platform for course discovery, counseling requests,
+            authenticated assessments, and admin operations. Students can take and revisit timed
+            exams, while staff can create sessions, import questions, and review results from the
+            same product.
           </p>
 
           <h3>Tech Stack</h3>
           <ul>
-            <li><strong>Backend:</strong> Django 5, Python</li>
-            <li><strong>Apps:</strong> accounts, courses, quizzes, dashboard</li>
-            <li><strong>Media:</strong> Pillow for image handling</li>
-            <li><strong>Frontend:</strong> Django templates, custom CSS</li>
+            <li><strong>Application:</strong> Next.js App Router, React, TypeScript</li>
+            <li><strong>Data and auth:</strong> Supabase Auth, PostgreSQL, row-level security</li>
+            <li><strong>Assessment tooling:</strong> Papa Parse, SheetJS, Zod</li>
+            <li><strong>Interface:</strong> Custom CSS, Lucide React, view transitions</li>
+            <li><strong>Booking:</strong> Next.js route handlers, Supabase, Vapi Web SDK</li>
             <li><strong>Hosting:</strong> Vercel, custom domain</li>
           </ul>
         </section>
