@@ -146,16 +146,12 @@ img {
   initial-value: rgba(92, 36, 28, 0.26);
 }
 
-/* Registering the positions too means the blooms can physically sweep across
-   the viewport as you scroll, not just change hue. Colour alone is not enough:
-   any hue at low alpha over a near-black base collapses to a similar brown, so
-   movement is what actually makes the change legible. */
-@property --warm-x { syntax: "<percentage>"; inherits: false; initial-value: 78%; }
-@property --warm-y { syntax: "<percentage>"; inherits: false; initial-value: 10%; }
-@property --cool-x { syntax: "<percentage>"; inherits: false; initial-value: 14%; }
-@property --cool-y { syntax: "<percentage>"; inherits: false; initial-value: 78%; }
-@property --deep-x { syntax: "<percentage>"; inherits: false; initial-value: 50%; }
-@property --deep-y { syntax: "<percentage>"; inherits: false; initial-value: 40%; }
+/* Angles are registered so they can interpolate. Rotating the wash directions
+   as you scroll is what makes the gradient feel alive without introducing any
+   shape — linear gradients have no silhouette to give themselves away. */
+@property --angle-a { syntax: "<angle>"; inherits: false; initial-value: 155deg; }
+@property --angle-b { syntax: "<angle>"; inherits: false; initial-value: 25deg; }
+@property --angle-c { syntax: "<angle>"; inherits: false; initial-value: 290deg; }
 
 .bg-blobs {
   position: fixed;
@@ -165,13 +161,14 @@ img {
   height: 100%;
   z-index: -1;
   overflow: hidden;
+  /* Three overlapping linear washes. No radial gradients and no child elements,
+     so there is no disc or blob shape anywhere — just colour bleeding across the
+     viewport. Both the colours and the angles animate on the scroll timeline. */
   background:
-    radial-gradient(circle at var(--warm-x) var(--warm-y), var(--tint-warm), transparent var(--spread-warm, 58%)),
-    radial-gradient(circle at var(--cool-x) var(--cool-y), var(--tint-cool), transparent var(--spread-cool, 60%)),
-    radial-gradient(ellipse at var(--deep-x) var(--deep-y), var(--tint-deep), transparent var(--spread-deep, 72%)),
-    radial-gradient(ellipse at center, transparent 58%, rgba(3, 4, 10, 0.18) 100%),
+    linear-gradient(var(--angle-a), var(--tint-warm) 0%, transparent 58%),
+    linear-gradient(var(--angle-b), var(--tint-cool) 0%, transparent 62%),
+    linear-gradient(var(--angle-c), var(--tint-deep) 0%, transparent 66%),
     var(--bg);
-  /* Isolate blob repaints from the rest of the page */
   contain: strict;
 }
 
@@ -247,31 +244,45 @@ img {
      The panels are translucent with a backdrop-filter, so anything light behind
      them bleeds through and washes the cards out — identity has to come from
      hue, not lightness. */
-  /* Amber and red stay dominant and carry the journey — gold, orange, ember red,
-     back to amber. The --tint-cool slot holds a deliberately faint teal/blue
-     counterpoint (roughly half the alpha of the warms) that alternates as you
-     descend: it keeps the palette from going monochrome and ties back to the
-     teal/blue accents in the UI, without reading as a cool background. */
+  /* Six stops so the shift is continuous rather than four discrete states.
+     Warm leads throughout; the cool slot alternates in as a minor counterpoint.
+     Angles rotate steadily so the washes sweep across as the colours change. */
   @keyframes bg-tint-journey {
     0% {
-      --tint-warm: rgba(232, 166, 68, 0.26);
-      --tint-cool: rgba(38, 150, 168, 0.14);
-      --tint-deep: rgba(92, 40, 30, 0.22);
+      --tint-warm: rgba(238, 168, 66, 0.42);
+      --tint-cool: rgba(38, 150, 172, 0.16);
+      --tint-deep: rgba(96, 38, 28, 0.34);
+      --angle-a: 155deg; --angle-b: 25deg; --angle-c: 290deg;
     }
-    34% {
-      --tint-warm: rgba(226, 120, 46, 0.28);
-      --tint-cool: rgba(40, 96, 176, 0.15);
-      --tint-deep: rgba(104, 30, 34, 0.24);
+    20% {
+      --tint-warm: rgba(232, 118, 44, 0.5);
+      --tint-cool: rgba(150, 52, 34, 0.2);
+      --tint-deep: rgba(74, 26, 30, 0.3);
+      --angle-a: 188deg; --angle-b: 62deg; --angle-c: 322deg;
     }
-    68% {
-      --tint-warm: rgba(198, 70, 44, 0.26);
-      --tint-cool: rgba(30, 150, 160, 0.17);
-      --tint-deep: rgba(72, 26, 36, 0.24);
+    40% {
+      --tint-warm: rgba(206, 62, 44, 0.46);
+      --tint-cool: rgba(40, 104, 176, 0.2);
+      --tint-deep: rgba(112, 30, 36, 0.36);
+      --angle-a: 222deg; --angle-b: 98deg; --angle-c: 356deg;
+    }
+    60% {
+      --tint-warm: rgba(240, 146, 56, 0.44);
+      --tint-cool: rgba(32, 168, 178, 0.19);
+      --tint-deep: rgba(84, 30, 26, 0.3);
+      --angle-a: 256deg; --angle-b: 134deg; --angle-c: 28deg;
+    }
+    80% {
+      --tint-warm: rgba(214, 84, 40, 0.48);
+      --tint-cool: rgba(46, 96, 186, 0.21);
+      --tint-deep: rgba(104, 32, 34, 0.34);
+      --angle-a: 290deg; --angle-b: 170deg; --angle-c: 62deg;
     }
     100% {
-      --tint-warm: rgba(236, 168, 78, 0.26);
-      --tint-cool: rgba(48, 104, 190, 0.16);
-      --tint-deep: rgba(84, 36, 32, 0.22);
+      --tint-warm: rgba(244, 176, 74, 0.44);
+      --tint-cool: rgba(36, 158, 176, 0.17);
+      --tint-deep: rgba(92, 36, 28, 0.32);
+      --angle-a: 324deg; --angle-b: 206deg; --angle-c: 96deg;
     }
   }
 
@@ -283,112 +294,41 @@ img {
 }
 
 .blob {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.4;
-  animation: float 20s infinite alternate ease-in-out;
+  /* Retired. These produced visible circular discs in the backdrop; the effect
+     is now carried entirely by layered linear washes on .bg-blobs, which have
+     no shape of their own. Kept as a no-op so the existing markup on every page
+     needs no change. */
+  display: none;
 }
 
-.blob-1 {
-  top: -10%;
-  left: -10%;
-  width: 50vw;
-  height: 50vw;
-  /* Ember rather than blue — this blob sits top-left across the whole page and
-     was the main source of the cool cast. */
-  background: radial-gradient(circle, rgba(214, 108, 46, 0.5) 0%, rgba(214, 108, 46, 0) 70%);
-}
 
-.blob-2 {
-  bottom: -20%;
-  right: -10%;
-  width: 60vw;
-  height: 60vw;
-  background:
-    radial-gradient(
-      circle at 42% 38%,
-      rgba(245, 199, 106, 0.54) 0%,
-      rgba(225, 73, 63, 0.34) 38%,
-      rgba(116, 24, 31, 0.14) 58%,
-      transparent 72%
-    );
-  animation-delay: -5s;
-}
 
-.blob-3 {
-  top: 40%;
-  left: 30%;
-  width: 40vw;
-  height: 40vw;
-  /* Cool accent, kept faint so the palette does not go monochrome. */
-  background: radial-gradient(circle, rgba(32, 205, 189, 0.24) 0%, rgba(32, 205, 189, 0) 70%);
-  animation-delay: -10s;
-}
 
-@keyframes float {
-  0% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(5%, 5%) scale(1.1); }
-  66% { transform: translate(-5%, 10%) scale(0.9); }
-  100% { transform: translate(0, 0) scale(1); }
-}
 
 /* Scroll-driven backdrop.
-   The page opens warm — gold and red high on the right — and cools as you
-   descend, blue and teal rising through the projects and contact sections, so
-   the backdrop reads as one continuous journey instead of a fixed wash.
 
-   This *replaces* the always-running `float` loop rather than adding to it: a
-   scroll timeline only advances while the user actually scrolls, so the idle
-   cost of the whole backdrop drops to zero. Must stay after the .blob rules —
-   same specificity, so source order is what lets it win.
-
-   Browsers without scroll-driven animations keep the existing `float`. */
+   A scroll timeline only advances while the user actually scrolls, so the idle
+   cost of the whole backdrop is zero — nothing animates on a still page. */
 @supports (animation-timeline: scroll()) {
-  /* Opacity only — deliberately no transform.
-     Moving or scaling one of these forces the GPU to re-rasterize an 80px blur
-     on every scroll frame. Measured on a 4x-throttled mobile profile, transform
-     journeys cost ~22fps (59 -> 37) while opacity costs ~5. Opacity on an
-     already-composited layer is close to free, and the colour journey on
-     .bg-blobs is what actually carries the effect. */
-  @keyframes blob-cool-presence {
-    0%   { opacity: 0.26; }
-    50%  { opacity: 0.52; }
-    100% { opacity: 0.4; }
-  }
+  /* The blooms physically travel across the viewport as you scroll — this is
+     the effect. Now that the blur filter is gone these are plain composited
+     textures, so translating them is cheap; the earlier ~22fps transform cost
+     was the blur re-rasterizing, not the movement itself.
 
-  @keyframes blob-warm-presence {
-    0%   { opacity: 0.6; }
-    45%  { opacity: 0.34; }
-    100% { opacity: 0.54; }
-  }
+     Each takes a different, crossing path so the composition is genuinely
+     rearranging rather than sliding as one sheet. Translation only: scaling
+     would force a re-raster and bring the cost straight back. */
 
-  @keyframes blob-accent-presence {
-    0%   { opacity: 0.14; }
-    55%  { opacity: 0.36; }
-    100% { opacity: 0.48; }
-  }
 
-  .blob-1 {
-    animation: blob-cool-presence linear both;
-    animation-timeline: scroll(root block);
-  }
 
-  .blob-2 {
-    animation: blob-warm-presence linear both;
-    animation-timeline: scroll(root block);
-  }
 
-  .blob-3 {
-    animation: blob-accent-presence linear both;
-    animation-timeline: scroll(root block);
-  }
+
 }
 
-/* A continuously *animated* 80px blur over half the viewport is the most
-   expensive thing on the page, and phones pay for it the most. Park the motion
-   there — but keep the colour. A static blur is rasterized once and cached, so
-   radius and opacity cost almost nothing per frame; only the animation did. */
+/* Phones run the same travelling backdrop. With the blur filter gone the blobs
+   are plain composited textures, so translating them is affordable here too —
+   the old mobile carve-out existed only because an animated 80px blur was
+   ruinous on a phone GPU. */
 @media (max-width: 768px) {
   /* On a phone the content column spans the full width, so far less of the
      backdrop is ever exposed than on desktop — the warm gradient only shows in
@@ -413,58 +353,10 @@ img {
     opacity: 0.34;
   }
 
-  .blob {
-    animation: none;
-    filter: blur(60px);
-    opacity: 0.58;
-  }
 
-  /* Phones get the same opacity-only treatment; the colour journey on
-     .bg-blobs does the visible work. Slightly higher values than desktop since
-     less backdrop is exposed here. */
-  @supports (animation-timeline: scroll()) {
-    @keyframes blob-cool-presence-mobile {
-      0%   { opacity: 0.34; }
-      50%  { opacity: 0.56; }
-      100% { opacity: 0.44; }
-    }
 
-    @keyframes blob-warm-presence-mobile {
-      0%   { opacity: 0.62; }
-      50%  { opacity: 0.4; }
-      100% { opacity: 0.58; }
-    }
 
-    .blob-1 {
-      animation: blob-cool-presence-mobile linear both;
-      animation-timeline: scroll(root block);
-    }
 
-    .blob-2 {
-      animation: blob-warm-presence-mobile linear both;
-      animation-timeline: scroll(root block);
-    }
-  }
-
-  /* Sized in vw, the gold/red blob collapses to a small smudge on a phone and
-     sits mostly offscreen (60vw wide, tucked past the bottom-right corner).
-     Scale it up and pull it into view so the warm gradient actually reads —
-     .bg-blobs is fixed, so this stays visible for the whole scroll. */
-  .blob-2 {
-    width: 135vw;
-    height: 135vw;
-    right: -32vw;
-    bottom: -6vh;
-  }
-
-  .blob-1 {
-    width: 90vw;
-    height: 90vw;
-  }
-
-  .blob-3 {
-    display: none;
-  }
 }
 
 /* Honour the OS "reduce motion" setting: keep the design, drop the movement. */
@@ -487,9 +379,7 @@ img {
      end keyframe, so cancel the journey outright rather than let it land
      somewhere arbitrary. */
   .bg-blobs,
-  .blob-1,
-  .blob-2,
-  .blob-3 {
+  .blob {
     animation: none !important;
     transform: none !important;
   }
