@@ -146,6 +146,17 @@ img {
   initial-value: rgba(92, 36, 28, 0.26);
 }
 
+/* Registering the positions too means the blooms can physically sweep across
+   the viewport as you scroll, not just change hue. Colour alone is not enough:
+   any hue at low alpha over a near-black base collapses to a similar brown, so
+   movement is what actually makes the change legible. */
+@property --warm-x { syntax: "<percentage>"; inherits: false; initial-value: 78%; }
+@property --warm-y { syntax: "<percentage>"; inherits: false; initial-value: 10%; }
+@property --cool-x { syntax: "<percentage>"; inherits: false; initial-value: 14%; }
+@property --cool-y { syntax: "<percentage>"; inherits: false; initial-value: 78%; }
+@property --deep-x { syntax: "<percentage>"; inherits: false; initial-value: 50%; }
+@property --deep-y { syntax: "<percentage>"; inherits: false; initial-value: 40%; }
+
 .bg-blobs {
   position: fixed;
   top: 0;
@@ -155,10 +166,10 @@ img {
   z-index: -1;
   overflow: hidden;
   background:
-    radial-gradient(circle at 78% 10%, var(--tint-warm), transparent 58%),
-    radial-gradient(circle at 14% 78%, var(--tint-cool), transparent 60%),
-    radial-gradient(ellipse at 50% 40%, var(--tint-deep), transparent 72%),
-    radial-gradient(ellipse at center, transparent 52%, rgba(3, 4, 10, 0.3) 100%),
+    radial-gradient(circle at var(--warm-x) var(--warm-y), var(--tint-warm), transparent var(--spread-warm, 58%)),
+    radial-gradient(circle at var(--cool-x) var(--cool-y), var(--tint-cool), transparent var(--spread-cool, 60%)),
+    radial-gradient(ellipse at var(--deep-x) var(--deep-y), var(--tint-deep), transparent var(--spread-deep, 72%)),
+    radial-gradient(ellipse at center, transparent 58%, rgba(3, 4, 10, 0.18) 100%),
     var(--bg);
   /* Isolate blob repaints from the rest of the page */
   contain: strict;
@@ -198,7 +209,10 @@ img {
       transparent 60%
     );
   filter: blur(32px);
-  opacity: 0.7;
+  /* Kept low deliberately. This layer's colours are fixed, so at high opacity
+     it acts as a constant veil that averages the scroll-driven gradient beneath
+     it into one flat brown. It is texture, not colour. */
+  opacity: 0.3;
   transform: translate3d(-12%, -6%, 0) rotate(-5deg) scale(1.05);
   animation: armor-gradient-drift 22s ease-in-out infinite alternate;
   will-change: transform;
@@ -396,7 +410,7 @@ img {
   .bg-blobs::after {
     animation: none;
     filter: blur(30px);
-    opacity: 0.9;
+    opacity: 0.34;
   }
 
   .blob {
