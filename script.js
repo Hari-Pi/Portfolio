@@ -106,4 +106,5 @@ document.addEventListener("DOMContentLoaded", () => {
     );
     idleObserver.observe(heroSystem);
   }
+
 });

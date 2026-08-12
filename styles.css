@@ -32,7 +32,13 @@
   --accent-gold: #f5c76a;
   --accent-signal: #20cdbd;
   --on-accent: #070914;
-  --shadow: 0 14px 38px rgba(2, 3, 6, 0.52);
+  /* Two layers instead of one big dark bloom: a tight contact shadow for depth,
+     plus an ambient one pulled back by a negative spread so its falloff hugs
+     the card. A single 38px near-black blur was invisible against a flat page,
+     but reads as a muddy halo now that a colour gradient sits behind it. */
+  --shadow:
+    0 1px 2px rgba(2, 3, 6, 0.34),
+    0 12px 28px -14px rgba(2, 3, 6, 0.5);
   --glass-blur: blur(16px);
   --max: 1180px;
 }
@@ -119,6 +125,34 @@ img {
 }
 
 /* Background Animated Blobs */
+/* Registering these as <color> is what makes them interpolable — a plain
+   custom property would jump between keyframes instead of blending, so the
+   backdrop could not cross-fade between sections. */
+@property --tint-warm {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: rgba(245, 199, 106, 0.26);
+}
+
+@property --tint-cool {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: rgba(38, 150, 168, 0.14);
+}
+
+@property --tint-deep {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: rgba(92, 36, 28, 0.26);
+}
+
+/* Angles are registered so they can interpolate. Rotating the wash directions
+   as you scroll is what makes the gradient feel alive without introducing any
+   shape — linear gradients have no silhouette to give themselves away. */
+@property --angle-a { syntax: "<angle>"; inherits: false; initial-value: 155deg; }
+@property --angle-b { syntax: "<angle>"; inherits: false; initial-value: 25deg; }
+@property --angle-c { syntax: "<angle>"; inherits: false; initial-value: 290deg; }
+
 .bg-blobs {
   position: fixed;
   top: 0;
@@ -127,12 +161,14 @@ img {
   height: 100%;
   z-index: -1;
   overflow: hidden;
+  /* Three overlapping linear washes. No radial gradients and no child elements,
+     so there is no disc or blob shape anywhere — just colour bleeding across the
+     viewport. Both the colours and the angles animate on the scroll timeline. */
   background:
-    radial-gradient(circle at 82% 12%, rgba(245, 199, 106, 0.2), transparent 27%),
-    radial-gradient(circle at 16% 80%, rgba(32, 205, 189, 0.055), transparent 30%),
-    radial-gradient(ellipse at center, transparent 42%, rgba(3, 4, 10, 0.34) 100%),
+    linear-gradient(var(--angle-a), var(--tint-warm) 0%, transparent 42%),
+    linear-gradient(var(--angle-b), var(--tint-cool) 0%, transparent 46%),
+    linear-gradient(var(--angle-c), var(--tint-deep) 0%, transparent 52%),
     var(--bg);
-  /* Isolate blob repaints from the rest of the page */
   contain: strict;
 }
 
@@ -170,7 +206,10 @@ img {
       transparent 60%
     );
   filter: blur(32px);
-  opacity: 0.7;
+  /* Kept low deliberately. This layer's colours are fixed, so at high opacity
+     it acts as a constant veil that averages the scroll-driven gradient beneath
+     it into one flat brown. It is texture, not colour. */
+  opacity: 0.2;
   transform: translate3d(-12%, -6%, 0) rotate(-5deg) scale(1.05);
   animation: armor-gradient-drift 22s ease-in-out infinite alternate;
   will-change: transform;
@@ -193,80 +232,95 @@ img {
   @keyframes parallax-bg {
     to { transform: translateY(-20%); }
   }
+
+  /* The restrained warm, cool, and deep tints shift with the reader's progress.
+     Low alpha preserves contrast through the translucent panels. */
+  @keyframes bg-tint-journey {
+    0% {
+      --tint-warm: rgba(238, 168, 66, 0.2);
+      --tint-cool: rgba(38, 150, 172, 0.1);
+      --tint-deep: rgba(58, 32, 40, 0.22);
+      --angle-a: 155deg; --angle-b: 25deg; --angle-c: 290deg;
+    }
+    20% {
+      --tint-warm: rgba(232, 118, 44, 0.24);
+      --tint-cool: rgba(46, 96, 150, 0.12);
+      --tint-deep: rgba(44, 26, 38, 0.22);
+      --angle-a: 188deg; --angle-b: 62deg; --angle-c: 322deg;
+    }
+    40% {
+      --tint-warm: rgba(206, 62, 44, 0.2);
+      --tint-cool: rgba(40, 104, 176, 0.13);
+      --tint-deep: rgba(52, 26, 40, 0.24);
+      --angle-a: 222deg; --angle-b: 98deg; --angle-c: 356deg;
+    }
+    60% {
+      --tint-warm: rgba(240, 146, 56, 0.22);
+      --tint-cool: rgba(32, 168, 178, 0.12);
+      --tint-deep: rgba(40, 28, 44, 0.22);
+      --angle-a: 256deg; --angle-b: 134deg; --angle-c: 28deg;
+    }
+    80% {
+      --tint-warm: rgba(214, 84, 40, 0.22);
+      --tint-cool: rgba(46, 96, 186, 0.13);
+      --tint-deep: rgba(48, 26, 40, 0.24);
+      --angle-a: 290deg; --angle-b: 170deg; --angle-c: 62deg;
+    }
+    100% {
+      --tint-warm: rgba(244, 176, 74, 0.2);
+      --tint-cool: rgba(36, 158, 176, 0.11);
+      --tint-deep: rgba(44, 30, 40, 0.22);
+      --angle-a: 324deg; --angle-b: 206deg; --angle-c: 96deg;
+    }
+  }
+
   .bg-blobs {
     height: 120vh;
-    animation: parallax-bg linear both;
-    animation-timeline: scroll();
+    animation: parallax-bg linear both, bg-tint-journey linear both;
+    animation-timeline: scroll(root block), scroll(root block);
   }
 }
 
 .blob {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.4;
-  animation: float 20s infinite alternate ease-in-out;
+  /* Retired. These produced visible circular discs in the backdrop; the effect
+     is now carried entirely by layered linear washes on .bg-blobs, which have
+     no shape of their own. Kept as a no-op so the existing markup on every page
+     needs no change. */
+  display: none;
 }
 
-.blob-1 {
-  top: -10%;
-  left: -10%;
-  width: 50vw;
-  height: 50vw;
-  background: radial-gradient(circle, rgba(52, 120, 212, 0.52) 0%, rgba(52, 120, 212, 0) 70%);
-}
-
-.blob-2 {
-  bottom: -20%;
-  right: -10%;
-  width: 60vw;
-  height: 60vw;
-  background:
-    radial-gradient(
-      circle at 42% 38%,
-      rgba(245, 199, 106, 0.54) 0%,
-      rgba(225, 73, 63, 0.34) 38%,
-      rgba(116, 24, 31, 0.14) 58%,
-      transparent 72%
-    );
-  animation-delay: -5s;
-}
-
-.blob-3 {
-  top: 40%;
-  left: 30%;
-  width: 40vw;
-  height: 40vw;
-  background: radial-gradient(circle, rgba(32, 205, 189, 0.3) 0%, rgba(32, 205, 189, 0) 70%);
-  animation-delay: -10s;
-}
-
-@keyframes float {
-  0% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(5%, 5%) scale(1.1); }
-  66% { transform: translate(-5%, 10%) scale(0.9); }
-  100% { transform: translate(0, 0) scale(1); }
-}
-
-/* A continuously animated 80px blur over half the viewport is the most
-   expensive thing on the page. Phones pay for it the most and show it the
-   least, so they get a cheaper static version. */
+/* Phones run the same travelling backdrop. With the blur filter gone the blobs
+   are plain composited textures, so translating them is affordable here too —
+   the old mobile carve-out existed only because an animated 80px blur was
+   ruinous on a phone GPU. */
 @media (max-width: 768px) {
+  /* On a phone the content column spans the full width, so far less of the
+     backdrop is ever exposed than on desktop — the warm gradient only shows in
+     the gaps between cards. Spread it to three points so some of it lands in a
+     visible gap at any scroll position, and ease off the vignette that was
+     flattening the little that did show. */
+  .bg-blobs {
+    /* Same animated tints as desktop — only the geometry changes. Spread wider
+       and skip the vignette, since a phone exposes far less backdrop and the
+       darkening at the edges was flattening what little showed. */
+    background:
+      radial-gradient(circle at 82% 4%, var(--tint-warm), transparent 62%),
+      radial-gradient(circle at 6% 58%, var(--tint-cool), transparent 64%),
+      radial-gradient(ellipse at 50% 92%, var(--tint-deep), transparent 70%),
+      radial-gradient(ellipse at center, transparent 70%, rgba(3, 4, 10, 0.12) 100%),
+      var(--bg);
+  }
+
   .bg-blobs::after {
-    filter: blur(20px);
-    opacity: 0.5;
-    animation-duration: 24s;
-  }
-
-  .blob {
     animation: none;
-    filter: blur(50px);
-    opacity: 0.35;
+    filter: blur(30px);
+    opacity: 0.34;
   }
 
-  .blob-3 {
-    display: none;
-  }
+
+
+
+
 }
 
 /* Honour the OS "reduce motion" setting: keep the design, drop the movement. */
@@ -282,6 +336,16 @@ img {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  /* Pin the backdrop to its opening state. The blanket 0.01ms duration above is
+     meaningless for a progress-based scroll timeline and can snap these to their
+     end keyframe, so cancel the journey outright rather than let it land
+     somewhere arbitrary. */
+  .bg-blobs,
+  .blob {
+    animation: none !important;
+    transform: none !important;
   }
 
   .js .reveal {
@@ -793,9 +857,10 @@ section[id] {
   line-height: 1;
 }
 
-.metric.metric-words {
-  font-size: clamp(1.4rem, 2.6vw, 2.15rem);
-  letter-spacing: -0.025em;
+.metric-suffix {
+  font-size: 0.6em;
+  vertical-align: 0.22em;
+  margin-left: 0.04em;
 }
 
 .summary-band span:last-child {
@@ -816,7 +881,7 @@ section[id] {
 
 /* About */
 .about-section {
-  padding: 60px 0 100px;
+  padding: 56px 0 64px;
 }
 
 .about-grid {
@@ -833,7 +898,7 @@ section[id] {
 
 /* Recruiter-facing chronology: compact enough to scan before the projects. */
 .experience-section {
-  padding: 60px 0 100px;
+  padding: 56px 0 64px;
   /* Skips layout and paint while off-screen; the intrinsic size keeps
      the scrollbar and anchor offsets stable. */
   content-visibility: auto;
@@ -845,6 +910,7 @@ section[id] {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 18px;
 }
+
 
 .experience-card {
   position: relative;
@@ -905,6 +971,28 @@ section[id] {
   line-height: 1.65;
 }
 
+/* Align every row across the three cards. Must sit after .experience-card,
+   which sets display:flex at equal specificity — source order is what lets
+   display:grid win. Without this the paragraphs were
+   bottom-anchored by `margin-top: auto`, so a longer one started higher and the
+   three body texts began at different heights (measured 164/188/211px). */
+@supports (grid-template-rows: subgrid) {
+  .experience-grid {
+    grid-template-rows: auto auto auto auto 1fr;
+  }
+
+  .experience-card {
+    display: grid;
+    grid-row: span 5;
+    grid-template-rows: subgrid;
+    align-content: start;
+  }
+
+  .experience-card p {
+    margin-top: 0;
+  }
+}
+
 .about-copy {
   display: flex;
   flex-direction: column;
@@ -940,13 +1028,17 @@ section[id] {
 }
 
 .about-avatar {
-  width: 72px;
-  height: 72px;
+  /* A real headshot earns more presence than the 72px thumbnail the old avatar
+     had. Neutral border and a soft ring instead of the blue tint, so the photo
+     reads as a photo rather than as a UI chip. */
+  width: 96px;
+  height: 96px;
   flex: 0 0 auto;
-  border: 2px solid rgba(52, 120, 212, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 18px;
   object-fit: cover;
-  box-shadow: 0 10px 30px rgba(52, 120, 212, 0.2);
+  object-position: center 22%;
+  box-shadow: 0 10px 30px rgba(3, 4, 10, 0.5);
   transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
@@ -1024,7 +1116,7 @@ section[id] {
 
 /* Projects */
 .projects-section {
-  padding: 60px 0 100px;
+  padding: 56px 0 64px;
   /* Skips layout and paint while off-screen; the intrinsic size keeps
      the scrollbar and anchor offsets stable. */
   content-visibility: auto;
@@ -1672,6 +1764,21 @@ section[id] {
               border-color 0.25s ease;
 }
 
+/* The GitHub tile is the exit to the wider body of work, so it reads as an
+   action rather than another project card. */
+.archive-item-github {
+  border-color: rgba(245, 199, 106, 0.28);
+  background: linear-gradient(
+    135deg,
+    rgba(245, 199, 106, 0.08),
+    rgba(245, 199, 106, 0.02)
+  );
+}
+
+.archive-item-github strong {
+  color: var(--accent-gold);
+}
+
 .archive-item:hover {
   border-color: var(--border-hover);
   background: var(--surface-hover);
@@ -1692,7 +1799,7 @@ section[id] {
 
 /* Stack Section */
 .stack-section {
-  padding: 60px 0 100px;
+  padding: 56px 0 64px;
   /* Skips layout and paint while off-screen; the intrinsic size keeps
      the scrollbar and anchor offsets stable. */
   content-visibility: auto;
@@ -1749,7 +1856,7 @@ section[id] {
 
 /* Contact */
 .contact-section {
-  padding: 20px 0 100px;
+  padding: 20px 0 72px;
 }
 
 .contact-panel {

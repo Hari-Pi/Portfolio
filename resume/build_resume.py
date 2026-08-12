@@ -210,7 +210,7 @@ def build_resume():
     skill_rows = [
         ("Languages", "Python, JavaScript, TypeScript, Dart, SQL, Bash"),
         ("Web & Mobile", "Django, React, Next.js, Node.js, Express, Flutter, REST APIs, WebRTC"),
-        ("Data & Auth", "MongoDB, PostgreSQL, SQLite, Next-Auth, email-based authentication"),
+        ("Data & Auth", "Supabase, PostgreSQL, MongoDB, SQLite, Next-Auth, email authentication"),
         ("Delivery & Systems", "Git, GitHub Actions, CI/CD, Docker, Vercel, Cloudflare Pages, Linux, Tailscale"),
     ]
     skills_table = Table(
@@ -239,7 +239,7 @@ def build_resume():
     story.append(
         item_header(
             "Full-stack Developer | Averra Data Academy",
-            "Django 5 | Python | Course delivery | Student accounts | Quizzes",
+            "Next.js | TypeScript | Supabase | Vercel",
             "Jan - Jun 2026",
             styles,
             "https://hari-pi.com/projects/averra-data.html",
@@ -248,15 +248,15 @@ def build_resume():
     story.extend(
         [
             bullet(
-                "Designed, built, and deployed a production learning platform spanning five academy tracks, public course discovery, and an authenticated student area.",
+                "Designed, built, and deployed a production platform spanning five academy tracks, public course discovery, student accounts, and timed assessments.",
                 styles,
             ),
             bullet(
-                "Implemented email authentication, enrolment-gated lessons, quiz attempts and score review, and CSV question-bank imports.",
+                "Implemented Supabase Auth and PostgreSQL workflows for role-aware profiles, exam sessions, questions, attempts, and answer-level results.",
                 styles,
             ),
             bullet(
-                "Created an admin-managed courses-to-modules-to-lessons content model so staff can update curricula without code changes.",
+                "Built admin workflows for CSV and Excel question imports, session creation, performance review, and counseling-request capture.",
                 styles,
             ),
         ]
