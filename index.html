@@ -38,7 +38,7 @@
     <link rel="preload" as="font" href="fonts/inter-latin-variable.woff2" type="font/woff2" crossorigin />
     <link rel="preload" as="font" href="fonts/outfit-latin-variable.woff2" type="font/woff2" crossorigin />
 
-    <link rel="stylesheet" href="styles.css?v=9.7" />
+    <link rel="stylesheet" href="styles.css?v=9.8" />
 
     <script type="application/ld+json">
       {
@@ -346,16 +346,18 @@
 
             <div class="project-grid personal-project-grid">
 
-              <article class="project-card glass-panel flagship reveal" data-category="systems">
-              <div class="project-visual has-image">
-                <img
-                  src="images/tunnelpane-card.webp"
-                  alt="TunnelPane browser and terminal file transfer interfaces"
-                  width="1000"
-                  height="480"
-                  loading="lazy"
-                  decoding="async"
-                />
+              <article class="project-card glass-panel flagship has-preview-video reveal" data-category="systems">
+              <div class="project-visual has-image" aria-hidden="true">
+                <video
+                  data-preview-video
+                  src="media/tunnelpane-demo.mp4"
+                  poster="images/tunnelpane-card.webp"
+                  muted
+                  loop
+                  playsinline
+                  preload="metadata"
+                ></video>
+                <span class="video-preview-label">Live preview</span>
               </div>
               <div class="project-body">
                 <span class="project-sequence">Featured open-source project</span>
@@ -373,7 +375,7 @@
                 </dl>
                 <div class="project-card-links">
                   <a class="project-link secondary" href="projects/tunnelpane.html">View Details</a>
-                  <a class="project-link primary" href="https://hari-pi.github.io/tunnelpane/demo.html" target="_blank" rel="noopener">Watch Demo</a>
+                  <a class="project-link primary" href="https://github.com/Hari-Pi/tunnelpane" target="_blank" rel="noopener">GitHub</a>
                 </div>
               </div>
               </article>

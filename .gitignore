@@ -20,6 +20,7 @@
 
 # Don't ignore public project demo videos
 !media/sys-config-demo.mp4
+!media/tunnelpane-demo.mp4
 
 # Don't ignore SEO / hosting files
 !sitemap.xml
