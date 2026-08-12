@@ -165,9 +165,9 @@ img {
      so there is no disc or blob shape anywhere — just colour bleeding across the
      viewport. Both the colours and the angles animate on the scroll timeline. */
   background:
-    linear-gradient(var(--angle-a), var(--tint-warm) 0%, transparent 58%),
-    linear-gradient(var(--angle-b), var(--tint-cool) 0%, transparent 62%),
-    linear-gradient(var(--angle-c), var(--tint-deep) 0%, transparent 66%),
+    linear-gradient(var(--angle-a), var(--tint-warm) 0%, transparent 42%),
+    linear-gradient(var(--angle-b), var(--tint-cool) 0%, transparent 46%),
+    linear-gradient(var(--angle-c), var(--tint-deep) 0%, transparent 52%),
     var(--bg);
   contain: strict;
 }
@@ -209,7 +209,7 @@ img {
   /* Kept low deliberately. This layer's colours are fixed, so at high opacity
      it acts as a constant veil that averages the scroll-driven gradient beneath
      it into one flat brown. It is texture, not colour. */
-  opacity: 0.3;
+  opacity: 0.2;
   transform: translate3d(-12%, -6%, 0) rotate(-5deg) scale(1.05);
   animation: armor-gradient-drift 22s ease-in-out infinite alternate;
   will-change: transform;
@@ -233,55 +233,43 @@ img {
     to { transform: translateY(-20%); }
   }
 
-  /* The page walks through four distinct colour states as you scroll, so each
-     section sits on a visibly different backdrop rather than one flat wash:
-       hero        violet + gold
-       about/exp   rust and amber, warmest point of the page
-       projects    teal and blue, coolest point
-       contact     magenta into deep blue
-     Alphas stay low enough that body text keeps its contrast throughout. */
-  /* Deep, saturated hues at modest alpha rather than bright ones at high alpha.
-     The panels are translucent with a backdrop-filter, so anything light behind
-     them bleeds through and washes the cards out — identity has to come from
-     hue, not lightness. */
-  /* Six stops so the shift is continuous rather than four discrete states.
-     Warm leads throughout; the cool slot alternates in as a minor counterpoint.
-     Angles rotate steadily so the washes sweep across as the colours change. */
+  /* The restrained warm, cool, and deep tints shift with the reader's progress.
+     Low alpha preserves contrast through the translucent panels. */
   @keyframes bg-tint-journey {
     0% {
-      --tint-warm: rgba(238, 168, 66, 0.42);
-      --tint-cool: rgba(38, 150, 172, 0.16);
-      --tint-deep: rgba(96, 38, 28, 0.34);
+      --tint-warm: rgba(238, 168, 66, 0.2);
+      --tint-cool: rgba(38, 150, 172, 0.1);
+      --tint-deep: rgba(58, 32, 40, 0.22);
       --angle-a: 155deg; --angle-b: 25deg; --angle-c: 290deg;
     }
     20% {
-      --tint-warm: rgba(232, 118, 44, 0.5);
-      --tint-cool: rgba(150, 52, 34, 0.2);
-      --tint-deep: rgba(74, 26, 30, 0.3);
+      --tint-warm: rgba(232, 118, 44, 0.24);
+      --tint-cool: rgba(46, 96, 150, 0.12);
+      --tint-deep: rgba(44, 26, 38, 0.22);
       --angle-a: 188deg; --angle-b: 62deg; --angle-c: 322deg;
     }
     40% {
-      --tint-warm: rgba(206, 62, 44, 0.46);
-      --tint-cool: rgba(40, 104, 176, 0.2);
-      --tint-deep: rgba(112, 30, 36, 0.36);
+      --tint-warm: rgba(206, 62, 44, 0.2);
+      --tint-cool: rgba(40, 104, 176, 0.13);
+      --tint-deep: rgba(52, 26, 40, 0.24);
       --angle-a: 222deg; --angle-b: 98deg; --angle-c: 356deg;
     }
     60% {
-      --tint-warm: rgba(240, 146, 56, 0.44);
-      --tint-cool: rgba(32, 168, 178, 0.19);
-      --tint-deep: rgba(84, 30, 26, 0.3);
+      --tint-warm: rgba(240, 146, 56, 0.22);
+      --tint-cool: rgba(32, 168, 178, 0.12);
+      --tint-deep: rgba(40, 28, 44, 0.22);
       --angle-a: 256deg; --angle-b: 134deg; --angle-c: 28deg;
     }
     80% {
-      --tint-warm: rgba(214, 84, 40, 0.48);
-      --tint-cool: rgba(46, 96, 186, 0.21);
-      --tint-deep: rgba(104, 32, 34, 0.34);
+      --tint-warm: rgba(214, 84, 40, 0.22);
+      --tint-cool: rgba(46, 96, 186, 0.13);
+      --tint-deep: rgba(48, 26, 40, 0.24);
       --angle-a: 290deg; --angle-b: 170deg; --angle-c: 62deg;
     }
     100% {
-      --tint-warm: rgba(244, 176, 74, 0.44);
-      --tint-cool: rgba(36, 158, 176, 0.17);
-      --tint-deep: rgba(92, 36, 28, 0.32);
+      --tint-warm: rgba(244, 176, 74, 0.2);
+      --tint-cool: rgba(36, 158, 176, 0.11);
+      --tint-deep: rgba(44, 30, 40, 0.22);
       --angle-a: 324deg; --angle-b: 206deg; --angle-c: 96deg;
     }
   }
@@ -299,30 +287,6 @@ img {
      no shape of their own. Kept as a no-op so the existing markup on every page
      needs no change. */
   display: none;
-}
-
-
-
-
-
-/* Scroll-driven backdrop.
-
-   A scroll timeline only advances while the user actually scrolls, so the idle
-   cost of the whole backdrop is zero — nothing animates on a still page. */
-@supports (animation-timeline: scroll()) {
-  /* The blooms physically travel across the viewport as you scroll — this is
-     the effect. Now that the blur filter is gone these are plain composited
-     textures, so translating them is cheap; the earlier ~22fps transform cost
-     was the blur re-rasterizing, not the movement itself.
-
-     Each takes a different, crossing path so the composition is genuinely
-     rearranging rather than sliding as one sheet. Translation only: scaling
-     would force a re-raster and bring the cost straight back. */
-
-
-
-
-
 }
 
 /* Phones run the same travelling backdrop. With the blur filter gone the blobs
@@ -893,9 +857,10 @@ section[id] {
   line-height: 1;
 }
 
-.metric.metric-words {
-  font-size: clamp(1.4rem, 2.6vw, 2.15rem);
-  letter-spacing: -0.025em;
+.metric-suffix {
+  font-size: 0.6em;
+  vertical-align: 0.22em;
+  margin-left: 0.04em;
 }
 
 .summary-band span:last-child {
@@ -916,7 +881,7 @@ section[id] {
 
 /* About */
 .about-section {
-  padding: 60px 0 100px;
+  padding: 56px 0 64px;
 }
 
 .about-grid {
@@ -933,7 +898,7 @@ section[id] {
 
 /* Recruiter-facing chronology: compact enough to scan before the projects. */
 .experience-section {
-  padding: 60px 0 100px;
+  padding: 56px 0 64px;
   /* Skips layout and paint while off-screen; the intrinsic size keeps
      the scrollbar and anchor offsets stable. */
   content-visibility: auto;
@@ -945,6 +910,7 @@ section[id] {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 18px;
 }
+
 
 .experience-card {
   position: relative;
@@ -1005,6 +971,28 @@ section[id] {
   line-height: 1.65;
 }
 
+/* Align every row across the three cards. Must sit after .experience-card,
+   which sets display:flex at equal specificity — source order is what lets
+   display:grid win. Without this the paragraphs were
+   bottom-anchored by `margin-top: auto`, so a longer one started higher and the
+   three body texts began at different heights (measured 164/188/211px). */
+@supports (grid-template-rows: subgrid) {
+  .experience-grid {
+    grid-template-rows: auto auto auto auto 1fr;
+  }
+
+  .experience-card {
+    display: grid;
+    grid-row: span 5;
+    grid-template-rows: subgrid;
+    align-content: start;
+  }
+
+  .experience-card p {
+    margin-top: 0;
+  }
+}
+
 .about-copy {
   display: flex;
   flex-direction: column;
@@ -1040,13 +1028,17 @@ section[id] {
 }
 
 .about-avatar {
-  width: 72px;
-  height: 72px;
+  /* A real headshot earns more presence than the 72px thumbnail the old avatar
+     had. Neutral border and a soft ring instead of the blue tint, so the photo
+     reads as a photo rather than as a UI chip. */
+  width: 96px;
+  height: 96px;
   flex: 0 0 auto;
-  border: 2px solid rgba(52, 120, 212, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 18px;
   object-fit: cover;
-  box-shadow: 0 10px 30px rgba(52, 120, 212, 0.2);
+  object-position: center 22%;
+  box-shadow: 0 10px 30px rgba(3, 4, 10, 0.5);
   transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
@@ -1124,7 +1116,7 @@ section[id] {
 
 /* Projects */
 .projects-section {
-  padding: 60px 0 100px;
+  padding: 56px 0 64px;
   /* Skips layout and paint while off-screen; the intrinsic size keeps
      the scrollbar and anchor offsets stable. */
   content-visibility: auto;
@@ -1772,6 +1764,21 @@ section[id] {
               border-color 0.25s ease;
 }
 
+/* The GitHub tile is the exit to the wider body of work, so it reads as an
+   action rather than another project card. */
+.archive-item-github {
+  border-color: rgba(245, 199, 106, 0.28);
+  background: linear-gradient(
+    135deg,
+    rgba(245, 199, 106, 0.08),
+    rgba(245, 199, 106, 0.02)
+  );
+}
+
+.archive-item-github strong {
+  color: var(--accent-gold);
+}
+
 .archive-item:hover {
   border-color: var(--border-hover);
   background: var(--surface-hover);
@@ -1792,7 +1799,7 @@ section[id] {
 
 /* Stack Section */
 .stack-section {
-  padding: 60px 0 100px;
+  padding: 56px 0 64px;
   /* Skips layout and paint while off-screen; the intrinsic size keeps
      the scrollbar and anchor offsets stable. */
   content-visibility: auto;
@@ -1849,7 +1856,7 @@ section[id] {
 
 /* Contact */
 .contact-section {
-  padding: 20px 0 100px;
+  padding: 20px 0 72px;
 }
 
 .contact-panel {
