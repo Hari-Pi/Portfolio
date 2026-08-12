@@ -1323,7 +1323,8 @@ section[id] {
   opacity: 0.86;
 }
 
-.flagship .project-visual.has-image img {
+.flagship .project-visual.has-image img,
+.flagship .project-visual.has-image video {
   inset: 48px 28px 28px;
   width: calc(100% - 56px);
   height: calc(100% - 76px);
@@ -2043,7 +2044,8 @@ section[id] {
     padding: 10px 12px;
   }
 
-  .flagship .project-visual.has-image img {
+  .flagship .project-visual.has-image img,
+  .flagship .project-visual.has-image video {
     inset-inline: 22px;
     width: calc(100% - 44px);
   }
@@ -2344,7 +2346,8 @@ section[id] {
     min-height: 280px;
   }
 
-  .flagship .project-visual.has-image img {
+  .flagship .project-visual.has-image img,
+  .flagship .project-visual.has-image video {
     inset: 42px 16px 18px;
     width: calc(100% - 32px);
     height: calc(100% - 60px);
