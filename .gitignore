@@ -13,6 +13,9 @@
 # Don't ignore site images
 !*.webp
 !*.svg
+!favicon.ico
+!favicon-*.png
+!apple-touch-icon.png
 !images/og-portfolio.jpg
 
 # Don't ignore public project demo videos
@@ -21,6 +24,7 @@
 # Don't ignore SEO / hosting files
 !sitemap.xml
 !robots.txt
+!site.webmanifest
 !CNAME
 !.nojekyll
 
