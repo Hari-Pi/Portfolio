@@ -39,7 +39,7 @@
   --shadow:
     0 1px 2px rgba(2, 3, 6, 0.34),
     0 12px 28px -14px rgba(2, 3, 6, 0.5);
-  --glass-blur: blur(16px);
+  --glass-blur: blur(10px);
   --max: 1180px;
 }
 
@@ -124,50 +124,24 @@ img {
   max-width: 100%;
 }
 
-/* Background Animated Blobs */
-/* Registering these as <color> is what makes them interpolable — a plain
-   custom property would jump between keyframes instead of blending, so the
-   backdrop could not cross-fade between sections. */
-@property --tint-warm {
-  syntax: "<color>";
-  inherits: false;
-  initial-value: rgba(245, 199, 106, 0.26);
-}
-
-@property --tint-cool {
-  syntax: "<color>";
-  inherits: false;
-  initial-value: rgba(38, 150, 168, 0.14);
-}
-
-@property --tint-deep {
-  syntax: "<color>";
-  inherits: false;
-  initial-value: rgba(92, 36, 28, 0.26);
-}
-
-/* Angles are registered so they can interpolate. Rotating the wash directions
-   as you scroll is what makes the gradient feel alive without introducing any
-   shape — linear gradients have no silhouette to give themselves away. */
-@property --angle-a { syntax: "<angle>"; inherits: false; initial-value: 155deg; }
-@property --angle-b { syntax: "<angle>"; inherits: false; initial-value: 25deg; }
-@property --angle-c { syntax: "<angle>"; inherits: false; initial-value: 290deg; }
-
+/* Static viewport backdrop. Keeping this layer visually rich but immutable
+   avoids repainting several full-screen gradients on every scroll frame. */
 .bg-blobs {
+  --wash-warm: hsla(34, 78%, 58%, 0.2);
+  --wash-cool: hsla(188, 64%, 42%, 0.1);
+  --wash-deep: hsla(338, 29%, 24%, 0.22);
+  --wash-angle-a: 155deg;
+  --wash-angle-b: 25deg;
+  --wash-angle-c: 290deg;
+  --grid-size: 48px;
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   z-index: -1;
   overflow: hidden;
-  /* Three overlapping linear washes. No radial gradients and no child elements,
-     so there is no disc or blob shape anywhere — just colour bleeding across the
-     viewport. Both the colours and the angles animate on the scroll timeline. */
   background:
-    linear-gradient(var(--angle-a), var(--tint-warm) 0%, transparent 42%),
-    linear-gradient(var(--angle-b), var(--tint-cool) 0%, transparent 46%),
-    linear-gradient(var(--angle-c), var(--tint-deep) 0%, transparent 52%),
+    linear-gradient(var(--wash-angle-a), var(--wash-warm) 0%, transparent 42%),
+    linear-gradient(var(--wash-angle-b), var(--wash-cool) 0%, transparent 46%),
+    linear-gradient(var(--wash-angle-c), var(--wash-deep) 0%, transparent 52%),
     var(--bg);
   contain: strict;
 }
@@ -179,106 +153,13 @@ img {
   background-image:
     linear-gradient(rgba(52, 120, 212, 0.028) 1px, transparent 1px),
     linear-gradient(90deg, rgba(52, 120, 212, 0.028) 1px, transparent 1px);
-  background-size: 48px 48px;
+  background-size: var(--grid-size) var(--grid-size);
   mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.75), transparent 78%);
   pointer-events: none;
 }
 
 .bg-blobs::after {
-  content: "";
-  position: absolute;
-  inset: -35%;
-  background:
-    linear-gradient(
-      110deg,
-      transparent 18%,
-      rgba(116, 24, 31, 0.11) 28%,
-      rgba(225, 73, 63, 0.18) 38%,
-      rgba(245, 199, 106, 0.16) 48%,
-      rgba(52, 120, 212, 0.12) 61%,
-      rgba(32, 205, 189, 0.09) 69%,
-      transparent 82%
-    ),
-    linear-gradient(
-      74deg,
-      transparent 40%,
-      rgba(245, 199, 106, 0.07) 50%,
-      transparent 60%
-    );
-  filter: blur(32px);
-  /* Kept low deliberately. This layer's colours are fixed, so at high opacity
-     it acts as a constant veil that averages the scroll-driven gradient beneath
-     it into one flat brown. It is texture, not colour. */
-  opacity: 0.2;
-  transform: translate3d(-12%, -6%, 0) rotate(-5deg) scale(1.05);
-  animation: armor-gradient-drift 22s ease-in-out infinite alternate;
-  will-change: transform;
-  pointer-events: none;
-}
-
-@keyframes armor-gradient-drift {
-  0% {
-    transform: translate3d(-12%, -6%, 0) rotate(-5deg) scale(1.05);
-  }
-  48% {
-    transform: translate3d(3%, 3%, 0) rotate(1deg) scale(1.1);
-  }
-  100% {
-    transform: translate3d(14%, -2%, 0) rotate(5deg) scale(1.04);
-  }
-}
-
-@supports (animation-timeline: scroll()) {
-  @keyframes parallax-bg {
-    to { transform: translateY(-20%); }
-  }
-
-  /* The restrained warm, cool, and deep tints shift with the reader's progress.
-     Low alpha preserves contrast through the translucent panels. */
-  @keyframes bg-tint-journey {
-    0% {
-      --tint-warm: rgba(238, 168, 66, 0.2);
-      --tint-cool: rgba(38, 150, 172, 0.1);
-      --tint-deep: rgba(58, 32, 40, 0.22);
-      --angle-a: 155deg; --angle-b: 25deg; --angle-c: 290deg;
-    }
-    20% {
-      --tint-warm: rgba(232, 118, 44, 0.24);
-      --tint-cool: rgba(46, 96, 150, 0.12);
-      --tint-deep: rgba(44, 26, 38, 0.22);
-      --angle-a: 188deg; --angle-b: 62deg; --angle-c: 322deg;
-    }
-    40% {
-      --tint-warm: rgba(206, 62, 44, 0.2);
-      --tint-cool: rgba(40, 104, 176, 0.13);
-      --tint-deep: rgba(52, 26, 40, 0.24);
-      --angle-a: 222deg; --angle-b: 98deg; --angle-c: 356deg;
-    }
-    60% {
-      --tint-warm: rgba(240, 146, 56, 0.22);
-      --tint-cool: rgba(32, 168, 178, 0.12);
-      --tint-deep: rgba(40, 28, 44, 0.22);
-      --angle-a: 256deg; --angle-b: 134deg; --angle-c: 28deg;
-    }
-    80% {
-      --tint-warm: rgba(214, 84, 40, 0.22);
-      --tint-cool: rgba(46, 96, 186, 0.13);
-      --tint-deep: rgba(48, 26, 40, 0.24);
-      --angle-a: 290deg; --angle-b: 170deg; --angle-c: 62deg;
-    }
-    100% {
-      --tint-warm: rgba(244, 176, 74, 0.2);
-      --tint-cool: rgba(36, 158, 176, 0.11);
-      --tint-deep: rgba(44, 30, 40, 0.22);
-      --angle-a: 324deg; --angle-b: 206deg; --angle-c: 96deg;
-    }
-  }
-
-  .bg-blobs {
-    height: 120vh;
-    animation: parallax-bg linear both, bg-tint-journey linear both;
-    animation-timeline: scroll(root block), scroll(root block);
-  }
+  display: none;
 }
 
 .blob {
@@ -289,38 +170,14 @@ img {
   display: none;
 }
 
-/* Phones run the same travelling backdrop. With the blur filter gone the blobs
-   are plain composited textures, so translating them is affordable here too —
-   the old mobile carve-out existed only because an animated 80px blur was
-   ruinous on a phone GPU. */
 @media (max-width: 768px) {
-  /* On a phone the content column spans the full width, so far less of the
-     backdrop is ever exposed than on desktop — the warm gradient only shows in
-     the gaps between cards. Spread it to three points so some of it lands in a
-     visible gap at any scroll position, and ease off the vignette that was
-     flattening the little that did show. */
   .bg-blobs {
-    /* Same animated tints as desktop — only the geometry changes. Spread wider
-       and skip the vignette, since a phone exposes far less backdrop and the
-       darkening at the edges was flattening what little showed. */
     background:
-      radial-gradient(circle at 82% 4%, var(--tint-warm), transparent 62%),
-      radial-gradient(circle at 6% 58%, var(--tint-cool), transparent 64%),
-      radial-gradient(ellipse at 50% 92%, var(--tint-deep), transparent 70%),
-      radial-gradient(ellipse at center, transparent 70%, rgba(3, 4, 10, 0.12) 100%),
+      linear-gradient(var(--wash-angle-a), var(--wash-warm) 0%, transparent 48%),
+      linear-gradient(var(--wash-angle-b), var(--wash-cool) 0%, transparent 54%),
+      linear-gradient(var(--wash-angle-c), var(--wash-deep) 0%, transparent 58%),
       var(--bg);
   }
-
-  .bg-blobs::after {
-    animation: none;
-    filter: blur(30px);
-    opacity: 0.34;
-  }
-
-
-
-
-
 }
 
 /* Honour the OS "reduce motion" setting: keep the design, drop the movement. */
@@ -2094,6 +1951,15 @@ section[id] {
     padding-bottom: 80px;
   }
 
+  /* Large translucent panels are expensive to recomposite while scrolling on
+     mobile GPUs. The opaque fallback keeps the same depth and contrast without
+     sampling and blurring the backdrop for every card. */
+  .glass-panel {
+    background: rgba(22, 20, 28, 0.94);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
   .hero-section {
     grid-template-columns: 1fr;
     gap: 24px;
@@ -2121,9 +1987,9 @@ section[id] {
     bottom: 0;
     left: 0;
     width: 100%;
-    background: rgba(13, 13, 20, 0.92);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    background: rgba(13, 13, 20, 0.98);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
     border-top: 1px solid var(--border);
     border-radius: 0;
     padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
