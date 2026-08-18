@@ -38,7 +38,7 @@
     <link rel="preload" as="font" href="fonts/inter-latin-variable.woff2" type="font/woff2" crossorigin />
     <link rel="preload" as="font" href="fonts/outfit-latin-variable.woff2" type="font/woff2" crossorigin />
 
-    <link rel="stylesheet" href="styles.css?v=9.8" />
+    <link rel="stylesheet" href="styles.css?v=9.8.2" />
 
     <script type="application/ld+json">
       {
@@ -473,21 +473,18 @@
               </div>
               </article>
 
-              <article class="project-card glass-panel compact reveal" data-category="systems">
-              <div class="project-visual kernel-device" aria-hidden="true">
-                <div class="phone-frame">
-                  <span class="phone-speaker"></span>
-                  <div class="phone-screen">
-                    <span>DROIDIAN</span>
-                    <strong>REALME 6</strong>
-                    <code>arm64 Linux</code>
-                  </div>
-                </div>
-                <div class="kernel-terminal">
-                  <span><i></i> boot.img</span>
-                  <span><i></i> kernel build</span>
-                  <span><i></i> remote services</span>
-                </div>
+              <article class="project-card glass-panel compact has-preview-video reveal" data-category="systems">
+              <div class="project-visual has-image" aria-hidden="true">
+                <video
+                  data-preview-video
+                  src="media/realme6-droidian-demo.mp4"
+                  poster="images/realme6-demo-poster.webp"
+                  muted
+                  loop
+                  playsinline
+                  preload="metadata"
+                ></video>
+                <span class="video-preview-label">Live preview</span>
               </div>
               <div class="project-body">
                 <div class="project-meta">
@@ -627,5 +624,6 @@
     </div>
 
     <script src="script.js?v=5.1"></script>
+    <script src="background.js?v=1.0"></script>
   </body>
 </html>

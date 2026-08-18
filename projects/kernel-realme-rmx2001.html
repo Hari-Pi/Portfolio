@@ -15,17 +15,17 @@
     <meta property="og:url" content="https://hari-pi.com/projects/kernel-realme-rmx2001.html" />
     <meta property="og:title" content="Linux on a Smartphone: Realme 6 | Harikaran Chettiyar" />
     <meta property="og:description" content="A Droidian kernel experiment that repurposes a Realme 6 as a low-cost Linux server." />
-    <meta property="og:image" content="https://hari-pi.com/images/og-portfolio.jpg" />
+    <meta property="og:image" content="https://hari-pi.com/images/realme6-demo-poster.webp" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Linux on a Smartphone: Realme 6 | Harikaran Chettiyar" />
     <meta name="twitter:description" content="A Droidian kernel experiment that repurposes a Realme 6 as a low-cost Linux server." />
-    <meta name="twitter:image" content="https://hari-pi.com/images/og-portfolio.jpg" />
+    <meta name="twitter:image" content="https://hari-pi.com/images/realme6-demo-poster.webp" />
 
     <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="../favicon-192.png" type="image/png" sizes="192x192" />
     <link rel="apple-touch-icon" href="../apple-touch-icon.png" sizes="180x180" />
     <link rel="manifest" href="../site.webmanifest" />
-    <link rel="stylesheet" href="../styles.css?v=9.7" />
+    <link rel="stylesheet" href="../styles.css?v=9.8.2" />
   </head>
   <body>
     <div class="bg-blobs" aria-hidden="true">
@@ -63,6 +63,73 @@
           <div><dt>Scope</dt><dd>Kernel + Linux deployment</dd></div>
           <div><dt>Delivery</dt><dd>Open-source repository</dd></div>
         </dl>
+
+        <section class="media-gallery" aria-label="Realme 6 Droidian demonstration and system proof">
+          <figure class="shot video-shot">
+            <video
+              controls
+              playsinline
+              preload="metadata"
+              poster="../images/realme6-demo-poster.webp"
+              aria-label="Realme 6 running Droidian, followed by SSH verification of the kernel and live Docker services"
+            >
+              <source src="../media/realme6-droidian-demo.mp4" type="video/mp4" />
+              Your browser does not support embedded video. You can
+              <a href="../media/realme6-droidian-demo.mp4">open the Realme 6 demo directly</a>.
+            </video>
+            <figcaption>Real hardware demo - Phosh, rotation, desktop apps, terminal workflows, and remote verification of the live server workload</figcaption>
+          </figure>
+
+          <div class="shot-grid">
+            <figure class="shot">
+              <img
+                src="../images/realme6-system-proof.webp"
+                alt="SSH session showing Droidian on ARM64 with the Linux 4.14.141 realme-rmx2001 kernel and MT6785 processor"
+                width="1920"
+                height="1080"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>System proof - Droidian, ARM64, MT6785, and the device-specific Realme 6 kernel</figcaption>
+            </figure>
+
+            <figure class="shot">
+              <img
+                src="../images/realme6-droidian-gui.webp"
+                alt="Realme 6 running the Droidian app grid beside the Console app with a live process monitor"
+                width="1460"
+                height="1280"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>On-device GUI - mobile apps and a full Linux terminal on reused phone hardware</figcaption>
+            </figure>
+          </div>
+
+          <figure class="shot">
+            <img
+              src="../images/realme6-live-system-monitor.webp"
+              alt="Live btop system monitor over SSH showing the Realme 6 CPU, memory, storage, network, and running Linux processes"
+              width="1920"
+              height="1217"
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption>Live system telemetry - eight CPU cores, memory, storage, network, Phosh, Docker, and device processes</figcaption>
+          </figure>
+
+          <figure class="shot">
+            <img
+              src="../images/realme6-docker-services.webp"
+              alt="Live Docker statistics on the Realme 6 showing TunnelPane alongside Nextcloud, Glance, and Portainer containers"
+              width="1920"
+              height="1080"
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption>Live server workload - TunnelPane running on the phone alongside the rest of the self-hosted stack</figcaption>
+          </figure>
+        </section>
 
         <section class="project-content glass-panel project-content-pad">
           <h2>The Challenge</h2>
@@ -136,5 +203,7 @@
         </div>
       </footer>
     </div>
+    <script src="../project-gallery.js?v=1.1"></script>
+    <script src="../background.js?v=1.0"></script>
   </body>
 </html>
