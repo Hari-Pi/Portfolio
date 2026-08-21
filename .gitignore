@@ -37,3 +37,8 @@
 # Public résumé and its reproducible source
 !resume/build_resume.py
 !resume/Harikaran-Chettiyar-Resume.pdf
+!resume/build_sysadmin_resume.py
+!resume/Harikaran-Chettiyar-Linux-SysAdmin-Resume.pdf
+
+# Local build venv for the resume PDFs
+.resume-venv/

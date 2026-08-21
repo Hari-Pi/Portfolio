@@ -14,11 +14,11 @@
     <meta property="og:type" content="article" />
     <meta property="og:url" content="https://hari-pi.com/projects/kernel-realme-rmx2001.html" />
     <meta property="og:title" content="Linux on a Smartphone: Realme 6 | Harikaran Chettiyar" />
-    <meta property="og:description" content="A Droidian kernel experiment that repurposes a Realme 6 as a low-cost Linux server." />
+    <meta property="og:description" content="A Droidian kernel build that repurposes a Realme 6 as a low-cost Linux server." />
     <meta property="og:image" content="https://hari-pi.com/images/realme6-demo-poster.webp" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Linux on a Smartphone: Realme 6 | Harikaran Chettiyar" />
-    <meta name="twitter:description" content="A Droidian kernel experiment that repurposes a Realme 6 as a low-cost Linux server." />
+    <meta name="twitter:description" content="A Droidian kernel build that repurposes a Realme 6 as a low-cost Linux server." />
     <meta name="twitter:image" content="https://hari-pi.com/images/realme6-demo-poster.webp" />
 
     <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
@@ -59,7 +59,7 @@
 
         <dl class="case-summary glass-panel" aria-label="Project overview">
           <div><dt>Role</dt><dd>Kernel &amp; Systems Developer</dd></div>
-          <div><dt>Ownership</dt><dd>Independent experiment</dd></div>
+          <div><dt>Ownership</dt><dd>Independent build</dd></div>
           <div><dt>Scope</dt><dd>Kernel + Linux deployment</dd></div>
           <div><dt>Delivery</dt><dd>Open-source repository</dd></div>
         </dl>
@@ -136,7 +136,7 @@
           <p>
             The Realme 6 is unsupported hardware for running a conventional mobile Linux environment.
             This project investigates what it takes to adapt the device kernel, debug the boot path,
-            and repurpose existing phone hardware as a low-cost Linux experimentation platform.
+            and repurpose existing phone hardware as a low-cost Linux server platform.
           </p>
 
           <h3>My Role</h3>
@@ -150,8 +150,8 @@
           <ul>
             <li><strong>Device kernel work:</strong> A modified Realme 6 kernel repository aimed at Droidian compatibility.</li>
             <li><strong>Boot debugging:</strong> Investigation across recovery, partitions, kernel logs, and deployment failures.</li>
-            <li><strong>Linux environment:</strong> A device-side environment for experimenting with services on reused hardware.</li>
-            <li><strong>Remote access:</strong> Containerized services and secure connectivity through Docker, CasaOS, and Tailscale.</li>
+            <li><strong>Linux environment:</strong> A device-side environment for running services on reused hardware.</li>
+            <li><strong>Remote access:</strong> Containerized services on per-service subdomains, with Glances for a unified system view and Tailscale for secure connectivity.</li>
           </ul>
 
           <h3>Key Decisions</h3>
@@ -176,7 +176,7 @@
           <ul>
             <li><strong>Kernel:</strong> C, Linux kernel, Makefile</li>
             <li><strong>Mobile Linux:</strong> Droidian, ADB, recovery tooling</li>
-            <li><strong>Services:</strong> Docker, CasaOS, Tailscale</li>
+            <li><strong>Services:</strong> Docker, Glances, Tailscale</li>
           </ul>
         </section>
 
