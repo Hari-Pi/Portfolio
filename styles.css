@@ -344,8 +344,8 @@ section[id] {
   flex-direction: column;
   width: 100%;
   max-width: 520px;
-  align-self: stretch;
-  margin: clamp(8px, 1.5vw, 10px) 0 clamp(8px, 1.5vw, 10px) auto;
+  align-self: center;
+  margin-left: auto;
   padding: clamp(28px, 3.2vw, 36px);
   background:
     radial-gradient(circle at top right, rgba(52, 120, 212, 0.16), transparent 52%),
@@ -429,6 +429,10 @@ section[id] {
 .hero-profile:hover .about-avatar {
   transform: translateY(-2px) scale(1.025);
   border-color: var(--border-hover);
+}
+
+.hero-profile .about-links {
+  margin-top: 0;
 }
 
 /* The systems map keeps its pointer response and animated layers below the
