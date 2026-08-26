@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // --- Hero system map pointer response ---
+  // --- Systems map pointer response ---
   const heroSystem = document.querySelector(".hero-system");
   const hasPrecisePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // --- Park the hero system map's animations once it scrolls away ---
+  // --- Park the systems map's animations once it scrolls away ---
   if (heroSystem && "IntersectionObserver" in window) {
     const idleObserver = new IntersectionObserver(
       ([entry]) => heroSystem.classList.toggle("is-idle", !entry.isIntersecting),

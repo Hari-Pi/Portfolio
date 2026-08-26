@@ -337,8 +337,102 @@ section[id] {
   max-width: 690px;
 }
 
-/* A code-native map of the areas Hari works across. It uses only transforms,
-   so the pointer response stays cheap and degrades cleanly without JS. */
+/* The hero leads with Hari's face and a concise profile, so visitors meet the
+   person behind the work before scanning the project details. */
+.hero-profile {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 520px;
+  align-self: stretch;
+  margin: clamp(8px, 1.5vw, 10px) 0 clamp(8px, 1.5vw, 10px) auto;
+  padding: clamp(28px, 3.2vw, 36px);
+  background:
+    radial-gradient(circle at top right, rgba(52, 120, 212, 0.16), transparent 52%),
+    var(--surface);
+}
+
+.hero-profile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.hero-profile-kicker,
+.hero-profile-location {
+  color: var(--accent-gold);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hero-profile-location {
+  display: inline-flex;
+  align-items: center;
+  color: var(--muted);
+  font-family: inherit;
+  font-size: 0.68rem;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  white-space: nowrap;
+}
+
+.availability-status i {
+  width: 8px;
+  height: 8px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--accent-2);
+  box-shadow: 0 0 12px var(--accent-2);
+}
+
+.hero-profile-facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 16px 0 20px;
+}
+
+.hero-profile-facts div {
+  min-width: 0;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: rgba(13, 13, 20, 0.34);
+}
+
+.hero-profile-facts dt {
+  margin-bottom: 6px;
+  color: var(--muted);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hero-profile-facts dd {
+  color: var(--ink);
+  font-size: 0.84rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.hero-profile .about-identity {
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.hero-profile:hover .about-avatar {
+  transform: translateY(-2px) scale(1.025);
+  border-color: var(--border-hover);
+}
+
+/* The systems map keeps its pointer response and animated layers below the
+   profile-led hero. */
 .hero-system {
   --system-rx: 0deg;
   --system-ry: 0deg;
@@ -743,7 +837,7 @@ section[id] {
 
 .about-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.45fr) minmax(300px, 0.75fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 24px;
   align-items: stretch;
 }
@@ -751,6 +845,17 @@ section[id] {
 .about-copy,
 .about-card {
   padding: clamp(28px, 4vw, 44px);
+}
+
+.about-system {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+}
+
+.about-system .hero-system {
+  width: 100%;
+  margin: 0 auto;
 }
 
 /* Recruiter-facing chronology: compact enough to scan before the projects. */
@@ -1923,6 +2028,11 @@ section[id] {
     max-width: 760px;
   }
 
+  .hero-profile {
+    width: min(100%, 600px);
+    margin: 0 auto;
+  }
+
   .hero-system {
     width: min(100%, 600px);
     margin: 0 auto;
@@ -2174,6 +2284,10 @@ section[id] {
   .system-stage {
     min-height: 286px;
     border-radius: 22px;
+  }
+
+  .hero-profile-facts {
+    grid-template-columns: 1fr;
   }
 
   .system-core {
