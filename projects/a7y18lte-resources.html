@@ -8,7 +8,7 @@
       document.documentElement.classList.add("js");
     </script>
     <meta name="view-transition" content="same-origin" />
-    <meta name="description" content="Custom kernels, recoveries, and flashing resources for the Samsung Galaxy A7 2018 (SM-A750x)." />
+    <meta name="description" content="A self-built custom kernel and de-googled ROM for the Samsung Galaxy A7 2018 (SM-A750x), plus CI-built recoveries and GSI flashing guides." />
     <title>a7y18lte-Resources | Harikaran Chettiyar</title>
 
 
@@ -37,14 +37,17 @@
         <section class="project-hero glass-panel">
           <div class="project-meta project-hero-meta">
             <span class="tag">Android</span>
-            <span class="tag">Open source</span>
+            <span class="tag">Device kernel</span>
+            <span class="tag highlight">Open source</span>
           </div>
           <h1>a7y18lte-Resources</h1>
           <p class="description">
-            Custom kernels, recoveries, and flashing resources for the Samsung Galaxy A7 2018 (SM-A750x).
+            A self-built custom kernel and de-googled stock ROM for the Samsung Galaxy A7 2018 (SM-A750x), with
+            CI-built TWRP/PBRP recoveries and guides for flashing GSIs.
           </p>
           <div class="hero-actions">
             <a class="button primary" href="https://github.com/Hari-Pi/a7y18lte-Resources" target="_blank" rel="noopener">View on GitHub</a>
+            <a class="button secondary" href="https://github.com/Hari-Pi/kernel_samsung_a7y18lte" target="_blank" rel="noopener">Kernel Source</a>
           </div>
         </section>
 
@@ -54,22 +57,32 @@
 
         <section class="project-content glass-panel project-content-pad">
           <h2>About the project</h2>
-          <p>a7y18lte-Resources is a dedicated hub for customizing the Samsung Galaxy A7 2018 (SM-A750x). It provides advanced users with custom kernels, de-googled stock ROMs, TWRP/PBRP recovery images, and extensive guides for flashing GSIs (Generic System Images) to breathe new life into the device.</p>
+          <p>
+            A second, independent device-kernel project alongside the <a href="kernel-realme-rmx2001.html">Realme 6 Droidian
+            build</a>: a custom kernel and de-googled stock ROM built for the Samsung Galaxy A7 2018 (SM-A750x), plus
+            CI-built recoveries and install guides that make the resulting images usable by other owners of the device.
+          </p>
 
-          <h2 style="margin-top: 32px;">Key Features</h2>
+          <h2 style="margin-top: 32px;">What I built</h2>
           <ul>
-            <li>Custom Boot Kernels for OneUI and GSIs</li>
-            <li>De-googled Android 10 Stock ROM</li>
-            <li>TWRP and PBRP custom recovery builds</li>
-            <li>Detailed TrebleDroid, /e/ OS, and LineageOS GSI guides</li>
-            <li>Magisk root upgrade methodologies</li>
+            <li><strong>Custom kernel:</strong> A modified Android 10 kernel (<a href="https://github.com/Hari-Pi/kernel_samsung_a7y18lte" target="_blank" rel="noopener">kernel_samsung_a7y18lte</a>) with device-specific fixes, compiled and shipped as flashable <code>boot.img</code> releases, compatible with both stock OneUI and GSIs.</li>
+            <li><strong>De-googled stock ROM:</strong> A de-googled Android 10 OneUI 2.0 build (<code>Stockrom-Degoogled.zip</code>) distributed alongside dm-verity handling instructions to keep it bootable.</li>
+            <li><strong>Recovery builds:</strong> TWRP and PBRP recoveries built through my own <a href="https://github.com/Hari-Pi/Action-TWRP-Builder" target="_blank" rel="noopener">CI recovery-builder pipeline</a>, using a device tree sourced from <a href="https://github.com/AKSharma87/TWRP_device_samsung_a7y18lte" target="_blank" rel="noopener">AKSharma87's TWRP_device_samsung_a7y18lte</a>.</li>
+          </ul>
+
+          <h2 style="margin-top: 32px;">What I documented</h2>
+          <ul>
+            <li>Flashing guides for TrebleDroid, /e/ OS, and LineageOS GSIs</li>
+            <li>A step-by-step Magisk upgrade path that avoids a known bootloop on this device</li>
+            <li>Low-level partition recovery using <code>parted</code>, for the "cannot mount /preload" failure mode</li>
           </ul>
 
           <h2 style="margin-top: 32px;">Tech Stack</h2>
           <div class="tags-container" style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px;">
-            <span class="tag">Android ROMs</span>
+            <span class="tag">Android Kernel</span>
             <span class="tag">Linux Kernel</span>
             <span class="tag">Shell</span>
+            <span class="tag">GitHub Actions</span>
             <span class="tag">TWRP</span>
           </div>
         </section>

@@ -8,17 +8,17 @@
       document.documentElement.classList.add("js");
     </script>
     <meta name="view-transition" content="same-origin" />
-    <meta name="description" content="A modified Linux kernel for running Droidian on the Realme 6 and repurposing the phone as a low-cost Linux server." />
+    <meta name="description" content="A patched, cross-compiled Linux kernel for Droidian on the Realme 6, shipped through a Debian-packaged, checksum-verified release workflow." />
     <title>Linux on a Smartphone: Realme 6 | Harikaran Chettiyar</title>
     <link rel="canonical" href="https://hari-pi.com/projects/kernel-realme-rmx2001.html" />
     <meta property="og:type" content="article" />
     <meta property="og:url" content="https://hari-pi.com/projects/kernel-realme-rmx2001.html" />
     <meta property="og:title" content="Linux on a Smartphone: Realme 6 | Harikaran Chettiyar" />
-    <meta property="og:description" content="A Droidian kernel build that repurposes a Realme 6 as a low-cost Linux server." />
+    <meta property="og:description" content="A patched, cross-compiled Droidian kernel for the Realme 6, packaged and released as versioned Debian packages." />
     <meta property="og:image" content="https://hari-pi.com/images/realme6-demo-poster.webp" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Linux on a Smartphone: Realme 6 | Harikaran Chettiyar" />
-    <meta name="twitter:description" content="A Droidian kernel build that repurposes a Realme 6 as a low-cost Linux server." />
+    <meta name="twitter:description" content="A patched, cross-compiled Droidian kernel for the Realme 6, packaged and released as versioned Debian packages." />
     <meta name="twitter:image" content="https://hari-pi.com/images/realme6-demo-poster.webp" />
 
     <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
@@ -46,14 +46,16 @@
           <div class="project-meta project-hero-meta">
             <span class="tag">C</span>
             <span class="tag">Device kernel</span>
+            <span class="tag highlight">Debian packaging</span>
           </div>
           <h1>Linux on a Smartphone: Realme 6</h1>
           <p class="description">
-            A modified Linux kernel for running Droidian on the Realme 6 (RMX2001) and repurposing the phone as a low-cost Linux server.
+            Patched, cross-compiled, and flashed a custom Linux kernel to run Droidian on the Realme 6 (RMX2001), then packaged
+            subsequent updates as versioned Debian packages &mdash; repurposing the phone as a low-cost Linux server.
           </p>
           <div class="hero-actions">
             <a class="button primary" href="https://github.com/Hari-Pi/kernel_realme_RMX2001" target="_blank" rel="noopener">View on GitHub</a>
-            <a class="button secondary" href="https://github.com/Hari-Pi/kernel_realme_RMX2001/blob/droidian/RMX2001_DROIDIAN_PORTING_STATUS.md" target="_blank" rel="noopener">Porting Status</a>
+            <a class="button secondary" href="https://github.com/Hari-Pi/kernel_realme_RMX2001/blob/droidian/helpers/KERNEL-BUILD-AND-TEST.md" target="_blank" rel="noopener">Build &amp; Validation Process</a>
           </div>
         </section>
 
@@ -141,15 +143,20 @@
 
           <h3>My Role</h3>
           <p>
-            I worked across kernel configuration and builds, device boot and recovery workflows,
-            partition-level troubleshooting, and Linux service deployment. Debugging relied on ADB
-            and device logs rather than a standard desktop installation path.
+            I patched the Linux 4.14.141 device kernel for Droidian compatibility, cross-compiled it
+            with the pinned Droidian toolchain, and flashed it to the device. Debugging relied on ADB
+            and device logs rather than a standard desktop installation path. Once the device was
+            stable, I moved from one-off flashing to a repeatable release pipeline: kernel updates are
+            now built and shipped as versioned Debian packages instead of a manual flash each time.
           </p>
 
           <h3>What I Delivered</h3>
           <ul>
-            <li><strong>Device kernel work:</strong> A modified Realme 6 kernel repository aimed at Droidian compatibility.</li>
-            <li><strong>Boot debugging:</strong> Investigation across recovery, partitions, kernel logs, and deployment failures.</li>
+            <li><strong>Kernel patching &amp; cross-compilation:</strong> Patched the RMX2001 device kernel (Linux 4.14.141, forked from the device's open-source kernel tree) for Droidian hardware compatibility and cross-compiled it with the pinned Droidian toolchain.</li>
+            <li><strong>Reproducible, guarded builds:</strong> A Dockerized build script (<code>helpers/build-magiskboot-deb.sh</code>) compiles the kernel, repacks it into a validated stock boot image with MagiskBoot, and byte-compares the ramdisk, DTB, and kernel DTB against the original before packaging &mdash; so a build can only touch the kernel, nothing else in the boot image.</li>
+            <li><strong>Debian packaging:</strong> Each successful build produces a versioned <code>linux-bootimage-*.deb</code> (installed with <code>apt install</code>) alongside a manifest of SHA-256 checksums for the package, boot image, and raw kernel &mdash; replacing the earlier flash-and-hope cycle with an auditable release.</li>
+            <li><strong>Pre-install auditing:</strong> Every package is inspected with <code>dpkg-deb --info/--contents/--control</code> and its maintainer scripts sanity-checked before install, since the package writes directly to a boot partition.</li>
+            <li><strong>Device validation gate:</strong> A documented checklist (<code>uname</code>, <code>systemctl --failed</code>, <code>journalctl</code>, <code>dmesg</code>, plus display/touch/power/Wi-Fi/SSH checks across repeated cold boots) has to pass before a build is considered publishable.</li>
             <li><strong>Linux environment:</strong> A device-side environment for running services on reused hardware.</li>
             <li><strong>Remote access:</strong> Containerized services on per-service subdomains, with Glances for a unified system view and Tailscale for secure connectivity.</li>
           </ul>
@@ -161,6 +168,12 @@
             low-cost environment that exposes real kernel and deployment problems.
           </p>
           <p>
+            <strong>Never trust a build until the device does.</strong> A structurally valid boot image
+            isn't treated as deployable on its own &mdash; verified boot/recovery backups are kept
+            separately, one kernel change is tested at a time, and a build only gets published after it
+            survives repeated real-device reboots.
+          </p>
+          <p>
             <strong>Debug from evidence.</strong> Boot logs, recovery behavior, partition state, and
             repeatable build output drive each iteration instead of relying on opaque trial and error.
           </p>
@@ -168,13 +181,17 @@
           <h3>Outcome</h3>
           <p>
             The repository documents an open, device-specific path toward running Droidian and Linux
-            services on the Realme 6. More importantly, it demonstrates hands-on work below the
-            application layer: kernels, boot flows, hardware constraints, and remote administration.
+            services on the Realme 6, backed by a reproducible build-package-install workflow rather
+            than a one-off port. It demonstrates hands-on work below the application layer: kernel
+            patching and cross-compilation, boot-image packaging, release auditing, and remote
+            administration.
           </p>
 
           <h3>Tech Stack</h3>
           <ul>
-            <li><strong>Kernel:</strong> C, Linux kernel, Makefile</li>
+            <li><strong>Kernel:</strong> C, Linux 4.14.141, Makefile, pinned Droidian cross-compilation toolchain</li>
+            <li><strong>Packaging:</strong> Debian packaging (dpkg, apt), MagiskBoot, SHA-256 checksummed release manifests</li>
+            <li><strong>Build tooling:</strong> Docker-based reproducible builds, shell</li>
             <li><strong>Mobile Linux:</strong> Droidian, ADB, recovery tooling</li>
             <li><strong>Services:</strong> Docker, Glances, Tailscale</li>
           </ul>

@@ -46,6 +46,7 @@
           <div class="project-meta project-hero-meta">
             <span class="tag">Flutter</span>
             <span class="tag">Mobile</span>
+            <span class="tag">CI/CD</span>
             <span class="tag highlight">Pre-release</span>
           </div>
           <h1>Currency Converter</h1>
@@ -164,11 +165,20 @@
             testing before a planned release on the Google Play Store.
           </p>
 
+          <h3>Release Automation</h3>
+          <p>
+            Every push to <code>main</code> triggers a GitHub Actions pipeline that builds a signed
+            release APK (Flutter + Java/Zulu toolchain), decodes the release keystore from a repository
+            secret, and publishes it as a versioned GitHub Release &mdash; so a working build is always
+            one push away without a manual export.
+          </p>
+
           <h3>Tech Stack</h3>
           <ul>
             <li><strong>Application:</strong> Flutter, Dart, Provider</li>
             <li><strong>Data:</strong> Frankfurter API, HTTP integration</li>
             <li><strong>Local state:</strong> Shared Preferences and cached rates</li>
+            <li><strong>Release automation:</strong> GitHub Actions, signed APK builds, versioned GitHub Releases</li>
             <li><strong>Release plan:</strong> Private development with a future Google Play Store launch</li>
           </ul>
         </section>

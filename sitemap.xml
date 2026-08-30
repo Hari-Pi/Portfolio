@@ -2,26 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://hari-pi.com/</loc>
-    <lastmod>2026-08-13</lastmod>
+    <lastmod>2026-08-30</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://hari-pi.com/projects/a7y18lte-resources.html</loc>
-    <lastmod>2026-08-13</lastmod>
+    <lastmod>2026-08-30</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://hari-pi.com/projects/averra-data.html</loc>
-    <lastmod>2026-08-13</lastmod>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://hari-pi.com/projects/blinkhub.html</loc>
-    <lastmod>2026-08-13</lastmod>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://hari-pi.com/projects/cargo.html</loc>
     <lastmod>2026-08-13</lastmod>
     <priority>0.7</priority>
   </url>
@@ -37,12 +27,12 @@
   </url>
   <url>
     <loc>https://hari-pi.com/projects/currency-converter.html</loc>
-    <lastmod>2026-08-13</lastmod>
+    <lastmod>2026-08-30</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://hari-pi.com/projects/kernel-realme-rmx2001.html</loc>
-    <lastmod>2026-08-13</lastmod>
+    <lastmod>2026-08-30</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
@@ -51,17 +41,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://hari-pi.com/projects/next-anime-site.html</loc>
-    <lastmod>2026-08-13</lastmod>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://hari-pi.com/projects/petopt.html</loc>
-    <lastmod>2026-08-13</lastmod>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://hari-pi.com/projects/ransomware-recovery-guide.html</loc>
     <lastmod>2026-08-13</lastmod>
     <priority>0.7</priority>
   </url>
