@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0f0d13" />
+    <script>
+      document.documentElement.classList.add("js");
+    </script>
+    <meta name="view-transition" content="same-origin" />
+    <meta name="description" content="TunnelTerm — a containerized web terminal for a Linux host, running ttyd behind an authenticated Nginx gateway and reaching the host through a loopback-restricted SSH key, with an optional Cloudflare Tunnel for internet access." />
+    <title>TunnelTerm | Harikaran Chettiyar</title>
+    <link rel="canonical" href="https://hari-pi.com/projects/tunnelterm.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://hari-pi.com/projects/tunnelterm.html" />
+    <meta property="og:title" content="TunnelTerm | Harikaran Chettiyar" />
+    <meta property="og:description" content="A containerized web terminal with an authenticated gateway, a loopback-restricted SSH key, and generated cross-platform CLI launchers over Cloudflare Tunnel." />
+    <meta property="og:image" content="https://hari-pi.com/images/tunnelterm-card.webp" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="TunnelTerm | Harikaran Chettiyar" />
+    <meta name="twitter:description" content="A containerized web terminal with an authenticated gateway, a loopback-restricted SSH key, and generated cross-platform CLI launchers over Cloudflare Tunnel." />
+    <meta name="twitter:image" content="https://hari-pi.com/images/tunnelterm-card.webp" />
+
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="../favicon-192.png" type="image/png" sizes="192x192" />
+    <link rel="apple-touch-icon" href="../apple-touch-icon.png" sizes="180x180" />
+    <link rel="manifest" href="../site.webmanifest" />
+    <link rel="stylesheet" href="../styles.css?v=9.8.2" />
+  </head>
+  <body>
+    <div class="bg-blobs" aria-hidden="true">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="blob blob-3"></div>
+    </div>
+
+    <div class="site-wrapper">
+      <main id="top" class="detail-main">
+        <div class="project-detail-header">
+          <a href="../index.html#projects" class="back-link">
+            Back to Portfolio
+          </a>
+        </div>
+
+        <section class="project-hero glass-panel">
+          <div class="project-meta project-hero-meta">
+            <span class="tag">Go</span>
+            <span class="tag">Docker</span>
+            <span class="tag">Nginx</span>
+            <span class="tag highlight">Open source</span>
+          </div>
+          <h1>TunnelTerm</h1>
+          <p class="description">
+            A containerized web terminal for a Linux host &mdash; ttyd behind an authenticated
+            Nginx gateway, reaching the host through a loopback-restricted SSH key, with an
+            optional Cloudflare Tunnel so the gateway can be published without opening a router
+            port.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="https://github.com/Hari-Pi/TunnelTerm" target="_blank" rel="noopener">View on GitHub</a>
+          </div>
+        </section>
+
+        <dl class="case-summary glass-panel" aria-label="Project overview">
+          <div><dt>Role</dt><dd>Full-stack Developer</dd></div>
+          <div><dt>Ownership</dt><dd>Independent build</dd></div>
+          <div><dt>Scope</dt><dd>Gateway, auth service, containers, CLI launchers</dd></div>
+          <div><dt>Delivery</dt><dd>Open source, MIT</dd></div>
+        </dl>
+
+        <section class="media-gallery" aria-label="TunnelTerm CLI launcher, terminal session, and system monitor">
+          <figure class="shot video-shot">
+            <video
+              controls
+              playsinline
+              preload="metadata"
+              poster="../images/tunnelterm-card.webp"
+              aria-label="Terminal demonstration of the TunnelTerm CLI launcher fetching cloudflared, authenticating over Cloudflare Tunnel, and landing in the persistent host session, followed by the same terminal reached through the browser login page"
+            >
+              <source src="../media/tunnelterm-demo.mp4" type="video/mp4" />
+              Your browser does not support embedded video. You can
+              <a href="../media/tunnelterm-demo.mp4">open the TunnelTerm demo directly</a>.
+            </video>
+            <figcaption>Live demo &mdash; the CLI launcher connecting over Cloudflare Tunnel, then the same host reached through the authenticated browser login</figcaption>
+          </figure>
+
+          <figure class="shot">
+            <img
+              src="../images/tunnelterm-btop.webp"
+              alt="btop resource monitor running inside a TunnelTerm session, showing CPU, memory, disk, network, and process panes over an SSH connection to a Linux host"
+              width="1700"
+              height="1077"
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption>A full system monitor running fine over the tunneled SSH session, the same as any local terminal</figcaption>
+          </figure>
+
+          <figure class="shot">
+            <img
+              src="../images/tunnelterm-session.webp"
+              alt="TunnelTerm browser session showing a persistent tmux prompt after reattaching, with the previous command history still intact"
+              width="1700"
+              height="1077"
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption>The tmux session persists across reconnects &mdash; closing the tab and coming back drops into the same shell</figcaption>
+          </figure>
+        </section>
+
+        <section class="project-content glass-panel project-content-pad">
+          <h2>The Challenge</h2>
+          <p>
+            Reaching a home or self-hosted Linux box from a browser usually means either exposing
+            SSH directly to the internet, or accepting a terminal-in-a-tab tool that hands out real
+            shell access without much thought for the auth layer in front of it. Neither is
+            something to leave running unattended.
+          </p>
+          <p>
+            TunnelTerm keeps the shell itself off the public internet entirely. ttyd and the SSH
+            connection it wraps stay bound to loopback; the only thing reachable from outside is an
+            Nginx gateway that checks a signed session on every request &mdash; page loads and the
+            WebSocket upgrade alike &mdash; before it will proxy anything through.
+          </p>
+
+          <h3>My Role</h3>
+          <p>
+            I built the whole stack: the Go authentication service, the Nginx gateway
+            configuration, the container images and their entrypoints, the generated CLI launchers
+            for four platforms, and the setup script that turns a bare host into a running
+            deployment.
+          </p>
+
+          <h3>What I Delivered</h3>
+          <ul>
+            <li><strong>Authenticated gateway:</strong> Nginx's <code>auth_request</code> module gates every page and WebSocket upgrade behind a single internal call to the auth service &mdash; no route bypasses it.</li>
+            <li><strong>Standalone Go auth service:</strong> bcrypt password check, constant-time username comparison, an HMAC-signed session cookie, and no session store to lose or leak.</li>
+            <li><strong>Persistent host sessions:</strong> ttyd runs <code>tmux new -A</code> over SSH, so a session survives a closed tab and the next login drops back into the same shell.</li>
+            <li><strong>Generated CLI launchers:</strong> a setup script produces POSIX and PowerShell scripts that install <code>cloudflared</code> on demand (including Termux's native package on Android) and tunnel SSH through Cloudflare, so CLI access needs no client-side pre-installation beyond an SSH client.</li>
+            <li><strong>Container hardening:</strong> read-only root filesystems, <code>cap_drop: ALL</code>, <code>no-new-privileges</code>, and non-root users across every service, with none of them mounting the Docker socket, the host root filesystem, or host process namespaces.</li>
+            <li><strong>Shell theming:</strong> matching Starship, tmux, and <code>dircolors</code> configs installable on the host, plus a shared xterm palette so the browser terminal and a locally attached ttyd service look identical.</li>
+          </ul>
+
+          <h3>Key Decisions</h3>
+          <p>
+            <strong>One auth check in front of everything.</strong> The gateway's only protected
+            location block calls <code>auth_request /_auth</code>, which forwards the request
+            cookie to the Go service's <code>/verify</code> endpoint. A 401 redirects to
+            <code>/login</code>; anything else proxies straight through to ttyd, WebSocket upgrade
+            headers included. There is exactly one place authentication can fail open, and it fails
+            closed.
+          </p>
+          <p>
+            <strong>A restricted key, not a general-purpose one.</strong> The terminal container
+            reaches the host as an ordinary SSH client with <code>BatchMode</code>,
+            <code>IdentitiesOnly</code>, password authentication disabled, and a pinned
+            <code>known_hosts</code> file. The setup script installs the container's key on the
+            host with OpenSSH's <code>restrict,from="127.0.0.1,::1"</code> &mdash; it only
+            authenticates from loopback, and forwarding, agent access, and X11 are all off, so the
+            key is useless to anything except the container it was generated for.
+          </p>
+          <p>
+            <strong>Signed cookies, no session table.</strong> The session cookie carries the
+            username and an expiry, base64-encoded and HMAC-SHA256 signed with a key that never
+            leaves the auth container. Verifying a session is one signature check, with nothing to
+            look up and nothing to clean up when it expires.
+          </p>
+          <p>
+            <strong>Rate limiting sized for a single-tenant service.</strong> Failed logins are
+            tracked per client IP in a bounded in-memory map (capped at 4096 entries, a 15-minute
+            window, five attempts before a lockout), which is enough for a service with one
+            legitimate user and avoids the operational weight of an external store.
+          </p>
+
+          <h3>Hardening</h3>
+          <ul>
+            <li>ttyd binds to loopback only (<code>-i lo</code>) and the terminal, gateway, and auth containers all listen on <code>127.0.0.1</code>; nothing is reachable except through the gateway.</li>
+            <li>Bcrypt credential hashing, an HMAC-signed session cookie, and a 250&nbsp;ms delay plus per-IP throttling on failed logins.</li>
+            <li>A strict <code>Content-Security-Policy</code>, <code>no-store</code> caching, <code>X-Frame-Options: DENY</code>, and same-origin checks on every state-changing request.</li>
+            <li>Every container runs read-only, non-root, with all Linux capabilities dropped and <code>no-new-privileges</code> set.</li>
+            <li>The SSH key handed to the terminal container is installed with <code>restrict,from="127.0.0.1,::1"</code>, so it only works from loopback and can't be used for forwarding or agent access.</li>
+          </ul>
+
+          <h3>Outcome</h3>
+          <p>
+            TunnelTerm is open source under MIT and deploys with a single setup script and
+            <code>docker compose up -d --build</code>. It's the terminal I actually use to reach my
+            own boxes &mdash; from a browser through the authenticated gateway, or from a CLI
+            launcher that tunnels SSH through Cloudflare without ever opening a port.
+          </p>
+        </section>
+
+        <nav class="project-pagination glass-panel" aria-label="Featured project navigation">
+          <a href="tunnelpane.html">
+            <span>Previous project</span>
+            <strong>TunnelPane</strong>
+          </a>
+          <a class="next" href="syncplayer.html">
+            <span>Next project</span>
+            <strong>Sync Player</strong>
+          </a>
+        </nav>
+      </main>
+
+      <footer class="site-footer">
+        <div class="glass-panel footer-content">
+          <span>Harikaran Chettiyar, Full-stack Software Engineer based in Pune, India</span>
+          <div class="footer-links">
+            <a href="mailto:harikaran.chettiyar@gmail.com">Email</a>
+            <a href="../resume/Harikaran-Chettiyar-Resume.pdf" download>Resume</a>
+            <a href="https://github.com/Hari-Pi" target="_blank" rel="noopener">GitHub</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <script src="../project-gallery.js?v=1.1"></script>
+    <script src="../background.js?v=1.0"></script>
+  </body>
+</html>
