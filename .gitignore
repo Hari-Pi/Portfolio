@@ -42,5 +42,8 @@
 !resume/build_sysadmin_resume.py
 !resume/Harikaran-Chettiyar-Linux-SysAdmin-Resume.pdf
 
+# Public services brochure
+!services/Harikaran-Chettiyar-Software-Services.pdf
+
 # Local build venv for the resume PDFs
 .resume-venv/
