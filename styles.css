@@ -362,9 +362,8 @@ section[id] {
 .hero-profile-kicker,
 .hero-profile-location {
   color: var(--accent-gold);
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 0.68rem;
-  font-weight: 800;
+  font-size: 0.8rem;
+  font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -374,8 +373,9 @@ section[id] {
   align-items: center;
   color: var(--muted);
   font-family: inherit;
-  font-size: 0.68rem;
-  letter-spacing: 0.02em;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0;
   text-transform: none;
   white-space: nowrap;
 }
@@ -390,39 +390,97 @@ section[id] {
 }
 
 .hero-profile-facts {
-  display: grid;
+  display: flex;
   flex: 1;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  grid-auto-rows: 1fr;
-  gap: 10px;
-  margin: 20px 0 24px;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  margin: 12px -12px 16px;
 }
 
 .hero-profile-facts div {
-  display: flex;
-  min-width: 0;
-  flex-direction: column;
-  justify-content: center;
-  padding: 16px;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  background: rgba(13, 13, 20, 0.34);
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
+  column-gap: 14px;
+  align-items: center;
+  padding: 10px 12px;
+  border-radius: 14px;
+  transition: background 0.2s ease;
+}
+
+@media (hover: hover) {
+  .hero-profile-facts div:hover {
+    background: rgba(255, 255, 255, 0.04);
+  }
+}
+
+.hero-profile-facts div::before {
+  content: "";
+  grid-row: 1 / 3;
+  width: 44px;
+  height: 44px;
+  border-radius: 13px;
+  /* Same gradient and glow as the HC brand mark */
+  background:
+    var(--fact-icon) center / 22px no-repeat,
+    linear-gradient(135deg, var(--accent-1), var(--accent-2));
+  box-shadow: 0 2px 14px rgba(52, 120, 212, 0.2);
+}
+
+/* Icons follow the order of the facts in the markup */
+.hero-profile-facts div:nth-child(1) {
+  --fact-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23070914' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='16 18 22 12 16 6'/%3E%3Cpolyline points='8 6 2 12 8 18'/%3E%3C/svg%3E");
+}
+
+.hero-profile-facts div:nth-child(2) {
+  --fact-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23070914' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpolygon points='16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88'/%3E%3C/svg%3E");
+}
+
+.hero-profile-facts div:nth-child(3) {
+  --fact-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23070914' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='2' y='7' width='20' height='14' rx='2'/%3E%3Cpath d='M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16'/%3E%3C/svg%3E");
+}
+
+.hero-profile-facts div:nth-child(4) {
+  --fact-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23070914' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cline x1='2' y1='12' x2='22' y2='12'/%3E%3Cpath d='M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z'/%3E%3C/svg%3E");
 }
 
 .hero-profile-facts dt {
-  margin-bottom: 8px;
-  color: var(--muted);
-  font-size: 0.74rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  grid-column: 2;
+  margin-bottom: 2px;
+  color: var(--accent-3);
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.35;
 }
 
 .hero-profile-facts dd {
+  grid-column: 2;
+  margin: 0;
   color: var(--ink);
-  font-size: 0.94rem;
+  font-size: 0.97rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.hero-profile-facts strong {
+  color: var(--accent-2);
   font-weight: 700;
-  line-height: 1.35;
+}
+
+.hero-profile-facts .fact-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 3px;
+}
+
+.fact-chips span {
+  padding: 2px 9px;
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.05);
+  font-size: 0.8rem;
+  line-height: 1.5;
 }
 
 .hero-profile .about-identity {
@@ -2263,23 +2321,6 @@ section[id] {
     font-size: 0.9rem;
   }
 
-  .hero-profile-facts {
-    margin: 16px 0 20px;
-  }
-
-  .hero-profile-facts div {
-    padding: 12px;
-  }
-
-  .hero-profile-facts dt {
-    margin-bottom: 6px;
-    font-size: 0.7rem;
-  }
-
-  .hero-profile-facts dd {
-    font-size: 0.84rem;
-  }
-
   .hero-profile .about-links a {
     min-height: 44px;
     padding: 10px 16px;
@@ -2598,10 +2639,6 @@ section[id] {
   .system-stage {
     min-height: 286px;
     border-radius: 22px;
-  }
-
-  .hero-profile-facts {
-    grid-template-columns: 1fr;
   }
 
   .system-core {
