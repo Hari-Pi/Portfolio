@@ -19,6 +19,9 @@
 !images/og-portfolio.jpg
 !images/hari-portrait-original-2026.png
 
+# Client logos are kept as their original PNG files
+!images/clients/*.png
+
 # Don't ignore public project demo videos
 !media/sys-config-demo.mp4
 !media/tunnelpane-demo.mp4

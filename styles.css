@@ -1849,34 +1849,130 @@ section[id] {
   padding: 56px 0 0;
 }
 
-.clients-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 12px;
+.clients-section .section-heading p:not(.eyebrow) {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 1.05rem;
 }
 
-.clients-grid a {
+.clients-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.client-card {
   display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding: 18px 20px;
+  align-items: center;
+  gap: 16px;
+  min-height: 96px;
+  padding: 20px 24px;
+  transition: transform 0.2s ease, background 0.2s ease,
+              border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.client-card i {
+  display: grid;
+  /* Keeps tall originals inside the tile instead of growing the track */
+  grid-template: minmax(0, 1fr) / minmax(0, 1fr);
+  flex-shrink: 0;
+  place-items: center;
+  width: 88px;
+  height: 60px;
+  padding: 6px;
+  border-radius: 14px;
+  /* Logos have dark and white artwork, so all sit on the same light tile */
+  background: #fff;
+  font: 800 1.05rem 'Outfit', sans-serif;
+  font-style: normal;
+}
+
+/* Brevity's mark is drawn for its own dark brand background */
+.client-card i.client-logo-dark {
+  background: #0b0816;
+  box-shadow: inset 0 0 0 1px var(--border);
+}
+
+.client-card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.client-card div {
+  min-width: 0;
+}
+
+.client-card strong {
+  display: block;
+  color: var(--ink);
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.3;
+}
+
+.client-card span {
+  display: block;
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 0.875rem;
   overflow-wrap: anywhere;
 }
 
-.clients-grid a:hover {
-  background: var(--surface-hover);
-  border-color: var(--border-hover);
-  transform: translateY(-2px);
-}
-
-.clients-grid strong {
-  font-family: 'Outfit', sans-serif;
-  color: var(--ink);
-}
-
-.clients-grid span {
+.client-card[target]::after {
+  content: "↗";
+  margin-left: auto;
   color: var(--muted);
-  font-size: 0.85rem;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.client-card:hover,
+.client-card:focus-visible {
+  background: var(--surface-hover);
+  border-color: var(--accent-2);
+  box-shadow: 0 8px 24px rgba(52, 120, 212, 0.18);
+  transform: translateY(-3px);
+}
+
+.client-card:hover::after,
+.client-card:focus-visible::after {
+  color: var(--accent-2);
+  transform: translate(2px, -2px);
+}
+
+.client-next {
+  border: 1px dashed var(--accent-3);
+  border-radius: 16px;
+  background: rgba(245, 199, 106, 0.05);
+}
+
+.client-next i {
+  background: rgba(245, 199, 106, 0.12);
+  color: var(--accent-3);
+  font-size: 1.6rem;
+}
+
+@media (max-width: 1024px) {
+  .clients-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .clients-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .client-card {
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .client-card i {
+    width: 76px;
+    height: 52px;
+  }
 }
 
 /* Services */
