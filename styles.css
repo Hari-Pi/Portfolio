@@ -2052,7 +2052,6 @@ section[id] {
 
 .services-grid article {
   padding: 24px;
-  border-left: 2px solid var(--accent-3);
 }
 
 .services-grid h3 {
@@ -2290,6 +2289,143 @@ section[id] {
     animation: detail-scroll-reveal linear both;
     animation-timeline: view();
     animation-range: entry 4% cover 24%;
+  }
+}
+
+/* Motion and feedback */
+.services-grid article,
+.summary-band .glass-panel {
+  position: relative;
+  overflow: hidden;
+}
+
+.services-grid article::before,
+.summary-band .glass-panel::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s ease;
+}
+
+.hero-profile-facts div::before,
+.client-card i {
+  transition: transform 0.25s ease;
+}
+
+@media (hover: hover) {
+  .services-grid article:hover,
+  .summary-band .glass-panel:hover,
+  .experience-card:hover {
+    background: var(--surface-hover);
+    border-color: var(--accent-1);
+    box-shadow: 0 14px 34px rgba(8, 9, 17, 0.42), 0 0 20px rgba(52, 120, 212, 0.14);
+    transform: translateY(-4px);
+  }
+
+  .services-grid article:hover::before,
+  .summary-band .glass-panel:hover::before {
+    transform: scaleX(1);
+  }
+
+  .hero-profile-facts div:hover::before,
+  .client-card:hover i {
+    transform: scale(1.07);
+  }
+}
+
+.client-card:active {
+  transform: scale(0.98);
+}
+
+/* Grid items rise in one after another. The fill stops at the first frame so
+   hover transforms still apply once the entrance has finished. */
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.js .stagger > * {
+  opacity: 0;
+}
+
+.js .stagger.active > * {
+  opacity: 1;
+  animation: rise-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+  animation-delay: calc(var(--i, 0) * 70ms);
+}
+
+@keyframes status-pulse {
+  from {
+    box-shadow: 0 0 0 0 rgba(32, 205, 189, 0.55);
+  }
+
+  to {
+    box-shadow: 0 0 0 8px rgba(32, 205, 189, 0);
+  }
+}
+
+.availability-status:last-child i {
+  animation: status-pulse 2.2s ease-out infinite;
+}
+
+.button.primary {
+  position: relative;
+  overflow: hidden;
+}
+
+.button.primary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 35%, rgba(255, 255, 255, 0.38) 50%, transparent 65%);
+  pointer-events: none;
+  transform: translateX(-100%);
+}
+
+.button.primary:hover::after {
+  transform: translateX(100%);
+  transition: transform 0.7s ease;
+}
+
+.nav-links a.is-current {
+  background: var(--surface-hover);
+  color: var(--ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js .stagger > * {
+    opacity: 1;
+    animation: none !important;
+  }
+
+  .availability-status:last-child i {
+    animation: none;
+  }
+
+  .button.primary::after {
+    display: none;
+  }
+
+  .services-grid article:hover,
+  .summary-band .glass-panel:hover,
+  .experience-card:hover,
+  .hero-profile-facts div:hover::before,
+  .client-card:hover i,
+  .client-card:active {
+    transform: none;
   }
 }
 

@@ -6,7 +6,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const projectCards = document.querySelectorAll(".project-grid .project-card");
 
   // --- Scroll Reveal Animation ---
-  const revealElements = document.querySelectorAll(".reveal");
+  const revealElements = document.querySelectorAll(".reveal, .stagger");
+
+  document.querySelectorAll(".stagger").forEach((group) => {
+    [...group.children].forEach((item, index) => item.style.setProperty("--i", index));
+  });
 
   if (prefersReducedMotion || !("IntersectionObserver" in window)) {
     // No observer needed: show everything up front.
@@ -30,6 +34,26 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
     revealElements.forEach((el) => revealObserver.observe(el));
+  }
+
+  // --- Current section in the navigation ---
+  const navLinks = [...document.querySelectorAll('.nav-links a[href^="#"]')];
+
+  if (navLinks.length && "IntersectionObserver" in window) {
+    const sectionObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const link = navLinks.find((a) => a.hash === `#${entry.target.id}`);
+          link?.classList.toggle("is-current", entry.isIntersecting);
+        });
+      },
+      { rootMargin: "-45% 0px -50% 0px" }
+    );
+
+    navLinks.forEach((link) => {
+      const section = document.querySelector(link.hash);
+      if (section) sectionObserver.observe(section);
+    });
   }
 
   // --- Card Clickability ---
