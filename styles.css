@@ -41,6 +41,26 @@
     0 12px 28px -14px rgba(2, 3, 6, 0.5);
   --glass-blur: blur(10px);
   --max: 1180px;
+
+  /* Motion standard. Every transition and entrance reads from these, so a
+     timing or easing change is a one-line edit. */
+  --dur-fast: 0.2s;   /* small controls: buttons, links, chips */
+  --dur-base: 0.3s;   /* cards and panels */
+  --dur-media: 0.4s;  /* image and video zoom */
+  --dur-enter: 0.6s;  /* entrances */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --lift-card: -5px;
+  --lift-control: -2px;
+  --stagger-step: 70ms;
+  --shadow-card-hover: 0 20px 44px rgba(8, 9, 17, 0.5), 0 0 24px rgba(52, 120, 212, 0.17);
+  --shadow-primary: 0 4px 18px rgba(52, 120, 212, 0.2);
+  --shadow-primary-hover: 0 8px 24px rgba(52, 120, 212, 0.28);
+}
+
+/* Lets details/accordion height animate to and from auto where supported. */
+html {
+  interpolate-size: allow-keywords;
 }
 
 * {
@@ -92,7 +112,7 @@ h1, h2, h3, h4, h5, h6, .eyebrow, .brand {
 a {
   color: inherit;
   text-decoration: none;
-  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+  transition: color var(--dur-fast) var(--ease), background-color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
 }
 
 /* Visible keyboard focus across every interactive element */
@@ -112,7 +132,7 @@ a {
   background: var(--accent-1);
   color: var(--on-accent);
   font-weight: 700;
-  transition: top 0.2s ease;
+  transition: top var(--dur-fast) var(--ease);
 }
 
 .skip-link:focus-visible {
@@ -211,7 +231,6 @@ img {
   }
 
   .project-card:hover,
-  .workspace-card:hover,
   .button.primary:hover,
   .button.secondary:hover,
   .stack-grid article:hover,
@@ -236,9 +255,10 @@ img {
   border: 1px solid var(--border);
   border-radius: 16px;
   box-shadow: var(--shadow);
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
-              border-color 0.3s ease, 
-              background 0.3s ease;
+  transition: transform var(--dur-base) var(--ease),
+              border-color var(--dur-base) var(--ease),
+              background var(--dur-base) var(--ease),
+              box-shadow var(--dur-base) var(--ease);
 }
 
 .site-wrapper {
@@ -257,7 +277,7 @@ img {
   width: min(var(--max), calc(100% - 32px));
   margin: 0 auto;
   padding: 12px 24px;
-  
+
   background: rgba(13, 13, 20, 0.86);
   border: 1px solid var(--border);
   border-radius: 99px;
@@ -406,7 +426,7 @@ section[id] {
   align-items: center;
   padding: 10px 12px;
   border-radius: 14px;
-  transition: background 0.2s ease;
+  transition: background var(--dur-fast) var(--ease);
 }
 
 @media (hover: hover) {
@@ -544,7 +564,7 @@ section[id] {
   box-shadow: 0 30px 80px rgba(8, 9, 17, 0.48), inset 0 1px rgba(255, 255, 255, 0.04);
   transform: rotateX(var(--system-rx)) rotateY(var(--system-ry));
   transform-style: preserve-3d;
-  transition: transform 0.22s ease-out, border-color 0.3s ease;
+  transition: transform var(--dur-fast) var(--ease), border-color var(--dur-base) var(--ease);
 }
 
 .hero-system:hover .system-stage {
@@ -676,8 +696,8 @@ section[id] {
   background: rgba(18, 18, 30, 0.88);
   box-shadow: 0 12px 28px rgba(8, 9, 17, 0.34);
   transform: translateZ(22px);
-  transition: border-color 0.25s ease, background-color 0.25s ease,
-              transform 0.25s ease;
+  transition: border-color var(--dur-fast) var(--ease), background-color var(--dur-fast) var(--ease),
+              transform var(--dur-fast) var(--ease);
 }
 
 .system-node i {
@@ -835,8 +855,8 @@ section[id] {
   border: 1px solid transparent;
   border-radius: 12px;
   cursor: pointer;
-  transition: transform 0.2s ease, background-color 0.2s ease,
-              border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  transition: transform var(--dur-fast) var(--ease), background-color var(--dur-fast) var(--ease),
+              border-color var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
   padding: 14px 24px;
   font-size: 1rem;
 }
@@ -847,12 +867,12 @@ section[id] {
      1px transparent border, which would fringe the edges. */
   background-origin: border-box;
   color: var(--on-accent);
-  box-shadow: 0 4px 18px rgba(52, 120, 212, 0.2);
+  box-shadow: var(--shadow-primary);
 }
 
 .button.primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(52, 120, 212, 0.28);
+  transform: translateY(var(--lift-control));
+  box-shadow: var(--shadow-primary-hover);
 }
 
 .button.secondary {
@@ -1087,7 +1107,7 @@ section[id] {
   object-fit: cover;
   object-position: center 22%;
   box-shadow: 0 10px 30px rgba(3, 4, 10, 0.5);
-  transition: transform 0.3s ease, border-color 0.3s ease;
+  transition: transform var(--dur-base) var(--ease), border-color var(--dur-base) var(--ease);
 }
 
 .about-card:hover .about-avatar {
@@ -1145,8 +1165,8 @@ section[id] {
   background: rgba(52, 120, 212, 0.06);
   font-family: 'Outfit', sans-serif;
   font-weight: 700;
-  transition: transform 0.2s ease, background-color 0.2s ease,
-              border-color 0.2s ease;
+  transition: transform var(--dur-fast) var(--ease), background-color var(--dur-fast) var(--ease),
+              border-color var(--dur-fast) var(--ease);
 }
 
 .about-links a:hover {
@@ -1241,15 +1261,8 @@ section[id] {
 
 /* Promote to its own layer only while the hover transition can actually run,
    instead of holding a compositor layer for every card at all times. */
-.project-card:hover,
-.workspace-card:hover {
-  will-change: transform;
-}
-
 .project-card:hover {
-  transform: translateY(-5px);
-  border-color: var(--accent-1);
-  box-shadow: 0 20px 44px rgba(8, 9, 17, 0.5), 0 0 24px rgba(52, 120, 212, 0.17);
+  will-change: transform;
 }
 
 .project-card.flagship {
@@ -1338,7 +1351,7 @@ section[id] {
 
 .project-visual.has-image img,
 .project-visual.has-image video {
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform var(--dur-media) var(--ease);
 }
 
 /* The two strongest client projects receive an editorial flagship layout instead of
@@ -1666,8 +1679,8 @@ section[id] {
   font-weight: 700;
   font-size: 0.875rem;
   white-space: nowrap;
-  transition: transform 0.2s ease, background-color 0.2s ease,
-              border-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+  transition: transform var(--dur-fast) var(--ease), background-color var(--dur-fast) var(--ease),
+              border-color var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
 }
 
 .project-link.primary {
@@ -1678,13 +1691,13 @@ section[id] {
      the edges. Sizing the gradient to the border box removes it. */
   background-origin: border-box;
   color: var(--on-accent);
-  box-shadow: 0 2px 12px rgba(52, 120, 212, 0.18);
+  box-shadow: var(--shadow-primary);
 }
 
 .project-link.primary:hover {
   color: var(--on-accent);
-  transform: translateY(-2px);
-  box-shadow: 0 7px 20px rgba(52, 120, 212, 0.3);
+  transform: translateY(var(--lift-control));
+  box-shadow: var(--shadow-primary-hover);
 }
 
 .project-link.secondary {
@@ -1733,8 +1746,8 @@ section[id] {
   border-radius: 50%;
   color: var(--ink);
   font-size: 1.4rem;
-  transition: transform 0.25s ease, background-color 0.2s ease,
-              border-color 0.2s ease;
+  transition: transform var(--dur-fast) var(--ease), background-color var(--dur-fast) var(--ease),
+              border-color var(--dur-fast) var(--ease);
 }
 
 .project-archive[open] summary::after {
@@ -1794,8 +1807,8 @@ section[id] {
   border: 1px solid var(--border);
   border-radius: 14px;
   background: rgba(18, 18, 30, 0.44);
-  transition: transform 0.25s ease, background-color 0.25s ease,
-              border-color 0.25s ease;
+  transition: transform var(--dur-fast) var(--ease), background-color var(--dur-fast) var(--ease),
+              border-color var(--dur-fast) var(--ease);
 }
 
 /* The GitHub tile is the exit to the wider body of work, so it reads as an
@@ -1851,7 +1864,7 @@ section[id] {
 }
 
 .stack-icon {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform var(--dur-base) var(--ease), box-shadow var(--dur-base) var(--ease);
 }
 
 .stack-grid article:hover .stack-icon {
@@ -1905,8 +1918,6 @@ section[id] {
   gap: 16px;
   min-height: 96px;
   padding: 20px 24px;
-  transition: transform 0.2s ease, background 0.2s ease,
-              border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .client-card i {
@@ -1964,15 +1975,7 @@ section[id] {
   color: var(--ink);
   font-size: 1.2rem;
   opacity: 0.75;
-  transition: color 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
-}
-
-.client-card:hover,
-.client-card:focus-visible {
-  background: var(--surface-hover);
-  border-color: var(--accent-1);
-  box-shadow: 0 20px 44px rgba(8, 9, 17, 0.5), 0 0 24px rgba(52, 120, 212, 0.17);
-  transform: translateY(-5px);
+  transition: color var(--dur-fast) var(--ease), opacity var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
 }
 
 .client-card:hover::after,
@@ -2174,7 +2177,7 @@ section[id] {
 
 .footer-links a {
   display: inline-flex;
-  transition: color 0.2s ease, transform 0.2s ease;
+  transition: color var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
 }
 
 .footer-links a:hover {
@@ -2220,34 +2223,32 @@ section[id] {
    Scoped to .js so content stays visible if JS fails or is disabled. */
 .js .reveal {
   opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s cubic-bezier(0.5, 0, 0, 1),
-              transform 0.8s cubic-bezier(0.5, 0, 0, 1);
 }
 
+/* An animation with a backwards fill, not a transition: nothing is left on the
+   element once it ends, so hover transforms and the card's own transitions
+   (border, shadow) keep working. */
 .js .reveal.active {
   opacity: 1;
-  transform: translateY(0);
+  animation: rise-in var(--dur-enter) var(--ease-out) backwards;
+}
+
+.js section.reveal.active {
+  animation-name: fade-in;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 /* Project-page motion stays CSS-only. The first screen receives a short load
    transition; later sections animate on view where scroll timelines exist.
    Browsers without that feature simply render those sections normally. */
-@keyframes detail-enter {
-  from {
-    opacity: 0;
-    transform: translateY(14px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 .detail-main > .project-detail-header,
 .detail-main > .project-hero,
 .detail-main > .case-summary {
-  animation: detail-enter 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: rise-in var(--dur-enter) var(--ease-out) backwards;
 }
 
 .detail-main > .project-hero {
@@ -2259,22 +2260,11 @@ section[id] {
 }
 
 @supports (animation-timeline: view()) {
-  @keyframes detail-scroll-reveal {
-    from {
-      opacity: 0;
-      transform: translateY(16px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
   .detail-main > .media-gallery,
   .detail-main > .project-content,
   .detail-main > .project-pagination,
   .detail-main + .site-footer {
-    animation: detail-scroll-reveal linear both;
+    animation: rise-in linear both;
     animation-timeline: view();
     animation-range: entry 4% cover 24%;
   }
@@ -2395,23 +2385,41 @@ section[id] {
 /* Motion and feedback */
 .hero-profile-facts div::before,
 .client-card i {
-  transition: transform 0.25s ease;
+  transition: transform var(--dur-fast) var(--ease);
 }
 
-/* Same lift as the project cards. Not limited to hover devices, so a tap lifts
-   the card on phones too, and it stays lifted while pressed. */
-.summary-band .glass-panel:hover,
+/* Panel hover standard: lift, blue border, blue glow, brighter surface.
+   Used by every card-sized surface. Hover is limited to hover-capable devices so
+   a tap does not leave a card stuck lifted; :active still gives touch a press
+   state. Keyboard focus mirrors hover on anything focusable. */
+@media (hover: hover) {
+  .project-card:hover,
+  .client-card:hover,
+  .summary-band .glass-panel:hover,
+  .services-grid article:hover,
+  .stack-grid article:hover,
+  .experience-card:hover,
+  .shot:hover,
+  .media-container:hover {
+    background: var(--surface-hover);
+    border-color: var(--accent-1);
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(var(--lift-card));
+  }
+}
+
+.project-card:active,
+.client-card:active,
+.client-card:focus-visible,
+.project-card:has(a:focus-visible),
 .summary-band .glass-panel:active,
-.services-grid article:hover,
 .services-grid article:active,
-.stack-grid article:hover,
 .stack-grid article:active,
-.experience-card:hover,
 .experience-card:active {
   background: var(--surface-hover);
   border-color: var(--accent-1);
-  box-shadow: 0 20px 44px rgba(8, 9, 17, 0.5), 0 0 24px rgba(52, 120, 212, 0.17);
-  transform: translateY(-5px);
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(var(--lift-card));
 }
 
 @media (hover: hover) {
@@ -2441,8 +2449,8 @@ section[id] {
 
 .js .stagger.active > * {
   opacity: 1;
-  animation: rise-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) backwards;
-  animation-delay: calc(var(--i, 0) * 70ms);
+  animation: rise-in var(--dur-enter) var(--ease-out) backwards;
+  animation-delay: calc(min(var(--i, 0), 6) * var(--stagger-step));
 }
 
 @keyframes status-pulse {
@@ -2459,12 +2467,14 @@ section[id] {
   animation: status-pulse 2.2s ease-out infinite;
 }
 
-.button.primary {
+.button.primary,
+.project-link.primary {
   position: relative;
   overflow: hidden;
 }
 
-.button.primary::after {
+.button.primary::after,
+.project-link.primary::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -2473,9 +2483,12 @@ section[id] {
   transform: translateX(-100%);
 }
 
-.button.primary:hover::after {
+.button.primary:hover::after,
+.button.primary:focus-visible::after,
+.project-link.primary:hover::after,
+.project-link.primary:focus-visible::after {
   transform: translateX(100%);
-  transition: transform 0.7s ease;
+  transition: transform 0.7s var(--ease);
 }
 
 .nav-links a.is-current {
@@ -2493,7 +2506,8 @@ section[id] {
     animation: none;
   }
 
-  .button.primary::after {
+  .button.primary::after,
+  .project-link.primary::after {
     display: none;
   }
 
@@ -2636,7 +2650,7 @@ section[id] {
     justify-content: center;
     padding: 12px;
   }
-  
+
   .nav-links {
     position: fixed;
     bottom: 0;
@@ -2652,7 +2666,7 @@ section[id] {
     gap: 0;
     z-index: 1000;
   }
-  
+
   .nav-links a {
     flex: 1;
     border-radius: 12px;
@@ -2672,12 +2686,12 @@ section[id] {
     margin-top: -4px;
     margin-bottom: 18px;
   }
-  
+
   .hero-actions {
     flex-direction: column;
     width: 100%;
   }
-  
+
   .hero-actions .button {
     width: 100%;
     text-align: center;
@@ -2816,7 +2830,7 @@ section[id] {
   .summary-band span:last-child {
     font-size: 0.85rem;
   }
-  
+
   .footer-content {
     flex-direction: column;
     text-align: center;
@@ -2964,12 +2978,12 @@ section[id] {
   font-family: 'Outfit', sans-serif;
   font-weight: 700;
   margin-bottom: 24px;
-  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  transition: background-color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
 }
 
 .back-link:hover {
   background: var(--surface-hover);
-  border-color: var(--accent-1);
+  border-color: var(--border-hover);
   transform: translateX(-3px);
 }
 
@@ -3000,8 +3014,8 @@ section[id] {
   gap: 16px;
   padding: 24px 28px;
   background: rgba(255, 255, 255, 0.025);
-  transition: background-color 0.2s ease, color 0.2s ease,
-              transform 0.2s ease;
+  transition: background-color var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease),
+              transform var(--dur-fast) var(--ease);
 }
 
 .project-pagination a + a {
@@ -3031,7 +3045,7 @@ section[id] {
   border-radius: 14px;
   background: #fff;
   font-style: normal;
-  transition: transform 0.2s ease;
+  transition: transform var(--dur-fast) var(--ease);
 }
 
 .nav-logo img {
@@ -3113,7 +3127,7 @@ section[id] {
   min-width: 0;
   padding: 20px;
   border-right: 1px solid var(--border);
-  transition: background-color 0.25s ease;
+  transition: background-color var(--dur-fast) var(--ease);
 }
 
 .case-summary div:hover {
@@ -3154,14 +3168,8 @@ section[id] {
   border: 1px solid var(--border);
   background: rgba(0,0,0,0.4);
   box-shadow: var(--shadow);
-  transition: transform 0.3s ease, border-color 0.3s ease,
-              box-shadow 0.3s ease;
-}
-
-.media-container:hover {
-  transform: translateY(-3px);
-  border-color: var(--border-hover);
-  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.4);
+  transition: transform var(--dur-base) var(--ease), border-color var(--dur-base) var(--ease),
+              box-shadow var(--dur-base) var(--ease);
 }
 
 .media-container video,
@@ -3191,7 +3199,7 @@ section[id] {
   border: 1px solid rgba(255, 255, 255, 0.18);
   background: #171a20;
   box-shadow: 0 14px 34px rgba(0, 0, 0, 0.55);
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s ease;
+  transition: transform var(--dur-base) var(--ease), border-color var(--dur-base) var(--ease);
 }
 
 /* Decorative window chrome. Gives every shot an unmistakable top edge, so two
@@ -3206,11 +3214,6 @@ section[id] {
     radial-gradient(circle 4.5px at 36px 50%, rgba(255, 255, 255, 0.24) 98%, transparent 100%),
     radial-gradient(circle 4.5px at 54px 50%, rgba(255, 255, 255, 0.16) 98%, transparent 100%),
     rgba(255, 255, 255, 0.06);
-}
-
-.shot:hover {
-  transform: translateY(-4px);
-  border-color: rgba(255, 255, 255, 0.32);
 }
 
 .shot img {
@@ -3246,7 +3249,7 @@ section[id] {
   border: 1px solid transparent;
   background: linear-gradient(to bottom, transparent 68%, rgba(0, 0, 0, 0.35));
   pointer-events: none;
-  transition: border-color 0.2s ease;
+  transition: border-color var(--dur-fast) var(--ease);
 }
 
 .shot-open:hover::after {
@@ -3260,7 +3263,7 @@ section[id] {
 }
 
 .shot-open img {
-  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform var(--dur-media) var(--ease);
 }
 
 .shot-open:hover img {
@@ -3631,5 +3634,161 @@ body.lightbox-open {
 
   .summary-band .metric {
     font-size: 1.75rem;
+  }
+}
+
+/* ==========================================================================
+   Motion additions
+   Keyboard parity, accordion and lightbox transitions, page transitions, and
+   reduced-motion coverage for the effects above.
+   ========================================================================== */
+
+/* Keyboard focus gets the same feedback as hover on every small control. */
+.button.primary:focus-visible,
+.project-link.primary:focus-visible {
+  transform: translateY(var(--lift-control));
+  box-shadow: var(--shadow-primary-hover);
+}
+
+.button.secondary:focus-visible,
+.project-link.secondary:focus-visible,
+.about-links a:focus-visible,
+.archive-item:focus-visible,
+.back-link:focus-visible,
+.project-pagination a:focus-visible {
+  background: var(--surface-hover);
+  border-color: var(--border-hover);
+  transform: translateY(var(--lift-control));
+}
+
+.back-link:focus-visible {
+  transform: translateX(-3px);
+}
+
+.footer-links a:focus-visible {
+  color: var(--ink);
+  transform: translateY(var(--lift-control));
+}
+
+/* "More work" accordion eases open and closed instead of snapping. Browsers
+   without ::details-content keep the instant toggle. */
+@supports (selector(::details-content)) {
+  .project-archive::details-content {
+    block-size: 0;
+    overflow: clip;
+    transition: block-size var(--dur-base) var(--ease),
+                content-visibility var(--dur-base) allow-discrete;
+  }
+
+  .project-archive[open]::details-content {
+    block-size: auto;
+  }
+}
+
+/* Lightbox fades and settles in, and the backdrop fades with it. */
+.image-lightbox,
+.image-lightbox::backdrop {
+  opacity: 0;
+  transition: opacity var(--dur-base) var(--ease),
+              transform var(--dur-base) var(--ease),
+              overlay var(--dur-base) allow-discrete,
+              display var(--dur-base) allow-discrete;
+}
+
+.image-lightbox {
+  transform: translateY(8px) scale(0.98);
+}
+
+.image-lightbox[open],
+.image-lightbox[open]::backdrop {
+  opacity: 1;
+}
+
+.image-lightbox[open] {
+  transform: none;
+}
+
+@starting-style {
+  .image-lightbox[open],
+  .image-lightbox[open]::backdrop {
+    opacity: 0;
+  }
+
+  .image-lightbox[open] {
+    transform: translateY(8px) scale(0.98);
+  }
+}
+
+.lightbox-controls button {
+  transition: background-color var(--dur-fast) var(--ease),
+              border-color var(--dur-fast) var(--ease);
+}
+
+.shot-zoom-hint {
+  transition: background-color var(--dur-fast) var(--ease),
+              border-color var(--dur-fast) var(--ease);
+}
+
+.shot-open:hover .shot-zoom-hint,
+.shot-open:focus-visible .shot-zoom-hint {
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(7, 10, 17, 0.92);
+}
+
+/* Smooth page-to-page navigation. The header keeps its own layer so it stays
+   put instead of cross-fading with the rest of the page. */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+
+  .site-header {
+    view-transition-name: site-header;
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: var(--dur-base);
+  }
+}
+
+/* Reduced motion: effects added or missed by the earlier lists. */
+@media (prefers-reduced-motion: reduce) {
+  .hero-profile:hover .about-avatar,
+  .about-card:hover .about-avatar,
+  .project-card:hover .project-visual.has-image img,
+  .project-card:hover .project-visual.has-image video,
+  .project-card:active,
+  .project-card:has(a:focus-visible),
+  .project-link:hover,
+  .project-link:focus-visible,
+  .button:focus-visible,
+  .about-links a:focus-visible,
+  .archive-item:focus-visible,
+  .back-link:focus-visible,
+  .project-pagination a:focus-visible,
+  .footer-links a:focus-visible,
+  .stack-grid article:hover .stack-icon,
+  .client-card:active,
+  .client-card:focus-visible,
+  .client-card:hover::after,
+  .client-card:focus-visible::after,
+  .image-lightbox {
+    transform: none;
+  }
+
+  /* Scroll-driven animations ignore the 0.01ms override, so switch them off
+     outright rather than let them land on an arbitrary frame. */
+  #scroll-progress {
+    display: none;
+  }
+
+  .detail-main > .media-gallery,
+  .detail-main > .project-content,
+  .detail-main > .project-pagination,
+  .detail-main + .site-footer {
+    animation: none;
+    opacity: 1;
+    transform: none;
   }
 }
