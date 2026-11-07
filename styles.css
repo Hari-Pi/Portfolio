@@ -2396,6 +2396,7 @@ section[id] {
   .project-card:hover,
   .client-card:hover,
   .about-copy:hover,
+  .about-process:hover,
   .summary-band .glass-panel:hover,
   .services-grid article:hover,
   .stack-grid article:hover,
@@ -2414,6 +2415,7 @@ section[id] {
 .client-card:focus-visible,
 .project-card:has(a:focus-visible),
 .about-copy:active,
+.about-process:active,
 .summary-band .glass-panel:active,
 .services-grid article:active,
 .stack-grid article:active,
@@ -3826,6 +3828,8 @@ body.lightbox-open {
 @media (prefers-reduced-motion: reduce) {
   .about-copy:hover,
   .about-copy:active,
+  .about-process:hover,
+  .about-process:active,
   .process-steps li:hover .process-icon {
     transform: none;
   }
@@ -3833,4 +3837,14 @@ body.lightbox-open {
   .js .stagger.active > li:not(:last-child)::after {
     animation: none;
   }
+}
+
+/* The process panel rises first; its steps and connector lines follow so the
+   two entrances read as a sequence, not one doubled movement. */
+.js .about-process .stagger.active > li {
+  animation-delay: calc(min(var(--i, 0), 6) * var(--stagger-step) + 150ms);
+}
+
+.js .about-process .stagger.active > li:not(:last-child)::after {
+  animation-delay: calc(min(var(--i, 0), 6) * var(--stagger-step) + 300ms);
 }
