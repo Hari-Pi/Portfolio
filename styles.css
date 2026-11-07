@@ -873,7 +873,7 @@ section[id] {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
   gap: 16px;
-  margin-bottom: 100px;
+  margin-bottom: 48px;
 }
 
 .summary-band .glass-panel {
@@ -918,7 +918,7 @@ section[id] {
 
 /* About */
 .about-section {
-  padding: 56px 0 64px;
+  padding: 48px 0;
 }
 
 .about-grid {
@@ -946,7 +946,7 @@ section[id] {
 
 /* Recruiter-facing chronology: compact enough to scan before the projects. */
 .experience-section {
-  padding: 56px 0 64px;
+  padding: 48px 0;
   /* Skips layout and paint while off-screen; the intrinsic size keeps
      the scrollbar and anchor offsets stable. */
   content-visibility: auto;
@@ -1164,7 +1164,7 @@ section[id] {
 
 /* Projects */
 .projects-section {
-  padding: 56px 0 64px;
+  padding: 48px 0;
   /* Skips layout and paint while off-screen; the intrinsic size keeps
      the scrollbar and anchor offsets stable. */
   content-visibility: auto;
@@ -1833,7 +1833,7 @@ section[id] {
 
 /* Stack Section */
 .stack-section {
-  padding: 56px 0 64px;
+  padding: 48px 0;
   /* Skips layout and paint while off-screen; the intrinsic size keeps
      the scrollbar and anchor offsets stable. */
   content-visibility: auto;
@@ -1884,7 +1884,7 @@ section[id] {
 
 /* Clients */
 .clients-section {
-  padding: 56px 0 0;
+  padding: 48px 0;
 }
 
 .clients-section .section-heading p:not(.eyebrow) {
@@ -2021,7 +2021,7 @@ section[id] {
 
 /* Services */
 .services-section {
-  padding: 8px 0 24px;
+  padding: 48px 0;
 }
 
 .services-section .section-heading p:not(.eyebrow) {
@@ -2101,7 +2101,7 @@ section[id] {
 
 /* Contact */
 .contact-section {
-  padding: 20px 0 72px;
+  padding: 48px 0 72px;
 }
 
 .contact-panel {
@@ -2939,13 +2939,12 @@ section[id] {
 .private-note {
   margin-top: 28px;
   padding: 14px 18px;
-  border-left: 3px solid var(--accent-3);
-  border-radius: 0 10px 10px 0;
-  background: rgba(245, 199, 106, 0.08);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.035);
   color: var(--muted);
   font-size: 0.9rem;
   line-height: 1.6;
-  max-width: 640px;
 }
 
 .project-detail-header {
@@ -3571,5 +3570,66 @@ body.lightbox-open {
 @media (max-width: 640px) {
   .footer-links {
     justify-content: center;
+  }
+}
+
+.project-card-links .project-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.project-link .icon {
+  width: 1.1em;
+  height: 1.1em;
+}
+
+/* The four steps as one row under the About text and diagram */
+.about-process-wide {
+  margin-top: 24px;
+}
+
+@media (min-width: 901px) {
+  .about-process-wide .process-steps {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 28px;
+  }
+
+  .about-process-wide .process-steps li {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    padding-bottom: 0;
+  }
+
+  .about-process-wide .process-steps li:not(:last-child)::after {
+    top: 23px;
+    right: -20px;
+    bottom: auto;
+    left: 64px;
+    width: auto;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-2), transparent);
+  }
+}
+
+/* Four highlight cards sit as a 2 x 2 grid below desktop width */
+@media (max-width: 960px) {
+  .summary-band {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .summary-band .glass-panel:first-child {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .summary-band .glass-panel {
+    padding: 24px 20px;
+  }
+
+  .summary-band .metric {
+    font-size: 1.75rem;
   }
 }

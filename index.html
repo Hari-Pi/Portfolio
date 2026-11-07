@@ -38,7 +38,7 @@
     <link rel="preload" as="font" href="fonts/inter-latin-variable.woff2" type="font/woff2" crossorigin />
     <link rel="preload" as="font" href="fonts/outfit-latin-variable.woff2" type="font/woff2" crossorigin />
 
-    <link rel="stylesheet" href="styles.css?v=9.9.17" />
+    <link rel="stylesheet" href="styles.css?v=9.9.20" />
 
     <script type="application/ld+json">
       {
@@ -264,6 +264,10 @@
             <span class="metric metric-words">ALL TECH</span>
             <span>Software, hardware and everything in between</span>
           </div>
+          <div class="glass-panel">
+            <span class="metric metric-words">OPEN SOURCE</span>
+            <span>50+ public repositories on GitHub</span>
+          </div>
         </section>
 
         <section class="clients-section reveal" id="clients" aria-labelledby="clients-title">
@@ -307,39 +311,75 @@
               </p>
             </article>
 
-            <div class="about-process glass-panel">
-              <p class="process-kicker">From idea to launch</p>
-              <ol class="process-steps stagger">
-                <li>
-                  <span class="process-icon" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#i-plan"/></svg></span>
-                  <div>
-                    <h3>Plan</h3>
-                    <p>Understand what you need and agree the practical way forward.</p>
+            <div class="about-system" aria-hidden="true">
+              <div class="hero-system">
+                <div class="system-stage">
+                  <svg class="system-connections" viewBox="0 0 520 460" focusable="false">
+                    <path d="M260 230 C205 190 155 130 96 92" />
+                    <path d="M260 230 C318 182 370 132 430 104" />
+                    <path d="M260 230 C204 278 151 330 91 357" />
+                    <path d="M260 230 C318 278 371 326 432 350" />
+                  </svg>
+
+                  <div class="system-core">
+                    <span class="core-ring"></span>
+                    <strong>HC</strong>
+                    <small>BUILD / SHIP</small>
                   </div>
-                </li>
-                <li>
-                  <span class="process-icon" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#i-build"/></svg></span>
-                  <div>
-                    <h3>Build</h3>
-                    <p>Websites, apps, platforms and systems, built to do real work.</p>
+
+                  <div class="system-node node-web">
+                    <i></i><strong>WEB</strong><small>Platforms</small>
                   </div>
-                </li>
-                <li>
-                  <span class="process-icon" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#i-launch"/></svg></span>
-                  <div>
-                    <h3>Launch</h3>
-                    <p>Set up, tested and made ready for real use.</p>
+                  <div class="system-node node-mobile">
+                    <i></i><strong>MOBILE</strong><small>Applications</small>
                   </div>
-                </li>
-                <li>
-                  <span class="process-icon" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#i-support"/></svg></span>
-                  <div>
-                    <h3>Support</h3>
-                    <p>Help after launch, so it keeps working for you.</p>
+                  <div class="system-node node-automation">
+                    <i></i><strong>AUTOMATION</strong><small>Workflows</small>
                   </div>
-                </li>
-              </ol>
+                  <div class="system-node node-linux">
+                    <i></i><strong>LINUX</strong><small>Systems</small>
+                  </div>
+
+                  <div class="system-status"><i></i><span>system ready</span></div>
+                  <span class="system-coordinate coordinate-a">01 / PRODUCT</span>
+                  <span class="system-coordinate coordinate-b">04 / DELIVERY</span>
+                </div>
+              </div>
             </div>
+          </div>
+
+          <div class="about-process about-process-wide glass-panel">
+            <p class="process-kicker">From idea to launch</p>
+            <ol class="process-steps stagger">
+              <li>
+                <span class="process-icon" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#i-plan"/></svg></span>
+                <div>
+                  <h3>Plan</h3>
+                  <p>Understand what you need and agree the practical way forward.</p>
+                </div>
+              </li>
+              <li>
+                <span class="process-icon" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#i-build"/></svg></span>
+                <div>
+                  <h3>Build</h3>
+                  <p>Websites, apps, platforms and systems, built to do real work.</p>
+                </div>
+              </li>
+              <li>
+                <span class="process-icon" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#i-launch"/></svg></span>
+                <div>
+                  <h3>Launch</h3>
+                  <p>Set up, tested and made ready for real use.</p>
+                </div>
+              </li>
+              <li>
+                <span class="process-icon" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#i-support"/></svg></span>
+                <div>
+                  <h3>Support</h3>
+                  <p>Help after launch, so it keeps working for you.</p>
+                </div>
+              </li>
+            </ol>
           </div>
         </section>
 
@@ -567,9 +607,9 @@
           <section class="project-group personal-work" aria-labelledby="personal-work-title">
             <div class="project-group-heading">
               <div>
-                <h3 id="personal-work-title">Personal projects</h3>
+                <h3 id="personal-work-title">Open source</h3>
               </div>
-              <p>Things I built on my own, from apps to Linux tools.</p>
+              <p>Public code you can read, run and reuse. Over 50 of my GitHub repositories are public.</p>
             </div>
 
             <div class="project-grid personal-project-grid">
@@ -603,7 +643,7 @@
                 </dl>
                 <div class="project-card-links">
                   <a class="project-link primary" href="projects/tunnelpane.html">View Details</a>
-                  <a class="project-link secondary" href="https://github.com/Hari-Pi/tunnelpane" target="_blank" rel="noopener">GitHub</a>
+                  <a class="project-link secondary" href="https://github.com/Hari-Pi/tunnelpane" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-github"/></svg>Source code</a>
                 </div>
               </div>
               </article>
@@ -636,7 +676,7 @@
                 </dl>
                 <div class="project-card-links">
                   <a class="project-link primary" href="projects/tunnelterm.html">View Details</a>
-                  <a class="project-link secondary" href="https://github.com/Hari-Pi/TunnelTerm" target="_blank" rel="noopener">GitHub</a>
+                  <a class="project-link secondary" href="https://github.com/Hari-Pi/TunnelTerm" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-github"/></svg>Source code</a>
                 </div>
               </div>
               </article>
@@ -658,7 +698,8 @@
                 <div class="project-meta">
                   <span class="tag">C</span>
                   <span class="tag">Device kernel</span>
-                  <span class="tag highlight">Debian packaging</span>
+                  <span class="tag">Debian packaging</span>
+                  <span class="tag highlight">Open source</span>
                 </div>
                 <h3>Linux on a Smartphone: Realme 6</h3>
                 <p>A custom Linux kernel for the Realme 6 phone, packaged for easy install, turning an old phone into a low-cost Linux server.</p>
@@ -669,7 +710,7 @@
                 </dl>
                 <div class="project-card-links">
                   <a class="project-link primary" href="projects/kernel-realme-rmx2001.html">View Details</a>
-                  <a class="project-link secondary" href="https://github.com/Hari-Pi/kernel_realme_RMX2001" target="_blank" rel="noopener">GitHub</a>
+                  <a class="project-link secondary" href="https://github.com/Hari-Pi/kernel_realme_RMX2001" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-github"/></svg>Source code</a>
                 </div>
               </div>
               </article>
@@ -685,7 +726,7 @@
               <span class="archive-count">8 projects · 50+ repos</span>
             </summary>
             <p class="archive-intro">
-              Eight more projects I built, from the 50+ public repositories on my GitHub.
+              Eight more projects. Most are open source, and there are 50+ public repositories on my GitHub.
             </p>
             <div class="archive-grid">
               <a class="archive-item" href="projects/syncplayer.html" aria-label="View Sync Player details">
