@@ -2438,7 +2438,7 @@ section[id] {
 @keyframes rise-in {
   from {
     opacity: 0;
-    transform: translateY(18px);
+    transform: translateY(var(--rise, 18px));
   }
 
   to {
@@ -3847,4 +3847,225 @@ body.lightbox-open {
 
 .js .about-process .stagger.active > li:not(:last-child)::after {
   animation-delay: calc(min(var(--i, 0), 6) * var(--stagger-step) + 300ms);
+}
+
+/* ==========================================================================
+   Phone scrolling
+   Subtle motion that responds to scrolling, scoped to phone widths so the
+   desktop behaviour is untouched.
+   ========================================================================== */
+
+@keyframes grow-x {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@keyframes drift {
+  from { translate: 0 -10px; }
+  to { translate: 0 10px; }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --rise: 14px;
+  }
+
+  /* Each item rises as it reaches the screen. */
+  .js .stagger.stagger-each > * {
+    opacity: 0;
+    animation: none;
+  }
+
+  .js .stagger.stagger-each > .is-in {
+    opacity: 1;
+    animation: rise-in var(--dur-enter) var(--ease-out) backwards;
+    animation-delay: 0s;
+  }
+
+  /* Header steps out of the way while reading downward. */
+  .site-header {
+    transition: transform var(--dur-base) var(--ease);
+  }
+
+  body.header-hidden .site-header {
+    transform: translateY(calc(-100% - 24px));
+  }
+
+  /* Bottom nav: one highlight that slides between links. */
+  .nav-links a {
+    position: relative;
+    z-index: 1;
+  }
+
+  .nav-links::before {
+    content: "";
+    position: absolute;
+    top: 12px;
+    left: 0;
+    width: var(--pill-w, 0);
+    height: 48px;
+    border-radius: 12px;
+    background: var(--surface-hover);
+    opacity: 0;
+    transform: translateX(var(--pill-x, 0));
+    transition: transform var(--dur-base) var(--ease),
+                width var(--dur-base) var(--ease),
+                opacity var(--dur-fast) var(--ease);
+    pointer-events: none;
+  }
+
+  .nav-links:not(.pill-ready)::before {
+    transition: none;
+  }
+
+  .nav-links.has-pill::before {
+    opacity: 1;
+  }
+
+  .nav-links.has-pill a.is-current {
+    background: transparent;
+  }
+
+  /* Sticky label: which project group and card you are on. */
+  .group-pill {
+    position: sticky;
+    top: 86px;
+    z-index: 5;
+    height: 0;
+    transition: top var(--dur-base) var(--ease);
+  }
+
+  body.header-hidden .group-pill {
+    top: 12px;
+  }
+
+  .group-pill-body {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 14px;
+    border: 1px solid var(--border);
+    border-radius: 99px;
+    background: rgba(13, 13, 20, 0.94);
+    color: var(--muted);
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: opacity var(--dur-base) var(--ease),
+                transform var(--dur-base) var(--ease);
+    pointer-events: none;
+  }
+
+  .group-pill.is-visible .group-pill-body {
+    opacity: 1;
+    transform: none;
+  }
+
+  .group-pill b {
+    color: var(--accent-gold);
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Touch: the card at the middle of the screen stands in for hover, and a tap
+   presses a card in instead of lifting it. */
+@media (hover: none) {
+  .project-card.is-spotlight,
+  .client-card.is-spotlight,
+  .services-grid article.is-spotlight,
+  .stack-grid article.is-spotlight,
+  .experience-card.is-spotlight,
+  .summary-band .glass-panel.is-spotlight {
+    border-color: var(--accent-1);
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-3px);
+  }
+
+  .stack-grid article.is-spotlight .stack-icon {
+    transform: translateY(var(--lift-control)) scale(1.035);
+    box-shadow: 0 10px 24px rgba(52, 120, 212, 0.18);
+  }
+
+  .client-card.is-spotlight i {
+    transform: scale(1.07);
+  }
+
+  .project-card:active,
+  .client-card:active,
+  .summary-band .glass-panel:active,
+  .services-grid article:active,
+  .stack-grid article:active,
+  .experience-card:active,
+  .about-copy:active,
+  .about-process:active {
+    transform: scale(0.985);
+  }
+}
+
+/* Scroll-linked touches, for browsers that support view timelines. Others keep
+   the static versions. */
+@media (max-width: 768px) and (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    /* overflow: hidden makes an element the scroller a view timeline measures
+       against, which leaves these animations stuck at their midpoint. clip
+       crops identically without becoming a scroll container. */
+    .project-card,
+    .project-visual,
+    .experience-card {
+      overflow: clip;
+    }
+
+    /* Screenshots drift slightly inside their frames as a card passes. */
+    .project-visual.has-image img,
+    .project-visual.has-image video {
+      animation: drift linear both;
+      animation-timeline: view();
+      animation-range: cover;
+    }
+
+    /* Compact cards fill their frame edge to edge, so oversize the media to
+       keep the drift from exposing the edges. */
+    .project-card:not(.flagship) .project-visual.has-image img,
+    .project-card:not(.flagship) .project-visual.has-image video {
+      inset: -12px 0;
+      height: calc(100% + 24px);
+    }
+
+    /* Timelines fill in as you scroll through them. */
+    .process-steps li:not(:last-child)::after {
+      animation: draw-line linear both;
+      animation-timeline: view();
+      animation-range: entry 10% cover 45%;
+    }
+
+    .experience-card::before {
+      transform-origin: left;
+      animation: grow-x linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 40%;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-card.is-spotlight,
+  .client-card.is-spotlight,
+  .services-grid article.is-spotlight,
+  .stack-grid article.is-spotlight,
+  .experience-card.is-spotlight,
+  .summary-band .glass-panel.is-spotlight,
+  .project-card:active,
+  .client-card:active,
+  .summary-band .glass-panel:active,
+  .services-grid article:active,
+  .stack-grid article:active,
+  .experience-card:active {
+    transform: none;
+  }
 }
