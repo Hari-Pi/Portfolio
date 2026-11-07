@@ -16,16 +16,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://hari-pi.com/projects/blinkhub.html</loc>
-    <lastmod>2026-11-05</lastmod>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://hari-pi.com/projects/cargo.html</loc>
-    <lastmod>2026-11-05</lastmod>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://hari-pi.com/projects/caseatlas.html</loc>
     <lastmod>2026-11-05</lastmod>
     <priority>0.7</priority>
@@ -51,17 +41,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://hari-pi.com/projects/next-anime-site.html</loc>
-    <lastmod>2026-11-05</lastmod>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://hari-pi.com/projects/petopt.html</loc>
-    <lastmod>2026-11-05</lastmod>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://hari-pi.com/projects/ransomware-recovery-guide.html</loc>
     <lastmod>2026-11-05</lastmod>
     <priority>0.7</priority>
   </url>
@@ -88,6 +68,21 @@
   <url>
     <loc>https://hari-pi.com/projects/tunnelterm.html</loc>
     <lastmod>2026-11-05</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://hari-pi.com/projects/unidos-systems.html</loc>
+    <lastmod>2026-11-07</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://hari-pi.com/projects/carrier-wave-technology.html</loc>
+    <lastmod>2026-11-07</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://hari-pi.com/projects/brevity-talk.html</loc>
+    <lastmod>2026-11-07</lastmod>
     <priority>0.7</priority>
   </url>
 </urlset>
