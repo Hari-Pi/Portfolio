@@ -2395,6 +2395,7 @@ section[id] {
 @media (hover: hover) {
   .project-card:hover,
   .client-card:hover,
+  .about-copy:hover,
   .summary-band .glass-panel:hover,
   .services-grid article:hover,
   .stack-grid article:hover,
@@ -2412,6 +2413,7 @@ section[id] {
 .client-card:active,
 .client-card:focus-visible,
 .project-card:has(a:focus-visible),
+.about-copy:active,
 .summary-band .glass-panel:active,
 .services-grid article:active,
 .stack-grid article:active,
@@ -3790,5 +3792,45 @@ body.lightbox-open {
     animation: none;
     opacity: 1;
     transform: none;
+  }
+}
+
+/* About: process steps match the stack icons, and the connector lines draw in
+   with their step. */
+.process-icon {
+  transition: transform var(--dur-base) var(--ease),
+              box-shadow var(--dur-base) var(--ease);
+}
+
+@media (hover: hover) {
+  .process-steps li:hover .process-icon {
+    transform: translateY(var(--lift-control)) scale(1.035);
+    box-shadow: 0 10px 24px rgba(52, 120, 212, 0.18);
+  }
+}
+
+.process-steps li:not(:last-child)::after {
+  transform-origin: top;
+}
+
+@keyframes draw-line {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+
+.js .stagger.active > li:not(:last-child)::after {
+  animation: draw-line var(--dur-enter) var(--ease-out) backwards;
+  animation-delay: calc(min(var(--i, 0), 6) * var(--stagger-step) + 150ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-copy:hover,
+  .about-copy:active,
+  .process-steps li:hover .process-icon {
+    transform: none;
+  }
+
+  .js .stagger.active > li:not(:last-child)::after {
+    animation: none;
   }
 }
