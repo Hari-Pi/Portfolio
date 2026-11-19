@@ -3605,6 +3605,7 @@ body.lightbox-open {
 
   .about-process-wide .process-steps li {
     grid-template-columns: 1fr;
+    align-content: start; /* keeps headings level when step text wraps differently */
     gap: 14px;
     padding-bottom: 0;
   }
@@ -3617,7 +3618,18 @@ body.lightbox-open {
     width: auto;
     height: 2px;
     background: linear-gradient(90deg, var(--accent-2), transparent);
+    transform-origin: left;
   }
+
+  /* The row's connectors are horizontal, so they draw across, not down. */
+  .js .about-process-wide .stagger.active > li:not(:last-child)::after {
+    animation-name: draw-line-x;
+  }
+}
+
+@keyframes draw-line-x {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
 }
 
 /* Four highlight cards sit as a 2 x 2 grid below desktop width */
@@ -3809,6 +3821,12 @@ body.lightbox-open {
     transform: translateY(var(--lift-control)) scale(1.035);
     box-shadow: 0 10px 24px rgba(52, 120, 212, 0.18);
   }
+
+  /* Each map node lifts on its own, in its accent colour. */
+  .hero-system .system-node:hover {
+    border-color: var(--node-accent);
+    transform: translateZ(22px) translateY(var(--lift-control)) scale(1.05);
+  }
 }
 
 .process-steps li:not(:last-child)::after {
@@ -3832,6 +3850,10 @@ body.lightbox-open {
   .about-process:active,
   .process-steps li:hover .process-icon {
     transform: none;
+  }
+
+  .hero-system .system-node:hover {
+    transform: translateZ(22px);
   }
 
   .js .stagger.active > li:not(:last-child)::after {
