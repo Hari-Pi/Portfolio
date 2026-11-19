@@ -76,21 +76,31 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("resize", movePill);
 
   if (navLinks.length && canObserve) {
+    // A link covers its own section plus any listed in data-sections
+    // (Home also covers the highlights strip and Clients below the hero).
+    const linkSections = new Map(
+      navLinks.map((link) => [
+        link,
+        [...document.querySelectorAll([link.hash, link.dataset.sections].filter(Boolean).join(","))],
+      ])
+    );
+    const inView = new Set();
+
     const sectionObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          const link = navLinks.find((a) => a.hash === `#${entry.target.id}`);
-          link?.classList.toggle("is-current", entry.isIntersecting);
+          if (entry.isIntersecting) inView.add(entry.target);
+          else inView.delete(entry.target);
+        });
+        linkSections.forEach((sections, link) => {
+          link.classList.toggle("is-current", sections.some((s) => inView.has(s)));
         });
         movePill();
       },
       { rootMargin: "-45% 0px -50% 0px" }
     );
 
-    navLinks.forEach((link) => {
-      const section = document.querySelector(link.hash);
-      if (section) sectionObserver.observe(section);
-    });
+    linkSections.forEach((sections) => sections.forEach((s) => sectionObserver.observe(s)));
   }
 
   // --- Card Clickability ---
