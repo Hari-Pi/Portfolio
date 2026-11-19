@@ -638,6 +638,101 @@ section[id] {
   background: radial-gradient(circle at 35% 30%, rgba(52, 120, 212, 0.32), rgba(13, 13, 20, 0.96) 68%);
   box-shadow: 0 0 50px rgba(52, 120, 212, 0.2), inset 0 0 24px rgba(32, 205, 189, 0.09);
   transform: translate(-50%, -50%) translateZ(36px);
+  /* It is a button (opens the QR code), so undo the browser's button styling. */
+  padding: 0;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  transition: transform var(--dur-base) var(--ease),
+              border-color var(--dur-base) var(--ease),
+              box-shadow var(--dur-base) var(--ease);
+}
+
+.system-core:hover,
+.system-core:focus-visible {
+  border-color: var(--accent-2);
+  box-shadow: 0 0 64px rgba(32, 205, 189, 0.32), inset 0 0 24px rgba(32, 205, 189, 0.16);
+  transform: translate(-50%, -50%) translateZ(36px) scale(1.05);
+}
+
+.system-core:focus-visible {
+  border-radius: 50%;
+}
+
+.system-core:active {
+  transform: translate(-50%, -50%) translateZ(36px) scale(0.97);
+}
+
+/* QR code for showing the site from a phone. */
+.qr-dialog {
+  width: min(92vw, 340px);
+  margin: auto; /* the global reset zeroes the margin that centres a modal */
+  padding: 0;
+  overflow: visible;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+}
+
+.qr-dialog::backdrop {
+  background: rgba(2, 3, 7, 0.84);
+  backdrop-filter: blur(12px);
+}
+
+.qr-dialog[open] .qr-card {
+  animation: rise-in var(--dur-enter) var(--ease-out);
+}
+
+.qr-card {
+  position: relative;
+  padding: 28px 24px 24px;
+  border-radius: 22px;
+  background: var(--bg-deep);
+  text-align: center;
+}
+
+.qr-card img {
+  width: 100%;
+  max-width: 232px;
+  height: auto;
+  margin: 8px auto 18px;
+  padding: 10px;
+  border-radius: 14px;
+  background: #fff;
+}
+
+.qr-card h2 {
+  margin: 0 0 6px;
+  font-size: 1.35rem;
+}
+
+.qr-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.qr-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 1.3rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
+}
+
+.qr-close:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  background: var(--surface-hover);
 }
 
 .system-core::before,

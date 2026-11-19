@@ -38,7 +38,7 @@
     <link rel="preload" as="font" href="fonts/inter-latin-variable.woff2" type="font/woff2" crossorigin />
     <link rel="preload" as="font" href="fonts/outfit-latin-variable.woff2" type="font/woff2" crossorigin />
 
-    <link rel="stylesheet" href="styles.css?v=9.11.3" />
+    <link rel="stylesheet" href="styles.css?v=9.11.5" />
 
     <script type="application/ld+json">
       {
@@ -311,38 +311,38 @@
               </p>
             </article>
 
-            <div class="about-system" aria-hidden="true">
+            <div class="about-system">
               <div class="hero-system">
                 <div class="system-stage">
-                  <svg class="system-connections" viewBox="0 0 520 460" focusable="false">
+                  <svg class="system-connections" viewBox="0 0 520 460" focusable="false" aria-hidden="true">
                     <path d="M260 230 C205 190 155 130 96 92" />
                     <path d="M260 230 C318 182 370 132 430 104" />
                     <path d="M260 230 C204 278 151 330 91 357" />
                     <path d="M260 230 C318 278 371 326 432 350" />
                   </svg>
 
-                  <div class="system-core">
+                  <button class="system-core" type="button" aria-haspopup="dialog" aria-controls="qr-dialog" aria-label="Show a QR code for hari-pi.com">
                     <span class="core-ring"></span>
                     <strong>HC</strong>
                     <small>BUILD / SHIP</small>
-                  </div>
+                  </button>
 
-                  <div class="system-node node-web">
+                  <div class="system-node node-web" aria-hidden="true">
                     <i></i><strong>WEB</strong><small>Platforms</small>
                   </div>
-                  <div class="system-node node-mobile">
+                  <div class="system-node node-mobile" aria-hidden="true">
                     <i></i><strong>MOBILE</strong><small>Applications</small>
                   </div>
-                  <div class="system-node node-automation">
+                  <div class="system-node node-automation" aria-hidden="true">
                     <i></i><strong>AUTOMATION</strong><small>Workflows</small>
                   </div>
-                  <div class="system-node node-linux">
+                  <div class="system-node node-linux" aria-hidden="true">
                     <i></i><strong>LINUX</strong><small>Systems</small>
                   </div>
 
-                  <div class="system-status"><i></i><span>system ready</span></div>
-                  <span class="system-coordinate coordinate-a">01 / PRODUCT</span>
-                  <span class="system-coordinate coordinate-b">04 / DELIVERY</span>
+                  <div class="system-status" aria-hidden="true"><i></i><span>system ready</span></div>
+                  <span class="system-coordinate coordinate-a" aria-hidden="true">01 / PRODUCT</span>
+                  <span class="system-coordinate coordinate-b" aria-hidden="true">04 / DELIVERY</span>
                 </div>
               </div>
             </div>
@@ -906,7 +906,18 @@
       </footer>
     </div>
 
-    <script src="script.js?v=5.5"></script>
+    <dialog class="qr-dialog" id="qr-dialog" aria-labelledby="qr-title">
+      <div class="qr-card glass-panel">
+        <form method="dialog">
+          <button class="qr-close" type="submit" aria-label="Close QR code">×</button>
+        </form>
+        <img src="images/qr-hari-pi.svg" width="232" height="232" alt="QR code that opens hari-pi.com" />
+        <h2 id="qr-title">hari-pi.com</h2>
+        <p>Scan with a phone camera to open this site.</p>
+      </div>
+    </dialog>
+
+    <script src="script.js?v=5.6"></script>
     <script src="background.js?v=1.0"></script>
   </body>
 </html>

@@ -131,6 +131,18 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // --- HC core opens a QR code for the site, to show from a phone ---
+  const qrDialog = document.querySelector("#qr-dialog");
+  const qrOpener = document.querySelector(".system-core");
+
+  if (qrDialog && qrOpener && typeof qrDialog.showModal === "function") {
+    qrOpener.addEventListener("click", () => qrDialog.showModal());
+    // The card fills the dialog, so a click landing on the dialog itself is the backdrop.
+    qrDialog.addEventListener("click", (event) => {
+      if (event.target === qrDialog) qrDialog.close();
+    });
+  }
+
   // --- Real project preview ---
   const previewVideos = document.querySelectorAll("[data-preview-video]");
   const playPreview = (video) => video.play().catch(() => {});
