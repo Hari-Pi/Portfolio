@@ -2778,11 +2778,17 @@ section[id] {
     height: 56px;
     flex-direction: column;
     gap: 4px;
-    padding: 6px 2px;
+    padding: 6px 0;
     border-radius: 14px;
-    font-size: 0.68rem;
-    letter-spacing: 0.01em;
+    /* Six tabs: labels scale with the screen so "Experience" fits at 360px. */
+    font-size: clamp(0.6rem, 2.9vw, 0.72rem);
     white-space: nowrap;
+  }
+
+  .nav-links span {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .nav-links .icon {

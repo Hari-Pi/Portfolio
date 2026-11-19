@@ -38,7 +38,7 @@
     <link rel="preload" as="font" href="fonts/inter-latin-variable.woff2" type="font/woff2" crossorigin />
     <link rel="preload" as="font" href="fonts/outfit-latin-variable.woff2" type="font/woff2" crossorigin />
 
-    <link rel="stylesheet" href="styles.css?v=9.11.6" />
+    <link rel="stylesheet" href="styles.css?v=9.11.7" />
 
     <script type="application/ld+json">
       {
@@ -149,6 +149,7 @@
   <body>
     <svg class="sprite" aria-hidden="true" focusable="false" width="0" height="0" style="position:absolute">
       <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></symbol>
+      <symbol id="i-home" viewBox="0 0 24 24"><path d="m3 10.5 9-7.5 9 7.5"/><path d="M5 9v12h14V9"/><path d="M10 21v-6h4v6"/></symbol>
       <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
       <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></symbol>
       <symbol id="i-briefcase" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></symbol>
@@ -185,6 +186,7 @@
           <span class="brand-name">Harikaran Chettiyar</span>
         </a>
         <nav class="nav-links" aria-label="Primary navigation">
+          <a href="#home"><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg><span>Home</span></a>
           <a href="#about"><svg class="icon" aria-hidden="true"><use href="#i-user"/></svg><span>About</span></a>
           <a href="#services"><svg class="icon" aria-hidden="true"><use href="#i-handshake"/></svg><span>Services</span></a>
           <a href="#projects"><svg class="icon" aria-hidden="true"><use href="#i-grid"/></svg><span>Projects</span></a>
@@ -194,7 +196,7 @@
       </header>
 
       <main id="top">
-        <section class="hero-section reveal" aria-labelledby="hero-title">
+        <section class="hero-section reveal" id="home" aria-labelledby="hero-title">
           <div class="hero-copy">
             <p class="eyebrow">Software &amp; Infrastructure Solutions · Pune, India</p>
             <h1 id="hero-title">Your ideas, built into working solutions.</h1>
